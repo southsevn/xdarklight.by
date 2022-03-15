@@ -1,9 +1,17 @@
 <template>
-  <Tutorial/>
+  <div class="dark">
+    <d-logo/>
+    <d-logo text/>
+    <d-page-title title="Каталог"/>
+    <d-button text="asdasd"/>
+  </div>
 </template>
 
 <script>
-export default {
-  name: 'IndexPage'
-}
 </script>
+
+<style scoped>
+  .dark {
+    background: #000;
+  }
+</style>
