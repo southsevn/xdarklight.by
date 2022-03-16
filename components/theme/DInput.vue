@@ -1,5 +1,5 @@
 <template>
-  <component :is="to ? 'nuxt-button' : 'button'" :to="to" class="d-button" :style="style">{{ text }}</component>
+  <input class="d-input" @input="$emit('input')" :type="type" :value="value" :style="style"/>
 </template>
 <script>
 import { localStorage } from "@/mixins";
@@ -8,12 +8,12 @@ export default {
   name: "DLogo",
   mixins: [localStorage],
   props: {
-    text: {
+    type: {
       type: String,
       required: false,
-      default: false
+      default: 'text'
     },
-    to: {
+    value: {
       type: String,
       required: false,
       default: ''
@@ -22,21 +22,20 @@ export default {
   computed: {
     style() {
       return {
-        background: this.dark ? '#0f0f0f' : '#fff',
-        color: this.dark ? '#fff' : '#0f0f0f'
+        color: this.dark ? '#0f0f0f' : '#fff',
+        'border-color': this.dark ? "#0f0f0f" : "#fff"
       }
     }
   }
 }
 </script>
 <style lang="sass" scoped>
-  .d-button
+  .d-input
     font-size: 20px
-    font-weight: bold
-    background: $white
-    color: $black
+    font-weight: 100
+    padding: 15px 20px
     border: none
-    padding: 15px 44px
-    min-width: 200px
-    cursor: pointer
+    outline: none
+    background: none
+    border-bottom: 1px solid
 </style>

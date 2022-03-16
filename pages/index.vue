@@ -5,14 +5,24 @@
     <d-logo text/>
     <d-page-title title="Каталог"/>
     <d-button text="Click"/>
+    <div>
+      <d-input v-model="inputValue"/>
+    </div>
   </div>
 </template>
 
 <script>
 import { localStorage } from "@/mixins";
+import DInput from '../components/theme/DInput.vue';
 
 export default {
-  mixins: [localStorage]
+  components: { DInput },
+  mixins: [localStorage],
+  data() {
+    return { 
+      inputValue: 'value'
+    }
+  }
 } 
 </script>
 
