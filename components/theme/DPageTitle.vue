@@ -1,10 +1,21 @@
 <template>
-  <h2 class="d-page-title">{{ title }}</h2>
+  <h2 class="d-page-title" :style="style">{{ title }}</h2>
 </template>
 
 <script>
+import { localStorage } from "@/mixins";
+
 export default {
   name: "DPageTitle",
+  mixins: [localStorage],
+  computed: {
+    style() {
+      return {
+        'border-color': this.dark ? '#0f0f0f' : '#fff',
+        color: this.dark ? '#0f0f0f' : '#fff'
+      }
+    }
+  },
   props: {
     title: {
       type: String,
@@ -17,7 +28,7 @@ export default {
 <style lang="sass" scoped>
   .d-page-title
     font-weight: bold
-    border-bottom: 2px solid $black
+    border-bottom: 2px solid
     position: relative
     margin-bottom: 10px
 
@@ -26,5 +37,5 @@ export default {
       content: " "
       position: absolute
       bottom: -4px
-      border-bottom: 1px solid $black
+      border-bottom: 1px solid
 </style>

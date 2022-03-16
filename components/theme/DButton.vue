@@ -1,12 +1,15 @@
 <template>
-  <component :is="to ? 'nuxt-button' : 'button'" :to="to" class="d-button">{{ text }}</component>
+  <component :is="to ? 'nuxt-button' : 'button'" :to="to" class="d-button" :style="style">{{ text }}</component>
 </template>
 <script>
+import { localStorage } from "@/mixins";
+
 export default {
   name: "DLogo",
+  mixins: [localStorage],
   props: {
     text: {
-      type: Boolean,
+      type: String,
       required: false,
       default: false
     },
@@ -14,6 +17,14 @@ export default {
       type: String,
       required: false,
       default: ''
+    }
+  },
+  computed: {
+    style() {
+      return {
+        background: this.dark ? '#0f0f0f' : '#fff',
+        color: this.dark ? '#fff' : '#0f0f0f'
+      }
     }
   }
 }
