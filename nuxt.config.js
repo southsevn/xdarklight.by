@@ -22,14 +22,14 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/fonts/road-radio.sass',
-    '@/assets/fonts/frizon.sass'
+    '@/assets/fonts/frizon.sass',
+    '@/assets/styles/helpers/_reset.sass',
+    '@/assets/styles/base.sass'
   ],
 
   styleResources: {
     sass: [
-      '@/assets/styles/helpers/_variables.sass',
-      '@/assets/styles/helpers/_reset.sass',
-      '@/assets/styles/base.sass'
+      '@/assets/styles/helpers/_variables.sass'
     ],
   },
 

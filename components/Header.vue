@@ -9,21 +9,23 @@
             :key="idx"
             :href="social.link"
             :text="$t(social.text)"
+            :light="!dark && showMenu"
             blank
           />
         </div>
       </div>
-      <Logo class="logo" :animated="animateLogo"/>
+      <Logo class="logo" :animated="showMenu"/>
       <div class="navigation">
         <d-link
           to="/login"
-          :text="$t('header.navigation.enter')"
+          :text="$t('components.header.navigation.enter')"
+          :light="!dark && showMenu"
         />
-        <div class="cart">
-          <nuxt-link to="/cart">{{ $t('header.navigation.cart') }}</nuxt-link>
-          <span> {{ `(${cartCount})` }} </span>
+        <div class="cart" :style="navItemsStyle">
+          <nuxt-link to="/cart" :style="navItemsStyle">{{ $t('components.header.navigation.cart') }}</nuxt-link>
+          <span class="cart-counter" :style="navItemsStyle"> {{ `(${cartCount})` }} </span>
         </div>
-        <div class="menu-button">
+        <div @click="onMenuButtonClick" class="menu-button">
           <span class="line-1" :style="menuButtonStyle"></span>
           <span class="line-2" :style="menuButtonStyle"></span>
           <span class="line-3" :style="menuButtonStyle"></span>
@@ -48,11 +50,17 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(["showMenu"]),
     ...mapGetters("cart", ["cartCount"]),
     menuButtonStyle() {
       return {
-        'border-color': this.dark ? "#ffffff" : "#0f0f0f"
+        'border-color': this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#fff"
       };
+    },
+    navItemsStyle() {
+      return {
+        color: this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#0f0f0f"
+      }
     }
   },
   data() {
@@ -61,21 +69,26 @@ export default {
       socials: [
         {
           link: "https://www.instagram.com/darklight.by",
-          text: "header.socials.instagram"
+          text: "components.header.socials.instagram"
         },
         {
           link: "https://vk.com/darklight_by",
-          text: "header.socials.vk"
+          text: "components.header.socials.vk"
         },
         {
           link: "https://www.facebook.com/darklight.gear",
-          text: "header.socials.fb"
+          text: "components.header.socials.fb"
         }
       ]
     }
   },
   mounted() {
     this.loaded = true;
+  },
+  methods: {
+    onMenuButtonClick() {
+      this.$store.commit("SET_MENU", !this.showMenu);
+    }
   }
 }
 </script>
@@ -96,9 +109,14 @@ export default {
 
   .header
     display: flex
-    align-items: flex-start
-    position: relative
+    align-items: center
     justify-content: space-between
+    position: fixed
+    z-index: 100
+    padding: 0 60px
+    width: 100%
+    left: 0
+    right: 0
 
     .socials, .navigation
       display: flex
@@ -121,22 +139,29 @@ export default {
       justify-content: center
       flex-direction: column
       cursor: pointer
+      transition: all 1s
 
       .line-1
+        transition: all 1s
         display: block
         border-bottom: 3px solid
         width: 100%
         margin-bottom: 5px
 
       .line-2
+        transition: all 1s
         display: block
         border-bottom: 2px solid
         width: 100%
         margin-bottom: 4px
 
       .line-3
+        transition: all 1s
         display: block
         border-bottom: 1px solid
         width: 100%
         margin-bottom: 0
+
+    .cart-counter
+      transition: all 1s
 </style>

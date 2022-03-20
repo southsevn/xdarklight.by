@@ -1,18 +1,29 @@
 {
-  "header": {
-    "socials": {
-      "instagram": "instagram",
-      "vk": "vk",
-      "fb": "fb"
-    },
-    "navigation": {
-      "enter": "Войти",
-      "cart": "Корзина"
+  "pages": {
+    "main": {
+      "head": "Главная | Darklight"
     }
   },
   "components": {
     "logo": {
       "alt": "Darklight"
+    },
+    "header": {
+      "socials": {
+        "instagram": "instagram",
+        "vk": "vk",
+        "fb": "fb"
+      },
+      "navigation": {
+        "enter": "Войти",
+        "cart": "Корзина"
+      }
+    },
+    "promoItem": {
+      "actions": {
+        "oneClick": "В один клик",
+        "addToCart": "В корзину"
+      }
     }
   }
 }

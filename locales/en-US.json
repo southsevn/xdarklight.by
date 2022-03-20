@@ -1,18 +1,31 @@
 {
-  "header": {
-    "socials": {
-      "instagram": "instagram",
-      "vk": "vk",
-      "fb": "fb"
-    },
-    "navigation": {
-      "enter": "Log In",
-      "cart": "Cart"
+  "menu": {
+  },
+  "pages": {
+    "main": {
+      "head": "Main | Darklight"
     }
   },
   "components": {
     "logo": {
       "alt": "Darklight"
+    },
+    "header": {
+      "socials": {
+        "instagram": "instagram",
+        "vk": "vk",
+        "fb": "fb"
+      },
+      "navigation": {
+        "enter": "Log In",
+        "cart": "Cart"
+      }
+    },
+    "promoItem": {
+      "actions": {
+        "oneClick": "One Click",
+        "addToCart": "Add To Cart"
+      }
     }
   }
 }
