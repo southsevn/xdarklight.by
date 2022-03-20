@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import { localStorage } from "@/mixins";
+import { theme } from "@/mixins";
 
 export default {
   name: "DPageTitle",
-  mixins: [localStorage],
+  mixins: [theme],
   computed: {
     style() {
       return {

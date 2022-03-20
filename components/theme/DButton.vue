@@ -1,12 +1,12 @@
 <template>
-  <component :is="to ? 'nuxt-button' : 'button'" :to="to" class="d-button" :style="style">{{ text }}</component>
+  <component :is="to ? 'nuxt-button' : 'button'" :to="to" class="d-button" :style="style" @click="$emit('click')">{{ text }}</component>
 </template>
 <script>
-import { localStorage } from "@/mixins";
+import { theme } from "@/mixins";
 
 export default {
   name: "DLogo",
-  mixins: [localStorage],
+  mixins: [theme],
   props: {
     text: {
       type: String,

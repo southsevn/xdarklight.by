@@ -2,11 +2,11 @@
   <input class="d-input" @input="$emit('input')" :type="type" :value="value" :style="style"/>
 </template>
 <script>
-import { localStorage } from "@/mixins";
+import { theme } from "@/mixins";
 
 export default {
   name: "DLogo",
-  mixins: [localStorage],
+  mixins: [theme],
   props: {
     type: {
       type: String,

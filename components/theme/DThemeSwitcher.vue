@@ -1,19 +1,18 @@
 <template>
   <div @click="changeTheme" class="d-theme-switcher">
-    <img v-if="dark" src="/theme-switcher/dark.svg">
+    <img v-if="!dark" src="/theme-switcher/dark.svg">
     <img v-else src="/theme-switcher/light.svg">
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
-import { localStorage } from "@/mixins"
+import { theme } from "@/mixins"
 
 export default {
   name: "DThemeSwitcher",
-  mixins: [localStorage],
+  mixins: [theme],
   methods: {
     changeTheme() {
-      this.$store.dispatch("localStorage/changeTheme", !this.dark)
+      this.$store.dispatch("changeTheme", !this.dark)
     }
   }
 }

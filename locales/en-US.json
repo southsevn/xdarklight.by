@@ -1,4 +1,15 @@
 {
+  "header": {
+    "socials": {
+      "instagram": "instagram",
+      "vk": "vk",
+      "fb": "fb"
+    },
+    "navigation": {
+      "enter": "Log In",
+      "cart": "Cart"
+    }
+  },
   "components": {
     "logo": {
       "alt": "Darklight"

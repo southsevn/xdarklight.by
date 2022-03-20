@@ -1,3 +1,18 @@
 {
-  "new": "Новый"
+  "header": {
+    "socials": {
+      "instagram": "instagram",
+      "vk": "vk",
+      "fb": "fb"
+    },
+    "navigation": {
+      "enter": "Войти",
+      "cart": "Корзина"
+    }
+  },
+  "components": {
+    "logo": {
+      "alt": "Darklight"
+    }
+  }
 }

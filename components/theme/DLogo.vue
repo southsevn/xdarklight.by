@@ -5,11 +5,11 @@
   </div>
 </template>
 <script>
-import { localStorage } from "@/mixins"
+import { theme } from "@/mixins"
 
 export default {
   name: "DLogo",
-  mixins: [localStorage],
+  mixins: [theme],
   props: {
     text: {
       type: Boolean,

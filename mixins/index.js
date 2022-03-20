@@ -1,6 +1,6 @@
-import { localStorage } from '@/mixins/localStorage';
+import { theme } from '@/mixins/theme';
 
 export {
-  localStorage
+  theme
 };
 
