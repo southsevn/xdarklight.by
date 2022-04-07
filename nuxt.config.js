@@ -24,7 +24,8 @@ export default {
     '@/assets/fonts/road-radio.sass',
     '@/assets/fonts/frizon.sass',
     '@/assets/styles/helpers/_reset.sass',
-    '@/assets/styles/base.sass'
+    '@/assets/styles/base.sass',
+    './node_modules/vue-slick-carousel/dist/vue-slick-carousel.css'
   ],
 
   styleResources: {
@@ -35,6 +36,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/vue-slick-carousel.js', mode: 'client' },
+    { src: '~/plugins/vue-marquee.js', mode: 'client'}
   ],
 
   loading: { color: "#008593" },
@@ -132,6 +135,15 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config, ctx) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]'
+        }
+      })
+    },
     loaders: {
       sass: {
         implementation: require('sass'),

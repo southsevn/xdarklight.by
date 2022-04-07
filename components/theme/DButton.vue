@@ -17,7 +17,7 @@ export default {
     text: {
       type: String,
       required: false,
-      default: false
+      default: ""
     },
     to: {
       type: String,

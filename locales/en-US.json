@@ -4,6 +4,39 @@
   "pages": {
     "main": {
       "head": "Main | Darklight"
+    },
+    "cart": {
+      "head": "Cart | Darklight"
+    },
+    "checkout": {
+      "head": "Checkout | Darklight"
+    },
+    "mission": {
+      "head": "Mission | Darklight"
+    },
+    "media": {
+      "head": "Media | Darklight"
+    },
+    "contacts": {
+      "head": "Contacts | Darklight"
+    },
+    "payments": {
+      "head": "Payments | Darklight"
+    },
+    "delivery": {
+      "head": "Delivery | Darklight"
+    },
+    "return": {
+      "head": "Return | Darklight" 
+    },
+    "terms": {
+      "head": "Terms | Darklight"
+    },
+    "privacy": {
+      "head": "Privacy | Darklight"
+    },
+    "publicOffer": {
+      "head": "Public Offer | Darklight"
     }
   },
   "components": {
@@ -26,6 +59,31 @@
         "oneClick": "One Click",
         "addToCart": "Add To Cart"
       }
+    },
+    "filters": {
+      "wear": "Wear",
+      "tshirts": "T-Shirts",
+      "shorts": "Shorts",
+      "longsleeves": "Longsleeves",
+      "pants": "Pants",
+      "bags": "Bags",
+      "accessories": "Accessories",
+      "modules": "Modules",
+      "bagpacks": "Bagpacks"
+    },
+    "menu": {
+      "catalog": "Catalog",
+      "mission": "Our Mission",
+      "media": "Media",
+      "contacts": "Contacts"
+    },
+    "textPages": {
+      "payment": "Оплата",
+      "delivery": "Доставка",
+      "return": "Возврат",
+      "terms": "Пользовательское соглашение",
+      "privacy": "Политика конфиденциальности",
+      "publicOffer": "Публичная оферта"
     }
   }
 }

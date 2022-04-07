@@ -2,6 +2,39 @@
   "pages": {
     "main": {
       "head": "Главная | Darklight"
+    },
+    "cart": {
+      "head": "Корзина | Darklight"
+    },
+    "checkout": {
+      "head": "Оплата | Darklight"
+    },
+    "mission": {
+      "head": "Миссия | Darklight"
+    },
+    "media": {
+      "head": "Медиа | Darklight"
+    },
+    "contacts": {
+      "head": "Контакты | Darklight"
+    },
+    "payments": {
+      "head": "Оплата | Darklight"
+    },
+    "delivery": {
+      "head": "Доставка | Darklight"
+    },
+    "return": {
+      "head": "Возврат | Darklight" 
+    },
+    "terms": {
+      "head": "Пользовательское соглашение | Darklight"
+    },
+    "privacy": {
+      "head": "Политика конфиденциальности | Darklight"
+    },
+    "publicOffer": {
+      "head": "Публичная оферта | Darklight"
     }
   },
   "components": {
@@ -24,6 +57,31 @@
         "oneClick": "В один клик",
         "addToCart": "В корзину"
       }
+    },
+    "menu": {
+      "catalog": "Каталог",
+      "mission": "Наша миссия",
+      "media": "Медиа",
+      "contacts": "Контакты"
+    },
+    "filters": {
+      "wear": "Одежда",
+      "tshirts": "Футболки",
+      "shorts": "Шорты",
+      "longsleeves": "Лонгсливы",
+      "pants": "Штаны",
+      "bags": "Сумки",
+      "accessories": "Аксессуары",
+      "modules": "Модули",
+      "bagpacks": "Рюкзаки"
+    },
+    "textPages": {
+      "payment": "Оплата",
+      "delivery": "Доставка",
+      "return": "Возврат",
+      "terms": "Пользовательское соглашение",
+      "privacy": "Политика конфиденциальности",
+      "publicOffer": "Публичная оферта"
     }
   }
 }

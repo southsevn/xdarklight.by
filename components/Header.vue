@@ -37,11 +37,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { theme } from "@/mixins";
+import { theme, soundEffects } from "@/mixins";
 
 export default {
   name: "Header",
-  mixins: [theme],
+  mixins: [theme, soundEffects],
   props: {
     animateLogo: {
       type: Boolean,
@@ -87,6 +87,7 @@ export default {
   },
   methods: {
     onMenuButtonClick() {
+      this.clickEffect();
       this.$store.commit("SET_MENU", !this.showMenu);
     }
   }
@@ -105,22 +106,23 @@ export default {
     left: 50%
     right: 50%
     transform: translate(-50%, -50%)
-    top: 60px
+    top: 112px
 
   .header
     display: flex
-    align-items: center
-    justify-content: space-between
     position: fixed
     z-index: 100
-    padding: 0 60px
     width: 100%
     left: 0
     right: 0
+    padding: 60px 0
 
     .socials, .navigation
       display: flex
       align-items: center
+
+    .socials
+      margin-left: 60px     
 
     .socials-list
       margin-left: 30px
@@ -129,8 +131,16 @@ export default {
         margin-right: 20px
 
     .navigation
+      position: absolute
+      right: 0
+      width: 301px
+      margin-right: 60px
+
       > *
-        margin-left: 20px
+        margin-left: 30px
+
+        &:first-child
+          margin-left: 60px
 
     .menu-button
       width: 30px

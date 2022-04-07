@@ -1,5 +1,5 @@
 <template>
-  <div class="logo-container">
+  <nuxt-link class="logo-container" to="/">
     <transition name="logo-blur">
       <div v-if="statica || (dark && !animated)" class="image-logo">
         <svg width="120" height="120" viewBox="0 0 201 201" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +40,7 @@
           <path d="M268.254 0.493104V3.22414H258.808V21.469H255.762V3.22414H246.316V0.493104H268.254Z" fill="#0F0F0F"/>
         </svg>
     </transition>
-  </div>
+  </nuxt-link>
 </template>
 
 <script>
