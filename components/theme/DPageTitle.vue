@@ -11,8 +11,8 @@ export default {
   computed: {
     style() {
       return {
-        'border-color': this.dark ? '#0f0f0f' : '#fff',
-        color: this.dark ? '#0f0f0f' : '#fff'
+        'border-color': !this.dark ? '#0f0f0f' : '#fff',
+        color: !this.dark ? '#0f0f0f' : '#fff'
       }
     }
   },
@@ -31,6 +31,7 @@ export default {
     border-bottom: 2px solid
     position: relative
     margin-bottom: 10px
+    font-size: 40px
 
     &::before
       width: 100%

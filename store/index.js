@@ -76,7 +76,10 @@ export default () => new Vuex.Store({
         ],
         category: 'Аксессуары',
         name: 'Target',
-        price: '120'
+        price: '120',
+        isSoldOut: false,
+        isSale: false,
+        salePercent: 0
       },
       {
         promoImages: [
@@ -91,7 +94,10 @@ export default () => new Vuex.Store({
         ],
         category: 'Аксессуары',
         name: 'Cors',
-        price: '90'
+        price: '90',
+        isSoldOut: false,
+        isSale: true,
+        salePercent: 20
       },
       {
         promoImages: [
@@ -105,7 +111,10 @@ export default () => new Vuex.Store({
         ],
         category: 'Одежда',
         name: 'True Love',
-        price: '90'
+        price: '90',
+        isSoldOut: true,
+        isSale: false,
+        salePercent: 0
       }
     ],
     filters: [

@@ -31,6 +31,8 @@ export default {
     padding-bottom: 40px
 
     &-item
+      color: $white !important
+
       &:not(:last-child)
         margin-right: 20px
 </style>

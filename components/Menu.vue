@@ -3,7 +3,7 @@
     <div v-if="menu" class="menu-list">
       <div :class="['menu-item', { submenu: item.childCategories }]" v-for="(item, idx) in menu" :key="idx">
         <div class="menu-item-container" v-if="item.childCategories">
-          <nuxt-link class="hover-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
+          <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
           <div class="submenu-container" v-for="(category, idx) in item.childCategories" :key="idx">
             <h4 class="submenu-category">{{ $t(category.categoryName) }}</h4>
             <div class="submenu-list">
@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="menu-item-container" v-else>
-          <nuxt-link class="hover-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
+          <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
         </div>
       </div>
     </div>
@@ -29,13 +29,19 @@
 
 <script>
 import { mapState } from "vuex";
-import { soundEffects } from "@/mixins";
+import { theme, soundEffects } from "@/mixins";
 
 export default {
   name: "Menu",
-  mixins: [soundEffects],
+  mixins: [theme, soundEffects],
   computed: {
     ...mapState(["menu"]),
+    style() {
+      return {
+        'border-color': !this.dark ? '#0f0f0f' : '#fff',
+        color: !this.dark ? '#0f0f0f' : '#fff'
+      }
+    }
   }
 }
 </script>
@@ -53,6 +59,7 @@ export default {
     backdrop-filter: blur(20px)
     display: flex
     flex-direction: column
+    color: $white
 
     &-list
       margin: 240px auto auto auto
@@ -87,6 +94,7 @@ export default {
       margin: 30px 0 20px
       border-bottom: 1px solid $white
       width: fit-content
+      color: $white
 
     .submenu-list
       display: flex
@@ -98,4 +106,12 @@ export default {
       font-size: 15px
       margin-right: 10px
       margin-bottom: 10px
+      color: $white !important
+
+    .page-link.hover-link
+      border-bottom: 2px solid transparent !important
+      color: $white
+      
+      &:hover
+        border-bottom: 2px solid !important
 </style>

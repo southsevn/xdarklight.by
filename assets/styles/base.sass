@@ -25,11 +25,15 @@ a
     color: inherit
 
 .d-app
+  //TODO: Remove
   min-height: 300vh
 
   &.light
     transition: 1s all
     color: $black
+
+    img
+      transition: none
 
     a
       transition: 1s all
@@ -42,6 +46,9 @@ a
     transition: 1s all
     color: $white
 
+    img
+      transition: none
+
     button
       transition: 1s all
 
@@ -50,5 +57,9 @@ a
       color: $white
     
   .hover-link
+    padding-bottom: 1px
+    border-bottom: 1px solid transparent !important
+    transition: none !important
+
     &:hover
-      text-decoration: underline
+      border-bottom: 1px solid !important

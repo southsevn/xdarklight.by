@@ -37,6 +37,18 @@
       "head": "Публичная оферта | Darklight"
     }
   },
+  "catalog": {
+    "title": "Каталог",
+    "product": {
+      "soldOut": "Нет в наличии",
+      "salePercent": "-{count}%",
+      "actions": {
+        "oneClick": "В один клик",
+        "addToCart": "В корзину",
+        "notify": "Уведомить о наличии"
+      }
+    }
+  },
   "components": {
     "logo": {
       "alt": "Darklight"
@@ -50,12 +62,6 @@
       "navigation": {
         "enter": "Войти",
         "cart": "Корзина"
-      }
-    },
-    "promoItem": {
-      "actions": {
-        "oneClick": "В один клик",
-        "addToCart": "В корзину"
       }
     },
     "menu": {

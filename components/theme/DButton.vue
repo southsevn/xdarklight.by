@@ -4,15 +4,18 @@
     :to="to"
     class="d-button"
     :style="style"
-    @click="$emit('click')"
-  >{{ text }}</component>
+    @click="onClick"
+  >
+    <img v-if="icon" :src="icon">
+    <span>{{ text }}</span>
+  </component>
 </template>
 <script>
-import { theme } from "@/mixins";
+import { theme, soundEffects } from "@/mixins";
 
 export default {
   name: "DLogo",
-  mixins: [theme],
+  mixins: [theme, soundEffects],
   props: {
     text: {
       type: String,
@@ -28,6 +31,16 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    icon: {
+      type: String,
+      required: true,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   computed: {
@@ -37,6 +50,12 @@ export default {
         color: this.dark && !this.inverted ? "#fff" : this.dark && this.inverted ? "#0f0f0f" : !this.dark && this.inverted ? "#fff" : "#0f0f0f",
         'border-color': this.dark && !this.inverted ? "#fff" : this.dark && this.inverted ? "#fff" : !this.dark && this.inverted ? "#0f0f0f" : "#0f0f0f"
       }
+    }
+  },
+  methods: {
+    onClick() {
+      this.$emit('click');
+      this.clickEffect();
     }
   }
 }
@@ -52,4 +71,11 @@ export default {
     min-width: 200px
     cursor: pointer
     border: 1px solid
+    display: flex
+    align-items: center
+    justify-content: center
+
+    img
+      margin-right: 20px
+      width: 20px
 </style>

@@ -1,6 +1,4 @@
 {
-  "menu": {
-  },
   "pages": {
     "main": {
       "head": "Main | Darklight"
@@ -37,6 +35,18 @@
     },
     "publicOffer": {
       "head": "Public Offer | Darklight"
+    }
+  },
+  "catalog": {
+    "title": "Catalog",
+    "product": {
+      "soldOut": "Sold Out",
+      "salePercent": "-{count}%",
+      "actions": {
+        "oneClick": "One Click",
+        "addToCart": "Add To Cart",
+        "notify": "Notify me"
+      }
     }
   },
   "components": {
