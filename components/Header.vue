@@ -14,7 +14,7 @@
           />
         </div>
       </div>
-      <Logo class="logo" :animated="showMenu"/>
+      <Logo class="logo" :animated="!isPageOnTop"/>
       <div class="navigation">
         <d-link
           to="/login"
@@ -50,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["showMenu"]),
+    ...mapGetters(["showMenu", "isPageOnTop"]),
     ...mapGetters("cart", ["cartCount"]),
     menuButtonStyle() {
       return {

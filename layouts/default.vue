@@ -18,11 +18,30 @@ import { theme } from "@/mixins";
 export default {
   mixins: [theme],
   computed: {
-    ...mapGetters(["showMenu"]),
+    ...mapGetters(["showMenu", "isPageOnTop"]),
   },
   data() {
     return {
       animateLogo: false
+    }
+  },
+  methods: {
+    handleScroll () {
+      if (window.scrollY > 150) {
+        this.$store.commit("SET_PAGE_ON_TOP", false);
+      } else {
+        this.$store.commit("SET_PAGE_ON_TOP", true);
+      }
+    }
+  },
+  beforeMount () {
+    if (process.client) {
+      window.addEventListener("scroll", this.handleScroll);
+    }
+  },
+  beforeDestroy() {
+    if (process.client) {
+      window.removeEventListener("scroll", this.handleScroll);
     }
   }
 }

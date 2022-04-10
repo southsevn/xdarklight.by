@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default () => new Vuex.Store({
   state: () => ({
     dark: JSON.parse(window.localStorage.getItem("dl.localStorage"))?.dark || true,
-    showMenu: true,
+    showMenu: false,
+    isPageOnTop: true,
     menu: [
       {
         text: "components.menu.catalog",
@@ -165,7 +166,8 @@ export default () => new Vuex.Store({
   }),
   getters: {
     dark: state => state.dark,
-    showMenu: state => state.showMenu
+    showMenu: state => state.showMenu,
+    isPageOnTop: state => state.isPageOnTop
   },
   mutations: {
     SET_THEME(state, value) {
@@ -173,6 +175,9 @@ export default () => new Vuex.Store({
     },
     SET_MENU(state, value) {
       state.showMenu = value;
+    },
+    SET_PAGE_ON_TOP(state, value) {
+      state.isPageOnTop = value;
     }
   },
   actions: {

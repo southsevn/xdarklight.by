@@ -1,13 +1,32 @@
 <template>
   <div class="filter-navigation">
-      <div class="filter-row" v-for="(row, idx) in filters" :key="idx">
-        <MarqueeText :reverse="idx+1 %1 !== 0" :duration="30">
-          <div class="filter-item" :key="idx" v-for="(item, idx) in row.items">  
+      <div
+        class="filter-row"
+        v-for="(row, idx) in filters"
+        :key="idx"
+      >
+        <MarqueeText
+          :reverse="idx+1 %1 !== 0"
+          :duration="duration"
+          :paused="paused"
+        >
+          <div
+            class="filter-item"
+            v-for="(item, idx) in row.items"
+            :key="idx"
+          >  
             <div class="filter-item-content">
-              <span @click="onFilterSelect(item.id)" class="filter-item-text">{{ $t(item.text) }}</span>
+              <span
+                @click="onFilterSelect(item.id)"
+                @mouseover="paused = true"
+                @mouseleave="paused = false"
+                class="filter-item-text"
+              >
+                {{ $t(item.text) }}
+              </span>
               <span class="filter-item-category">{{ $t(row.parentCategory) }}</span>
             </div>
-            <span class="filter-item-separator" v-if="idx !== (filters.length - 1)">/</span>
+            <span class="filter-item-separator" v-if="idx !== filters.length - 1">/</span>
           </div>
         </MarqueeText>
       </div>
@@ -23,6 +42,12 @@ export default {
     mappedFilters() {
       return this.filters.map()
     }
+  },
+  data() {
+    return {
+      duration: 30,
+      paused: false
+    };
   },
   methods: {
     onFilterSelect(id) {
@@ -53,6 +78,7 @@ export default {
 
   .filter-item-category
     font-size: 15px
+    user-select: none
   
   .marquee-text-text
     display: flex
