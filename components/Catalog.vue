@@ -30,13 +30,28 @@
           </div>
           <DPrice class="product-price" v-model="product.price"/>
           <div class="product-actions">
-            <DButton v-if="!product.isSoldOut" :text="$t('catalog.product.actions.oneClick')"/>
-            <DButton v-if="!product.isSoldOut" inverted :text="$t('catalog.product.actions.addToCart')"/>
-            <DButton v-if="product.isSoldOut" :text="$t('catalog.product.actions.notify')" icon="/icons/notify-icon.svg"/>
+            <DButton
+              v-if="!product.isSoldOut"
+              :text="$t('catalog.product.actions.oneClick')"
+              @mouseover="hoverEffect"
+            />
+            <DButton
+              v-if="!product.isSoldOut"
+              inverted
+              :text="$t('catalog.product.actions.addToCart')"
+              @click="clickEffect"
+            />
+            <DButton
+              @click="clickEffect"
+              v-if="product.isSoldOut"
+              :text="$t('catalog.product.actions.notify')"
+              :icon="dark ? '/icons/notify-icon.svg' : '/icons/notify-icon-black.svg'"
+            />
           </div>
         </div>
       </div>
     </div>
+    <DPagination :value="paginationValue" :length="7" @change="onPaginate"/>
   </div>
 </template>
 
@@ -55,8 +70,18 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      paginationValue: 1
+    };
+  },
   computed: {
     ...mapState(["products", "filters"])
+  },
+  methods: {
+    onPaginate(navQty) {
+      this.paginationValue = this.paginationValue + navQty;
+    }
   }
 }
 </script>
@@ -65,6 +90,8 @@ export default {
   .catalog
     padding: 60px
     margin-top: 60px
+    display: flex
+    flex-direction: column
     
     &-container
       display: grid
@@ -76,7 +103,7 @@ export default {
       margin-top: 50px
 
     .filters
-      grid-area: 1 / 1 / 2 / 2
+      grid-area: 1
 
     .filter-group
       margin-bottom: 30px
@@ -98,10 +125,9 @@ export default {
         width: fit-content
 
     .products-container
-      grid-area: 1 / 2 / 2 / 3
+      grid-area: 1
       display: grid
       grid-template-columns: 1fr 1fr 1fr
-      grid-template-rows: 1fr 1fr 1fr 1fr
       gap: 100px 60px
       grid-area: 1 / 2 / 2 / 3
 
@@ -143,6 +169,7 @@ export default {
         justify-content: center
         font-size: 30px
         font-weight: bold
+        color: $white
 
       &-info
         padding-top: 15px
@@ -177,4 +204,7 @@ export default {
 
         .d-button
           width: 100%
+    
+  .d-pagination
+    margin: 92px auto 0
 </style>

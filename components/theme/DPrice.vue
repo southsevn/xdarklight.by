@@ -27,7 +27,7 @@ export default {
 
     &-char
       font-size: 50px
-      margin-right: 1rem
+      margin-right: 20px
 
     &-value, &-char
       font-weight: bold

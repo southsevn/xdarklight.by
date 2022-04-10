@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default () => new Vuex.Store({
   state: () => ({
     dark: JSON.parse(window.localStorage.getItem("dl.localStorage"))?.dark || true,
-    showMenu: false,
+    showMenu: true,
     menu: [
       {
         text: "components.menu.catalog",

@@ -4,10 +4,11 @@
     :to="to"
     class="d-button"
     :style="style"
-    @click="onClick"
+    @click="$emit('click')"
+    @mouseover.stop="$emit('mouseover')"
   >
     <img v-if="icon" :src="icon">
-    <span>{{ text }}</span>
+    {{ text }}
   </component>
 </template>
 <script>
@@ -53,9 +54,8 @@ export default {
     }
   },
   methods: {
-    onClick() {
-      this.$emit('click');
-      this.clickEffect();
+    onHoverBtnText(e) {
+      e.stopPropagation();
     }
   }
 }

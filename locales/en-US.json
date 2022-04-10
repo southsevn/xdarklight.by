@@ -85,7 +85,10 @@
       "catalog": "Catalog",
       "mission": "Our Mission",
       "media": "Media",
-      "contacts": "Contacts"
+      "contacts": "Contacts",
+      "cart": {
+        "empty": "Cart is Empty"
+      }
     },
     "textPages": {
       "payment": "Оплата",

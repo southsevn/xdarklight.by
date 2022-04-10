@@ -68,7 +68,10 @@
       "catalog": "Каталог",
       "mission": "Наша миссия",
       "media": "Медиа",
-      "contacts": "Контакты"
+      "contacts": "Контакты",
+      "cart": {
+        "empty": "Корзина пуста"
+      }
     },
     "filters": {
       "wear": "Одежда",

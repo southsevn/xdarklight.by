@@ -115,7 +115,7 @@ export default {
     width: 100%
     left: 0
     right: 0
-    padding: 60px 0
+    padding: 60px 0 0
 
     .socials, .navigation
       display: flex

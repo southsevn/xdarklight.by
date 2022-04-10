@@ -7,6 +7,10 @@ export const soundEffects = {
     clickEffect() {
       const audio = new Audio("/sounds/click.wav");
       audio.play();
+    },
+    deniedEffect() {
+      const audio = new Audio("/sounds/denied.wav");
+      audio.play();
     }
   }
 }
