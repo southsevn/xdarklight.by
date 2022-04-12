@@ -1,14 +1,25 @@
 <template>
-  <div></div>
+  <div class="d-page" v-if="deliveryDescription">{{ deliveryDescription }}</div>
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 export default {
-  name: "Delivery Page",
+  name: "DeliveryPage",
   head() {
     return {
       title: this.$t("pages.delivery.head")
     };
+  },
+  computed: {
+    ...mapState("company", ["deliveryDescription"])
+  },
+  methods: {
+    ...mapActions("company", ["getDeliveryDescription"])
+  },
+  async created() {
+    await this.getDeliveryDescription();
   }
 }
 </script>

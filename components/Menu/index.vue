@@ -26,7 +26,7 @@
       <MenuCart v-if="products && products.length" :products="products"/>
       <h3 v-else class="empty-cart">{{ $t('components.menu.cart.empty') }}</h3>
     </div>
-    <TextPages/>
+    <TextPages menu/>
   </div>
 </template>
 

@@ -8,6 +8,7 @@
       <Menu v-if="showMenu"/>
     </transition>
     <nuxt/>
+    <TextPages/>
   </div>
 </template>
 

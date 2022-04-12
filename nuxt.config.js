@@ -36,6 +36,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/axios-port', mode: "client" },
+    { src: '~/plugins/axios', mode: "client" },
     { src: '~/plugins/vue-slick-carousel.js', mode: 'client' },
     { src: '~/plugins/vue-marquee.js', mode: 'client'}
   ],
@@ -59,6 +61,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    '@nuxtjs/dotenv',
     [
       "@nuxtjs/i18n", {
         locales: [

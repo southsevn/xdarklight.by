@@ -6,6 +6,7 @@
       @mouseover.native="hoverEffect"
       :to="page.to"
       :key="idx"
+      :style="style"
     >
       {{ $t(page.text) }}
     </nuxt-link>
@@ -14,13 +15,25 @@
 
 <script>
 import { mapState } from "vuex";
-import { soundEffects } from "@/mixins";
+import { theme, soundEffects } from "@/mixins";
 
 export default {
   name: "TextPages",
-  mixins: [soundEffects],
+  mixins: [theme, soundEffects],
+  props: {
+    menu: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
   computed: {
-    ...mapState(["textPages"])
+    ...mapState(["textPages"]),
+    style() {
+      return {
+        color: this.menu ? '#fff' : !this.menu && this.dark ? '#fff' : !this.menu && !this.dark ? '#0f0f0f' : '#0f0f0f'
+      }
+    }
   }
 }
 </script>
@@ -31,7 +44,7 @@ export default {
     padding-bottom: 40px
 
     &-item
-      color: $white !important
+      user-select: none
 
       &:not(:last-child)
         margin-right: 20px
