@@ -1,5 +1,5 @@
 <template>
-  <h2 class="d-page-title" :style="style">{{ title }}</h2>
+  <h2 :class="['d-page-title', { simply: simply }]" :style="style">{{ title }}</h2>
 </template>
 
 <script>
@@ -20,6 +20,11 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    simply: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   }
 }
@@ -28,15 +33,19 @@ export default {
 <style lang="sass" scoped>
   .d-page-title
     font-weight: bold
-    border-bottom: 2px solid
     position: relative
     margin-bottom: 10px
-    font-size: 40px
+    font-size: 30px
+    transition: 1s all
 
-    &::before
-      width: 100%
-      content: " "
-      position: absolute
-      bottom: -4px
-      border-bottom: 1px solid
+    &:not(.simply)
+      border-bottom: 2px solid
+      font-size: 40px
+
+      &::before
+        width: 100%
+        content: " "
+        position: absolute
+        bottom: -4px
+        border-bottom: 1px solid
 </style>

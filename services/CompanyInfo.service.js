@@ -2,13 +2,13 @@ import apiClient from "@/services/apiClient";
 const companyId = process.env.COMPANY_ID;
 
 export default {
-  getCareDescription() {
+  getCareContent() {
     return apiClient.$get(`/companies/${companyId}/care`);
   },
-  getDeliveryDescription() {
+  getDeliveryContent() {
     return apiClient.$get(`/companies/${companyId}/delivery`);
   },
-  getPaymentDescription() {
+  getPaymentContent() {
     return apiClient.$get(`/companies/${companyId}/payments`);
   }
 }

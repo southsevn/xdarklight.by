@@ -49,9 +49,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  .d-app
-    background: url("https://images.unsplash.com/photo-1647449680637-00bd9816f4f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80") no-repeat center
-
   .show-menu-enter-active
     animation: slide-in 2.5s ease forwards
 

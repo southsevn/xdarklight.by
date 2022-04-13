@@ -24,6 +24,9 @@
     "delivery": {
       "head": "Доставка | Darklight"
     },
+    "care": {
+      "head": "Уход | Darklight"
+    },
     "return": {
       "head": "Возврат | Darklight" 
     },
@@ -87,6 +90,7 @@
     "textPages": {
       "payment": "Оплата",
       "delivery": "Доставка",
+      "care": "Уход",
       "return": "Возврат",
       "terms": "Пользовательское соглашение",
       "privacy": "Политика конфиденциальности",

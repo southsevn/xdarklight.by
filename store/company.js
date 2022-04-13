@@ -1,35 +1,35 @@
 import CompanyInfo from "~/services/CompanyInfo.service.js";
 
 export const state = () => ({
-  careDescription: null,
-  deliveryDescription: null,
-  paymentDescription: null
+  carePageContent: null,
+  deliveryPageContent: null,
+  paymentPageContent: null
 });
 
 export const mutations = {
-  SET_CARE_DESCRIPTION(state, description) {
-    state.careDescription = description;
+  SET_CARE_CONTENT(state, content) {
+    state.carePageContent = content;
   },
-  SET_DELIVERY_DESCRIPTION(state, description) {
-    state.deliveryDescription = description;
+  SET_DELIVERY_CONTENT(state, content) {
+    state.deliveryPageContent = content;
   },
-  SET_PAYMENT_DESCRIPTION(state, description) {
-    state.paymentDescription = description;
+  SET_PAYMENT_CONTENT(state, content) {
+    state.paymentPageContent = content;
   }
 };
 
 export const actions = {
-  async getCareDescription({ commit }) {
-    const description = await CompanyInfo.getCareDescription();
-    commit("SET_CARE_DESCRIPTION", description);
+  async getCarePageContent({ commit }) {
+    const content = await CompanyInfo.getCareContent();
+    commit("SET_CARE_CONTENT", content);
   },
-  async getDeliveryDescription({ commit }) {
-    const description = await CompanyInfo.getDeliveryDescription();
-    commit("SET_DELIVERY_DESCRIPTION", description);
+  async getDeliveryPageContent({ commit }) {
+    const content = await CompanyInfo.getDeliveryContent();
+    commit("SET_DELIVERY_CONTENT", content);
   },
-  async getPaymentDescription({ commit }) {
-    const description = await CompanyInfo.getPaymentDescription();
-    commit("SET_PAYMENT_DESCRIPTION", description);
+  async getPaymentPageContent({ commit }) {
+    const content = await CompanyInfo.getPaymentContent();
+    commit("SET_PAYMENT_CONTENT", content);
   }
 };
 

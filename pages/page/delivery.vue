@@ -1,5 +1,7 @@
 <template>
-  <div class="d-page" v-if="deliveryDescription">{{ deliveryDescription }}</div>
+  <div class="d-page">
+    <TextPage v-if="content" :content="content" :title="$t('components.textPages.delivery')"/>
+  </div>
 </template>
 
 <script>
@@ -13,13 +15,16 @@ export default {
     };
   },
   computed: {
-    ...mapState("company", ["deliveryDescription"])
+    ...mapState("company", ["deliveryPageContent"]),
+    content() {
+      return this.deliveryPageContent;
+    }
   },
   methods: {
-    ...mapActions("company", ["getDeliveryDescription"])
+    ...mapActions("company", ["getDeliveryPageContent"])
   },
   async created() {
-    await this.getDeliveryDescription();
+    await this.getDeliveryPageContent();
   }
 }
 </script>

@@ -39,7 +39,8 @@ export default {
     { src: '~/plugins/axios-port', mode: "client" },
     { src: '~/plugins/axios', mode: "client" },
     { src: '~/plugins/vue-slick-carousel.js', mode: 'client' },
-    { src: '~/plugins/vue-marquee.js', mode: 'client'}
+    { src: '~/plugins/vue-marquee.js', mode: 'client'},
+    { src: '~/plugins/vue-storage.js', mode: 'client'}
   ],
 
   loading: { color: "#008593" },

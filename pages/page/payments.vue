@@ -1,5 +1,7 @@
 <template>
-  <div class="d-page" v-if="paymentDescription">{{ paymentDescription }}</div>
+  <div class="d-page">
+    <TextPage v-if="content" :content="content" :title="$t('components.textPages.payment')"/>
+  </div>
 </template>
 
 <script>
@@ -13,13 +15,16 @@ export default {
     };
   },
   computed: {
-    ...mapState("company", ["paymentDescription"])
+    ...mapState("company", ["paymentPageContent"]),
+    content() {
+      return this.paymentPageContent;
+    }
   },
   methods: {
-    ...mapActions("company", ["getPaymentDescription"])
+    ...mapActions("company", ["getPaymentPageContent"])
   },
-  created() {
-    this.getPaymentDescription();
+  async created() {
+    await this.getPaymentPageContent();
   }
 }
 </script>

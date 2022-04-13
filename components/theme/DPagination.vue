@@ -55,7 +55,7 @@ export default {
       border: 1px solid
       font-size: 20px
       font-weight: bold
-      transition: .3s all
+      transition: 1s all
       user-select: none
 
       &:hover:not(.arrow)

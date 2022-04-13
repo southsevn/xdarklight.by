@@ -48,6 +48,10 @@ export default () => new Vuex.Store({
         to: "/page/delivery"
       },
       {
+        text: "components.textPages.care",
+        to: "/page/care"
+      },
+      {
         text: "components.textPages.return",
         to: "/page/return"
       },
