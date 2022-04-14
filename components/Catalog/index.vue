@@ -3,14 +3,14 @@
     <DPageTitle :title="$t('catalog.title')"/>
     <div class="catalog-container">
       <div class="filter-container">
-        <CatalogFilter/>
+        <CatalogFilter :styles="style"/>
       </div>
       <div class="products-container">
         <CatalogProduct
           v-for="(product, idx) in products"
           :key="idx"
           :product="product"
-          :style="style"
+          :styles="style"
           :dark="dark"
         />
       </div>
@@ -30,21 +30,19 @@ import { theme } from "@/mixins";
 export default {
   name: "Catalog",
   mixins: [theme],
-  computed: {
-    style() {
-      return {
-        'border-color': !this.dark ? '#0f0f0f' : '#fff',
-        color: !this.dark ? '#0f0f0f' : '#fff'
-      }
-    }
-  },
   data() {
     return {
       paginationValue: 1
     };
   },
   computed: {
-    ...mapState(["products"])
+    ...mapState(["products"]),
+    style() {
+      return {
+        'border-color': !this.dark ? '#0f0f0f' : '#fff',
+        color: !this.dark ? '#0f0f0f' : '#fff'
+      }
+    }
   },
   methods: {
     onPaginate(navQty) {

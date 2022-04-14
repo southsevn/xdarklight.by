@@ -15,7 +15,7 @@
 import { theme, soundEffects } from "@/mixins";
 
 export default {
-  name: "DLogo",
+  name: "DButton",
   mixins: [theme, soundEffects],
   props: {
     text: {
@@ -35,8 +35,8 @@ export default {
     },
     icon: {
       type: String,
-      required: true,
-      default: false
+      required: false,
+      default: ""
     },
     disabled: {
       type: Boolean,

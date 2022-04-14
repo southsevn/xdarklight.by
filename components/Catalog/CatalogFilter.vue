@@ -5,13 +5,13 @@
       v-for="(filter, idx) in filters"
       :key="idx"
     >
-      <h5 class="filter-group-parent" :style="style">{{ $t(filter.parentCategory) }}</h5>
+      <h5 class="filter-group-parent" :style="styles">{{ $t(filter.parentCategory) }}</h5>
       <div class="filter-group-items">
         <span
           @mouseover="hoverEffect"
           @click="clickEffect"
           class="hover-link"
-          :style="style"
+          :style="styles"
           v-for="(item, key) in filter.items"
           :key="key"
         >{{ $t(item.text) }}</span>
@@ -27,9 +27,9 @@ import { soundEffects } from "@/mixins";
 export default {
   name: "CatalogFilter",
   props: {
-    style: {
+    styles: {
       type: Object,
-      required: true
+      required: false
     }
   },
   mixins: [soundEffects],

@@ -6,8 +6,8 @@
       <img :src="product.images[0]" :alt="product.name">
     </div>
     <div class="product-info">
-      <span :style="style" class="product-category">{{ product.category }}</span>
-      <span :style="style" class="product-name">{{ product.name }}</span>
+      <span :style="styles" class="product-category">{{ product.category }}</span>
+      <span :style="styles" class="product-name">{{ product.name }}</span>
     </div>
     <DPrice class="product-price" v-model="product.price"/>
     <div class="product-actions">
@@ -43,9 +43,9 @@ export default {
       type: Object,
       required: true
     },
-    style: {
+    styles: {
       type: Object,
-      required: true
+      required: false
     },
     dark: {
       type: Boolean,

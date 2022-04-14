@@ -2,6 +2,9 @@ import apiClient from "@/services/apiClient";
 const companyId = process.env.COMPANY_ID;
 
 export default {
+  getCurrencies() {
+    return apiClient.$get(`/currencies`);
+  },
   getCareContent() {
     return apiClient.$get(`/companies/${companyId}/care`);
   },

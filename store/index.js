@@ -2,12 +2,31 @@ import Vue from "vue";
 import Vuex from "vuex";
 import cart from "./cart";
 import company from "./company";
+import Company from "~/services/Company.service.js";
 
 Vue.use(Vuex);
-
 export default () => new Vuex.Store({
   state: () => ({
-    dark: JSON.parse(window.localStorage.getItem("dl.localStorage"))?.dark || true,
+    dark: !!JSON.parse(window.localStorage.getItem("dl_theme"))?.value,
+    languages: [
+      {
+        value: 'en',
+        title: 'English'
+      },
+      {
+        value: 'ru',
+        title: 'Русский'
+      }
+    ],
+    language: JSON.parse(window.localStorage.getItem("dl_language"))?.value || {
+      value: 'ru',
+      title: 'Русский'
+    },
+    currency: JSON.parse(window.localStorage.getItem("dl_currency"))?.value || {
+      name: 'BYN',
+      value: 'byn'
+    },
+    currencies: [],
     showMenu: false,
     isPageOnTop: true,
     menu: [
@@ -170,13 +189,22 @@ export default () => new Vuex.Store({
     ]
   }),
   getters: {
-    dark: state => state.dark,
     showMenu: state => state.showMenu,
     isPageOnTop: state => state.isPageOnTop
   },
   mutations: {
     SET_THEME(state, value) {
       state.dark = value;
+    },
+    SET_LANGUAGE(state, language) {
+      state.language = language;
+      this.$i18n.locale = language.value;
+    },
+    SET_CURRENCY(state, currency) {
+      state.currency = currency;
+    },
+    SET_CURRENCIES(state, currencies) {
+      state.currencies = currencies;
     },
     SET_MENU(state, value) {
       state.showMenu = value;
@@ -187,11 +215,12 @@ export default () => new Vuex.Store({
   },
   actions: {
     changeTheme({ commit }, value) {
-      window.localStorage.setItem("dl.localStorage", JSON.stringify({
-        dark: value
-      }));
-  
       commit("SET_THEME", value);
+    },
+    async getCurrencies({ commit }) {
+      const currencies = await Company.getCurrencies();
+      commit('SET_CURRENCIES', currencies);
+      commit('SET_CURRENCY', currencies[0]);
     }
   },
   modules: {

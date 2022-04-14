@@ -1,7 +1,7 @@
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export const theme = {
   computed: {
-    ...mapGetters(["dark"])
+    ...mapState(["dark"])
   }
 };

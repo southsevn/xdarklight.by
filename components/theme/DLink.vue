@@ -39,11 +39,6 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    },
-    dark: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
   computed: {

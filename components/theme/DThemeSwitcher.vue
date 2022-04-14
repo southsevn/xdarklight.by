@@ -12,6 +12,7 @@ export default {
   mixins: [theme],
   methods: {
     changeTheme() {
+      this.$storage.set('theme', !this.dark);
       this.$store.dispatch("changeTheme", !this.dark)
     }
   }

@@ -1,3 +1,6 @@
+const ru = require('./locales/ru-RU');
+const en = require('./locales/en-US');
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -80,7 +83,8 @@ export default {
         defaultLocale: "ru",
         noPrefixDefaultLocale: true,
         vueI18n: {
-          fallbackLocale: "ru"
+          fallbackLocale: "ru",
+          messages: { en, ru }
         },
         lazy: true,
         langDir: "locales/"
