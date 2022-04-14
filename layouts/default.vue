@@ -41,7 +41,16 @@ export default {
     await this.getCurrencies();
 
     const language = this.$storage.get("language");
-    this.$i18n.locale = language.value;
+
+    if (language) {
+      this.$i18n.locale = language.value;
+    }
+
+    const currency = this.$storage.get("currency");
+
+    if (currency) {
+      this.$store.commit("SET_CURRENCY", currency);
+    }
 
     if (this.$route.query.lang) {
       const findedLang = this.languages.find(

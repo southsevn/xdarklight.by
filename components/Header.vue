@@ -15,17 +15,6 @@
         </div>
       </div>
       <Logo class="logo" :animated="!isPageOnTop"/>
-      <DSelect
-        v-if="languages"
-        v-model="currentLanguage"
-        :options="languages"
-      />
-      <DSelect
-        v-if="currencies"
-        currency
-        v-model="currentCurrency"
-        :options="currencies"
-      />
       <div class="navigation">
         <d-link
           to="/login"
@@ -47,8 +36,9 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 import { theme, soundEffects } from "@/mixins";
+import { CartService } from "@/services";
 
 export default {
   name: "Header",
@@ -62,8 +52,9 @@ export default {
   },
   computed: {
     ...mapGetters(["showMenu", "isPageOnTop"]),
-    ...mapGetters("cart", ["cartCount"]),
-    ...mapState(["languages", "currencies", "language", "currency"]),
+    cartCount() {
+      return CartService.getCartCount();
+    },
     menuButtonStyle() {
       return {
         'border-color': this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#fff"
@@ -74,24 +65,6 @@ export default {
         color: this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#0f0f0f"
       }
     },
-    currentLanguage: {
-      get() {
-        return this.language;
-      },
-      set(value) {
-        this.$storage.set('language', value);
-        this.$store.commit("SET_LANGUAGE", value);
-      }
-    },
-    currentCurrency: {
-      get() {
-        return this.currency;
-      },
-      set(value) {
-        this.$storage.set('currency', value);
-        this.$store.commit("SET_CURRENCY", value);
-      }
-    }
   },
   data() {
     return {

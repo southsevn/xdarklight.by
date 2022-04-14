@@ -1,8 +1,8 @@
 <template>
   <div class="price">
-    <span class="price-char">P</span>
+    <span class="price-char">{{ value.name }}</span>
     <div class="price-value">
-      <span class="value">{{ value }}</span>
+      <span class="value">{{ value.price }}</span>
       <span class="zeros">.00</span>
     </div>
   </div>
@@ -13,8 +13,8 @@ export default {
   name: "DPrice",
   props: {
     value: {
-    type: Number | String,
-    required: true
+      type: Object,
+      required: true
     }
   }
 }

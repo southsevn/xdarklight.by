@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import cart from "./cart";
 import company from "./company";
-import Company from "~/services/Company.service.js";
+import { CompanyService } from "@/services";
+import products from "./products";
 
 Vue.use(Vuex);
 export default () => new Vuex.Store({
@@ -87,61 +87,6 @@ export default () => new Vuex.Store({
         to: "/page/public-offer"
       }
     ],
-    products: [
-      {
-        promoImages: [
-          '/products/target1.jpg',
-          '/products/target2.jpg'
-        ],
-        images: [
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0375_1000x.jpg?v=1598646610',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0375_1000x.jpg?v=1598646610',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0375_1000x.jpg?v=1598646610',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0375_1000x.jpg?v=1598646610'
-        ],
-        category: 'Аксессуары',
-        name: 'Target',
-        price: '120',
-        isSoldOut: false,
-        isSale: false,
-        salePercent: 0
-      },
-      {
-        promoImages: [
-          '/products/long2.jpg',
-          '/products/target1.jpg'
-        ],
-        images: [
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0451_1000x.jpg?v=1633350480',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0451_1000x.jpg?v=1633350480',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0451_1000x.jpg?v=1633350480',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/DSC_0451_1000x.jpg?v=1633350480'
-        ],
-        category: 'Аксессуары',
-        name: 'Cors',
-        price: '90',
-        isSoldOut: false,
-        isSale: true,
-        salePercent: 20
-      },
-      {
-        promoImages: [
-          '/products/long1.jpg',
-          '/products/long2.jpg'
-        ],
-        images: [
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/scum_crewneck_3_1000x.jpg?v=1632406393',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/scum_crewneck_3_1000x.jpg?v=1632406393',
-          'https://cdn.shopify.com/s/files/1/1621/9773/products/scum_crewneck_3_1000x.jpg?v=1632406393'
-        ],
-        category: 'Одежда',
-        name: 'True Love',
-        price: '90',
-        isSoldOut: true,
-        isSale: false,
-        salePercent: 0
-      }
-    ],
     filters: [
       {
         parentCategory: "components.filters.wear",
@@ -218,13 +163,13 @@ export default () => new Vuex.Store({
       commit("SET_THEME", value);
     },
     async getCurrencies({ commit }) {
-      const currencies = await Company.getCurrencies();
+      const currencies = await CompanyService.getCurrencies();
       commit('SET_CURRENCIES', currencies);
       commit('SET_CURRENCY', currencies[0]);
     }
   },
   modules: {
-    cart: cart,
-    company: company
+    company: company,
+    products: products
   }
 });

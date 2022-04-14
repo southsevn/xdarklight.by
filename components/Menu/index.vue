@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="menu-cart">
-      <MenuCart v-if="products && products.length" :products="products"/>
+      <MenuCart v-if="cartProducts" :products="cartProducts"/>
       <h3 v-else class="empty-cart">{{ $t('components.menu.cart.empty') }}</h3>
     </div>
     <TextPages menu/>
@@ -33,12 +33,30 @@
 <script>
 import { mapState } from "vuex";
 import { theme, soundEffects } from "@/mixins";
+import { CartService } from "@/services";
 
 export default {
   name: "Menu",
   mixins: [theme, soundEffects],
   computed: {
-    ...mapState(["menu", "products"]),
+    ...mapState(["menu"]),
+    ...mapState("products", ["products"]),
+    cartProducts() {
+      const cartProducts = CartService.getCart();
+
+      if(!cartProducts.length) {
+        return [];
+      } else {
+        return cartProducts.map(cartProduct => {
+          const findedProduct = this.products.find(product => product.id === cartProduct.id);
+          
+          return {
+            product: findedProduct,
+            qnt: cartProduct.qnt
+          }
+        });
+      }
+    },
     style() {
       return {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
@@ -121,7 +139,10 @@ export default {
       &:hover
         border-bottom: 2px solid !important
 
-  .text-pages
-    margin-top: auto
-    margin-left: 0
+    .text-pages
+      margin-top: auto
+      margin-left: 0
+
+      .actions
+        margin-right: 361px
 </style>

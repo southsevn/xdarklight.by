@@ -1,15 +1,17 @@
 <template>
-  <nuxt-link :to="`/product/${product.id}`" :class="['product', {'sale': product.isSale, 'sold-out': product.isSoldOut}]">
-    <div class="product-image">
-      <span class="product-sale-percent" v-if="product.isSale && product.salePercent > 0">{{ $tc("catalog.product.salePercent", product.salePercent) }}</span>
-      <p class="product-soldout" v-if="product.isSoldOut">{{ $t("catalog.product.soldOut") }}</p>
-      <img :src="product.images[0]" :alt="product.name">
-    </div>
+  <div :class="['product', {'sale': product.isSale, 'sold-out': product.isSoldOut}]">
+    <nuxt-link :to="`/product/${product.id}`">
+      <div class="product-image">
+        <span class="product-sale-percent" v-if="product.isSale && product.salePercent > 0">{{ $tc("catalog.product.salePercent", product.salePercent) }}</span>
+        <p class="product-soldout" v-if="product.isSoldOut">{{ $t("catalog.product.soldOut") }}</p>
+        <img :src="`${STATIC_PATH}${product.images[0]}`" :alt="product.name">
+      </div>
+    </nuxt-link>
     <div class="product-info">
       <span :style="styles" class="product-category">{{ product.category }}</span>
       <span :style="styles" class="product-name">{{ product.name }}</span>
     </div>
-    <DPrice class="product-price" v-model="product.price"/>
+    <DPrice class="product-price" v-model="productPrice"/>
     <div class="product-actions">
       <DButton
         v-if="!product.isSoldOut"
@@ -20,7 +22,7 @@
         v-if="!product.isSoldOut"
         inverted
         :text="$t('catalog.product.actions.addToCart')"
-        @click="clickEffect"
+        @click="addToCart(product.id)"
       />
       <DButton
         @click="clickEffect"
@@ -29,15 +31,16 @@
         :icon="dark ? '/icons/notify-icon.svg' : '/icons/notify-icon-black.svg'"
       />
     </div>
-  </nuxt-link>
+  </div>
 </template>
 
 <script>
-import { soundEffects } from "@/mixins";
+import { soundEffects, settings } from "@/mixins";
+import { CartService } from "@/services";
 
 export default {
   name: "CatalogProduct",
-  mixins: [soundEffects],
+  mixins: [soundEffects, settings],
   props: {
     product: {
       type: Object,
@@ -50,6 +53,18 @@ export default {
     dark: {
       type: Boolean,
       required: true
+    }
+  },
+  computed: {
+    productPrice() {
+      // TODO: Parse price at backend
+      return JSON.parse(this.product.prices.find(price => JSON.parse(price).name.toLowerCase() === this.cur.toLowerCase()));
+    }
+  },
+  methods: {
+    addToCart(productId) {
+      this.clickEffect();
+      CartService.addToCart(productId);
     }
   }
 };
@@ -67,6 +82,7 @@ export default {
 
       img
         max-width: 100%
+        width: 100%
         height: 100%
         object-fit: cover
 

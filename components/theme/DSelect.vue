@@ -6,7 +6,7 @@
         <img class="d-icon-arrow" :src="arrow" alt="Arrow">
       </div>
     </div>
-    <ul class="d-select-list" v-if="open">
+    <ul :class="['d-select-list', {'top-open': topOpen}]" v-if="open">
       <li
         class="d-select-item"
         v-for="(option, idx) in options"
@@ -42,6 +42,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    topOpen: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data() {
@@ -69,18 +74,14 @@ export default {
 <style lang="sass">
 .d-select
   position: relative
-  font-size: 15px
-  font-weight: 600
-  text-transform: uppercase
-
-  @media (max-width: $xl)
-    font-size: 15px
 
   &-list
     width: 100%
     position: absolute
-    padding: 10px
     z-index: 10
+
+    &.top-open
+      bottom: 30px
 
     @media (max-width: $xl)
       padding-top: 0
@@ -99,28 +100,17 @@ export default {
 
 .d-selected
   position: relative
-  padding: 10px
+  padding: 0px
   display: flex
   flex-direction: row
   cursor: pointer
   align-items: center
 
-  @media (max-width: $md)
-    padding: 5px
-
   [class^="d-icon-"]
     margin-left: 10px
     user-select: none
-    width: 15px
-    height: 15px
+    width: 10px
+    height: 10px
     font-size: 15px
     line-height: 0
-
-    @media (max-width: $xl)
-      width: 15px
-      height: 15px
-      font-size: 10px
-
-    @media (max-width: $sm)
-      margin-left: 5px
 </style>

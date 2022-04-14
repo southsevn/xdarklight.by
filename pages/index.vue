@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <Promo/>
+    <Promo v-if="products && products.length"/>
     <Catalog/>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["products"])
+    ...mapState("products", ["products"])
   }
 } 
 </script>

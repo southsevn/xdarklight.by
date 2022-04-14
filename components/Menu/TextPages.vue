@@ -1,15 +1,32 @@
 <template>
   <div class="text-pages">
-    <nuxt-link
-      v-for="(page, idx) in textPages"
-      class="text-pages-item hover-link"
-      @mouseover.native="hoverEffect"
-      :to="page.to"
-      :key="idx"
-      :style="style"
-    >
-      {{ $t(page.text) }}
-    </nuxt-link>
+    <div class="links">
+      <nuxt-link
+        v-for="(page, idx) in textPages"
+        class="text-pages-item hover-link"
+        @mouseover.native="hoverEffect"
+        :to="page.to"
+        :key="idx"
+        :style="style"
+      >
+        {{ $t(page.text) }}
+      </nuxt-link>
+    </div>
+    <div class="actions">
+      <DSelect
+        v-if="languages"
+        v-model="currentLanguage"
+        :options="languages"
+        top-open
+      />
+      <DSelect
+        v-if="currencies"
+        currency
+        v-model="currentCurrency"
+        :options="currencies"
+        top-open
+      />
+    </div>
   </div>
 </template>
 
@@ -28,7 +45,26 @@ export default {
     }
   },
   computed: {
-    ...mapState(["textPages"]),
+    ...mapState(["textPages", "languages", "currencies", "language", "currency"]),
+    currentLanguage: {
+      get() {
+        return this.language;
+      },
+      set(value) {
+        this.$storage.set("language", value);
+        this.$store.commit("SET_LANGUAGE", value);
+      }
+    },
+    currentCurrency: {
+      get() {
+        return this.currency;
+      },
+      set(value) {
+        console.log(value);
+        this.$storage.set("currency", value);
+        this.$store.commit("SET_CURRENCY", value);
+      }
+    },
     style() {
       return {
         color: this.menu ? '#fff' : !this.menu && this.dark ? '#fff' : !this.menu && !this.dark ? '#0f0f0f' : '#0f0f0f'
@@ -40,12 +76,22 @@ export default {
 
 <style lang="sass">
   .text-pages
-    padding-left: 60px
+    padding: 0 60px
     padding-bottom: 40px
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
 
     &-item
       user-select: none
 
       &:not(:last-child)
         margin-right: 20px
+
+    .actions
+      display: flex
+
+    .d-select:not(:last-child)
+      margin-right: 20px
 </style>

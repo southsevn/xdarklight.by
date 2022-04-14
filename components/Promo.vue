@@ -7,7 +7,7 @@
         v-bind="promoSlideOptions"
       >
         <div class="promo-slide" v-for="(image, idx) in mappedPromoImages" :key="idx">
-          <img :src="image" :alt="idx"/>
+          <img :src="`${STATIC_PATH}${image}`" :alt="idx"/>
         </div>
       </VueSlickCarousel>
     </client-only>
@@ -21,7 +21,7 @@ import { mapState } from "vuex";
 export default {
   name: "Promo",
   computed: {
-    ...mapState(["products"]),
+    ...mapState("products", ["products"]),
     mappedPromoImages() {
       return this.products.map(product => {
         return product.promoImages[0];

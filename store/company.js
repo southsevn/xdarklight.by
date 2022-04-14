@@ -1,4 +1,4 @@
-import Company from "~/services/Company.service.js";
+import { CompanyService } from "@/services";
 
 export const state = () => ({
   carePageContent: null,
@@ -20,15 +20,15 @@ export const mutations = {
 
 export const actions = {
   async getCarePageContent({ commit }) {
-    const content = await Company.getCareContent();
+    const content = await CompanyService.getCareContent();
     commit("SET_CARE_CONTENT", content);
   },
   async getDeliveryPageContent({ commit }) {
-    const content = await Company.getDeliveryContent();
+    const content = await CompanyService.getDeliveryContent();
     commit("SET_DELIVERY_CONTENT", content);
   },
   async getPaymentPageContent({ commit }) {
-    const content = await Company.getPaymentContent();
+    const content = await CompanyService.getPaymentContent();
     commit("SET_PAYMENT_CONTENT", content);
   }
 };

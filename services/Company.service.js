@@ -1,7 +1,7 @@
 import apiClient from "@/services/apiClient";
 const companyId = process.env.COMPANY_ID;
 
-export default {
+export const CompanyService = {
   getCurrencies() {
     return apiClient.$get(`/currencies`);
   },

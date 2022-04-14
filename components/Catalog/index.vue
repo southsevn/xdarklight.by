@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 import { theme } from "@/mixins";
 
 export default {
@@ -36,7 +36,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["products"]),
+    ...mapState("products", ["products"]),
     style() {
       return {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
@@ -44,10 +44,14 @@ export default {
       }
     }
   },
+  async created() {
+    await this.getProducts();
+  },
   methods: {
     onPaginate(navQty) {
       this.paginationValue = this.paginationValue + navQty;
-    }
+    },
+    ...mapActions("products", ["getProducts"])
   }
 }
 </script>

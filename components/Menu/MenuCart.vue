@@ -1,34 +1,42 @@
 <template>
   <div class="product-list">
-    <div class="product" v-for="(product, idx) in products" :key="idx">
+    <div class="product" v-for="(item, idx) in products" :key="idx">
       <span class="close-icon">
         <img src="/icons/close-icon.svg" alt="Close">
       </span>
-      <img :src="product.images[0]" :alt="product.name">
+      <img :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.product.name">
       <div class="product-info">
-        <span class="product-category">{{ product.category }}</span>
-        <h4 class="product-name">{{ product.name }}</h4>
+        <span class="product-category">{{ item.product.category }}</span>
+        <h4 class="product-name">{{ item.product.name }}</h4>
       </div>
       <div class="product-price">
         <div class="product-quantity">
           <span class="minus">-</span>
-          <span class="quantity">1</span>
+          <span class="quantity">{{ item.qnt }}</span>
           <span class="plus">+</span>
         </div>
-        <DPrice v-model="product.price"/>
+        <DPrice :value="getProductPrice(item.product)"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { settings } from "@/mixins";
 
 export default {
   name: "MenuCart",
+  mixins: [settings],
   props: {
     products: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    getProductPrice(product) {
+      // TODO: Parse price at backend
+      return JSON.parse(product.prices.find(price => JSON.parse(price).name.toLowerCase() === this.cur.toLowerCase()));
     }
   }
 }
