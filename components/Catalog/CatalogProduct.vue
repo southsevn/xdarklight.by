@@ -65,6 +65,8 @@ export default {
     addToCart(productId) {
       this.clickEffect();
       CartService.addToCart(productId);
+      const cartCount = CartService.getCartCount();
+      this.$store.commit("SET_CART_COUNT", cartCount);
     }
   }
 };

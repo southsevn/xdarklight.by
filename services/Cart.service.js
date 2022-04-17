@@ -29,10 +29,39 @@ export const CartService = {
             return product;
           }
         })
-        storage.set('cart', cartToUpdate)
+        storage.set('cart', cartToUpdate);
       } else {
-        storage.set('cart', [...cart, { id: productId, qnt: 1 }])
+        storage.set('cart', [...cart, { id: productId, qnt: 1 }]);
       }
+    }
+  },
+  changeProductQnt(productId, qnt) {
+    const cart = this.getCart();
+
+    if (cart.find(product => product.id === productId)) {
+      const cartToUpdate = cart.map(product => {
+        if (product.id === productId) {
+          if ((product.qnt + qnt) >= 1) {
+            return {
+              ...product,
+              qnt: product.qnt + qnt
+            }
+          } else {
+            return product;
+          }
+        } else {
+          return product;
+        }
+      })
+      storage.set('cart', cartToUpdate);
+    }
+  },
+  deleteProduct(productId) {
+    const cart = this.getCart();
+
+    if (cart.find(product => product.id === productId)) {
+      const updatedCart = cart.filter(product => product.id !== productId);
+      storage.set('cart', updatedCart);
     }
   }
 }

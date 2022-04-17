@@ -5,9 +5,22 @@ import { CompanyService } from "@/services";
 import products from "./products";
 
 Vue.use(Vuex);
+
+console.log(JSON.parse(window.localStorage.getItem("dl_cart"))?.value?.length);
 export default () => new Vuex.Store({
   state: () => ({
+    showMenu: false,
+    isPageOnTop: true,
     dark: !!JSON.parse(window.localStorage.getItem("dl_theme"))?.value,
+    language: JSON.parse(window.localStorage.getItem("dl_language"))?.value || {
+      value: 'ru',
+      title: 'Русский'
+    },
+    currency: JSON.parse(window.localStorage.getItem("dl_currency"))?.value || {
+      name: 'BYN',
+      value: 'byn'
+    },
+    cartCount: JSON.parse(window.localStorage.getItem("dl_cart"))?.value?.length || 0,
     languages: [
       {
         value: 'en',
@@ -18,17 +31,7 @@ export default () => new Vuex.Store({
         title: 'Русский'
       }
     ],
-    language: JSON.parse(window.localStorage.getItem("dl_language"))?.value || {
-      value: 'ru',
-      title: 'Русский'
-    },
-    currency: JSON.parse(window.localStorage.getItem("dl_currency"))?.value || {
-      name: 'BYN',
-      value: 'byn'
-    },
     currencies: [],
-    showMenu: false,
-    isPageOnTop: true,
     menu: [
       {
         text: "components.menu.catalog",
@@ -140,6 +143,9 @@ export default () => new Vuex.Store({
   mutations: {
     SET_THEME(state, value) {
       state.dark = value;
+    },
+    SET_CART_COUNT(state, value) {
+      state.cartCount = value;
     },
     SET_LANGUAGE(state, language) {
       state.language = language;

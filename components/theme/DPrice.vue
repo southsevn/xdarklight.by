@@ -37,4 +37,9 @@ export default {
 
       .zeros
         font-size: 40px
+        line-height: 1.15
+
+    &-value
+      display: flex
+      align-items: flex-end
 </style>

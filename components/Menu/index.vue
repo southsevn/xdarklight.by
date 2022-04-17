@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="menu-cart">
-      <MenuCart v-if="cartProducts" :products="cartProducts"/>
+      <MenuCart v-if="cartCount"/>
       <h3 v-else class="empty-cart">{{ $t('components.menu.cart.empty') }}</h3>
     </div>
     <TextPages menu/>
@@ -39,24 +39,8 @@ export default {
   name: "Menu",
   mixins: [theme, soundEffects],
   computed: {
-    ...mapState(["menu"]),
+    ...mapState(["menu", "cartCount"]),
     ...mapState("products", ["products"]),
-    cartProducts() {
-      const cartProducts = CartService.getCart();
-
-      if(!cartProducts.length) {
-        return [];
-      } else {
-        return cartProducts.map(cartProduct => {
-          const findedProduct = this.products.find(product => product.id === cartProduct.id);
-          
-          return {
-            product: findedProduct,
-            qnt: cartProduct.qnt
-          }
-        });
-      }
-    },
     style() {
       return {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',

@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import { theme, soundEffects } from "@/mixins";
 import { CartService } from "@/services";
 
@@ -52,9 +52,7 @@ export default {
   },
   computed: {
     ...mapGetters(["showMenu", "isPageOnTop"]),
-    cartCount() {
-      return CartService.getCartCount();
-    },
+    ...mapState(["cartCount"]),
     menuButtonStyle() {
       return {
         'border-color': this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#fff"
@@ -138,6 +136,7 @@ export default {
       right: 0
       width: 301px
       margin-right: 60px
+      justify-content: flex-end
 
       > *
         margin-left: 30px

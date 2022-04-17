@@ -1,7 +1,7 @@
 <template>
-  <div class="product-list">
-    <div class="product" v-for="(item, idx) in products" :key="idx">
-      <span class="close-icon">
+  <div class="cart-list">
+    <div class="cart-product" v-for="(item, idx) in cartItems || cartProducts" :key="idx">
+      <span @click="deleteCartItem(item.product.id)" class="close-icon">
         <img src="/icons/close-icon.svg" alt="Close">
       </span>
       <img :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.product.name">
@@ -11,9 +11,9 @@
       </div>
       <div class="product-price">
         <div class="product-quantity">
-          <span class="minus">-</span>
+          <span @click="changeCartItem(item, -1)" class="minus">-</span>
           <span class="quantity">{{ item.qnt }}</span>
-          <span class="plus">+</span>
+          <span @click="changeCartItem(item, 1)" class="plus">+</span>
         </div>
         <DPrice :value="getProductPrice(item.product)"/>
       </div>
@@ -22,31 +22,80 @@
 </template>
 
 <script>
-import { settings } from "@/mixins";
+import { settings, soundEffects } from "@/mixins";
+import { CartService } from "@/services";
+import { mapState } from "vuex";
 
 export default {
   name: "MenuCart",
-  mixins: [settings],
-  props: {
-    products: {
-      type: Array,
-      required: true
+  mixins: [settings, soundEffects],
+  data() {
+    return {
+      cartItems: null
     }
+  },
+  computed: {
+    ...mapState("products", ["products"]),
+    cartProducts: {
+      set(value) {
+        const mappedCartProducts = value.map(cartProduct => {
+            const findedProduct = this.products.find(product => product.id === cartProduct.id);
+            
+            return {
+              product: findedProduct,
+              qnt: cartProduct.qnt
+            }
+          });
+        this.cartItems = mappedCartProducts;
+      },
+      get() {
+        const cartProducts = CartService.getCart();
+
+        if(!cartProducts.length) {
+          return [];
+        } else {
+          return cartProducts.map(cartProduct => {
+            const findedProduct = this.products.find(product => product.id === cartProduct.id);
+            
+            return {
+              product: findedProduct,
+              qnt: cartProduct.qnt
+            }
+          });
+        }
+      }
+    },
   },
   methods: {
     getProductPrice(product) {
       // TODO: Parse price at backend
       return JSON.parse(product.prices.find(price => JSON.parse(price).name.toLowerCase() === this.cur.toLowerCase()));
+    },
+    changeCartItem(item, qnt) {
+      if ((item.qnt + qnt) <= 1) {
+        this.deniedEffect();
+      }
+      console.log(item);
+      CartService.changeProductQnt(item.product.id, qnt);
+      const updatedCart = CartService.getCart();
+      this.cartProducts = updatedCart;
+    },
+    deleteCartItem(id) {
+      CartService.deleteProduct(id);
+      const updatedCart = CartService.getCart();
+      this.cartProducts = updatedCart;
+      const cartCount = CartService.getCartCount();
+      this.$store.commit("SET_CART_COUNT", cartCount);
     }
   }
 }
 </script>
 
-<style scoped lang="sass">
-  .product-list
+<style lang="sass">
+  .cart-list
     margin-top: 10px
 
-  .product
+  .cart-product
     position: relative
     text-align: center
     padding-top: 23px
@@ -55,56 +104,62 @@ export default {
     img
       max-width: 80%
 
-  .close-icon
-    position: absolute
-    right: 0
-    top: 0
-    cursor: pointer
-    z-index: 2000
-
-    img
-      cursor: pointer
-
-  .product-info
-    text-align: left
-    margin-top: 5px
-
-  .product-category
-    font-size: 15px
-
-  .product-name
-    font-size: 20px
-    margin: 5px 0
-    font-weight: bold
-
-  .product-price
-    border-top: 1px solid $white
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    align-items: center
-
-  .product-quantity
-    display: flex
-    flex-direction: row
-    justify-content: center
-    align-items: center
-    margin-top: 10px
-
-  .quantity
-    font-size: 20px
-    margin: 0 10px
-
-  .plus, .minus
-    font-size: 20px
-    cursor: pointer
-    user-select: none
-
-  .price-char
-    font-size: 20px
-    margin-right: 10px
-
-  .price-value
-    .value, .zeros
+    .quantity
       font-size: 20px
+      margin: 0 10px
+
+    .product-price
+      padding-top: 10px
+      border-top: 1px solid $white
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      align-items: center
+      user-select: none
+
+      .price-value, .price-char
+        font-size: 20px
+
+        .value, .zeros
+          font-size: 20px
+          line-height: 1
+
+    .close-icon
+      position: absolute
+      right: 0
+      top: 0
+      cursor: pointer
+      z-index: 2000
+
+      img
+        cursor: pointer
+
+    .product-info
+      text-align: left
+      margin-top: 5px
+
+    .product-category
+      font-size: 15px
+
+    .product-name
+      font-size: 20px
+      margin: 5px 0
+      font-weight: bold
+
+    .product-quantity
+      display: flex
+      flex-direction: row
+      justify-content: center
+      align-items: center
+      user-select: none
+
+    .plus, .minus
+      font-size: 20px
+      cursor: pointer
+      user-select: none
+
+    .price-char
+      font-size: 20px
+      margin-right: 10px
+      user-select: none
 </style>
