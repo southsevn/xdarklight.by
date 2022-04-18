@@ -60,7 +60,6 @@ export default {
         return this.currency;
       },
       set(value) {
-        console.log(value);
         this.$storage.set("currency", value);
         this.$store.commit("SET_CURRENCY", value);
       }

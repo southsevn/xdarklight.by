@@ -52,6 +52,18 @@
       }
     }
   },
+  "cart": {
+    "title": "Cart",
+    "table": {
+      "heading": {
+        "product": "Product",
+        "price": "Price",
+        "qnt": "Quantity",
+        "total": "Total",
+        "remove": "Remove"
+      }
+    }
+  },
   "components": {
     "logo": {
       "alt": "Darklight"

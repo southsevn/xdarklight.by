@@ -11,7 +11,7 @@
         </div>
       </VueSlickCarousel>
     </client-only>
-    <FilterNavigation/>
+    <FilterNavigation :styles="style"/>
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
   computed: {
     ...mapState("products", ["products"]),
     mappedPromoImages() {
-      return this.products.map(product => {
+      return this.products?.map(product => {
         return product.promoImages[0];
       });
     }
@@ -42,6 +42,12 @@ export default {
         infinite: true
       }
     }
+  },
+  async created() {
+    await this.getProducts();
+  },
+  methods: {
+    ...mapState("products", ["getProducts"]),
   }
 }
 </script>

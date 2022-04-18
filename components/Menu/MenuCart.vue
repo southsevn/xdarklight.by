@@ -1,21 +1,21 @@
 <template>
   <div class="cart-list">
-    <div class="cart-product" v-for="(item, idx) in cartItems || cartProducts" :key="idx">
+    <div class="cart-product" v-for="(item, idx) in cartProducts" :key="idx">
       <span @click="deleteCartItem(item.product.id)" class="close-icon">
         <img src="/icons/close-icon.svg" alt="Close">
       </span>
-      <img :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.product.name">
-      <div class="product-info">
+      <img v-if="item && item.product" :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.product.name">
+      <div v-if="item && item.product" class="product-info">
         <span class="product-category">{{ item.product.category }}</span>
         <h4 class="product-name">{{ item.product.name }}</h4>
       </div>
-      <div class="product-price">
+      <div v-if="item" class="product-price">
         <div class="product-quantity">
           <span @click="changeCartItem(item, -1)" class="minus">-</span>
           <span class="quantity">{{ item.qnt }}</span>
           <span @click="changeCartItem(item, 1)" class="plus">+</span>
         </div>
-        <DPrice :value="getProductPrice(item.product)"/>
+        <DPrice v-if="item && item.product" :value="getProductPrice(item.product)"/>
       </div>
     </div>
   </div>
@@ -24,14 +24,14 @@
 <script>
 import { settings, soundEffects } from "@/mixins";
 import { CartService } from "@/services";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "MenuCart",
   mixins: [settings, soundEffects],
   data() {
     return {
-      cartItems: null
+      cartItems: []
     }
   },
   computed: {
@@ -39,23 +39,27 @@ export default {
     cartProducts: {
       set(value) {
         const mappedCartProducts = value.map(cartProduct => {
-            const findedProduct = this.products.find(product => product.id === cartProduct.id);
-            
-            return {
-              product: findedProduct,
-              qnt: cartProduct.qnt
-            }
-          });
+          const findedProduct = this.products?.find(product => product.id === cartProduct.id);
+          
+          return {
+            product: findedProduct,
+            qnt: cartProduct.qnt
+          }
+        });
         this.cartItems = mappedCartProducts;
       },
       get() {
         const cartProducts = CartService.getCart();
 
+        if (this.cartItems?.length) {
+          return this.cartItems;
+        }
+
         if(!cartProducts.length) {
           return [];
         } else {
           return cartProducts.map(cartProduct => {
-            const findedProduct = this.products.find(product => product.id === cartProduct.id);
+            const findedProduct = this.products?.find(product => product.id === cartProduct.id);
             
             return {
               product: findedProduct,
@@ -66,16 +70,18 @@ export default {
       }
     },
   },
+  async created() {
+    await this.getProducts();
+  },
   methods: {
+    ...mapActions("products", ["getProducts"]),
     getProductPrice(product) {
-      // TODO: Parse price at backend
-      return JSON.parse(product.prices.find(price => JSON.parse(price).name.toLowerCase() === this.cur.toLowerCase()));
+      return product.prices.find(price => price.name.toLowerCase() === this.cur.toLowerCase());
     },
     changeCartItem(item, qnt) {
       if ((item.qnt + qnt) <= 1) {
         this.deniedEffect();
       }
-      console.log(item);
       CartService.changeProductQnt(item.product.id, qnt);
       const updatedCart = CartService.getCart();
       this.cartProducts = updatedCart;

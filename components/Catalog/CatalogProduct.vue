@@ -58,7 +58,7 @@ export default {
   computed: {
     productPrice() {
       // TODO: Parse price at backend
-      return JSON.parse(this.product.prices.find(price => JSON.parse(price).name.toLowerCase() === this.cur.toLowerCase()));
+      return this.product.prices.find(price => price.name.toLowerCase() === this.cur.toLowerCase());
     }
   },
   methods: {

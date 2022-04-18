@@ -6,7 +6,6 @@ import products from "./products";
 
 Vue.use(Vuex);
 
-console.log(JSON.parse(window.localStorage.getItem("dl_cart"))?.value?.length);
 export default () => new Vuex.Store({
   state: () => ({
     showMenu: false,

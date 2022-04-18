@@ -96,6 +96,7 @@ export default {
       .empty-cart
         margin-top: 40px
         text-align: center
+        user-select: none
 
     .submenu-category
       font-size: 20px
