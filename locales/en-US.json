@@ -118,6 +118,20 @@
       "terms": "Terms",
       "privacy": "Privacy",
       "publicOffer": "Public Offer"
+    },
+    "material": {
+      "fabric": {
+        "outside": "Inside Material",
+        "inside": "Outside Material"
+      }
+    },
+    "legal": {
+      "companyName": "Company Name: {name}",
+      "inn": "INN: {inn}",
+      "address": "Address: {address}",
+      "workingHour": "Working Hour: {hour}",
+      "phone": "Phone: {phone}",
+      "email": "Email: {email}"
     }
   }
 }

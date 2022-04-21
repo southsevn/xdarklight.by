@@ -118,6 +118,14 @@
         "outside": "Внешний материал",
         "inside": "Внутренний материал"
       }
+    },
+    "legal": {
+      "companyName": "Наименование: {name}",
+      "inn": "УНП: {inn}",
+      "address": "Адрес: {address}",
+      "workingHour": "Режим работы: {hour}",
+      "phone": "Телефон: {phone}",
+      "email": "Email: {email}"
     }
   }
 }
