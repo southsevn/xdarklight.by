@@ -1,7 +1,7 @@
 <template>
   <div class="cart-list">
-    <div class="cart-product" v-for="(item, idx) in cartProducts" :key="idx">
-      <span @click="deleteCartItem(item.product.id)" class="close-icon">
+    <div class="cart-product" v-for="(item, idx) in cartItems" :key="idx">
+      <span @click="deleteCartItem(item.product)" class="close-icon">
         <img src="/icons/close-icon.svg" alt="Close">
       </span>
       <img v-if="item && item.product" :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.product.name">
@@ -22,76 +22,14 @@
 </template>
 
 <script>
-import { settings, soundEffects } from "@/mixins";
-import { CartService } from "@/services";
-import { mapState, mapActions } from "vuex";
+import { settings, soundEffects, cart } from "@/mixins";
 
 export default {
   name: "MenuCart",
-  mixins: [settings, soundEffects],
-  data() {
-    return {
-      cartItems: []
-    }
-  },
-  computed: {
-    ...mapState("products", ["products"]),
-    cartProducts: {
-      set(value) {
-        const mappedCartProducts = value.map(cartProduct => {
-          const findedProduct = this.products?.find(product => product.id === cartProduct.id);
-          
-          return {
-            product: findedProduct,
-            qnt: cartProduct.qnt
-          }
-        });
-        this.cartItems = mappedCartProducts;
-      },
-      get() {
-        const cartProducts = CartService.getCart();
-
-        if (this.cartItems?.length) {
-          return this.cartItems;
-        }
-
-        if(!cartProducts.length) {
-          return [];
-        } else {
-          return cartProducts.map(cartProduct => {
-            const findedProduct = this.products?.find(product => product.id === cartProduct.id);
-            
-            return {
-              product: findedProduct,
-              qnt: cartProduct.qnt
-            }
-          });
-        }
-      }
-    },
-  },
-  async created() {
-    await this.getProducts();
-  },
+  mixins: [settings, soundEffects, cart],
   methods: {
-    ...mapActions("products", ["getProducts"]),
     getProductPrice(product) {
       return product.prices.find(price => price.name.toLowerCase() === this.cur.toLowerCase());
-    },
-    changeCartItem(item, qnt) {
-      if ((item.qnt + qnt) <= 1) {
-        this.deniedEffect();
-      }
-      CartService.changeProductQnt(item.product.id, qnt);
-      const updatedCart = CartService.getCart();
-      this.cartProducts = updatedCart;
-    },
-    deleteCartItem(id) {
-      CartService.deleteProduct(id);
-      const updatedCart = CartService.getCart();
-      this.cartProducts = updatedCart;
-      const cartCount = CartService.getCartCount();
-      this.$store.commit("SET_CART_COUNT", cartCount);
     }
   }
 }

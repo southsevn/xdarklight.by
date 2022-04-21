@@ -62,6 +62,11 @@
         "total": "Total",
         "remove": "Remove"
       }
+    },
+    "empty": {
+      "header": "Cart is empty",
+      "link": "go to catalog",
+      "text": "for getting products"
     }
   },
   "components": {

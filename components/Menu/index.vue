@@ -33,7 +33,6 @@
 <script>
 import { mapState } from "vuex";
 import { theme, soundEffects } from "@/mixins";
-import { CartService } from "@/services";
 
 export default {
   name: "Menu",

@@ -6,7 +6,14 @@
         <CatalogFilter :styles="style"/>
       </div>
       <div class="cart-table-container">
-        <CartTable/>
+        <CartTable v-if="cartCount"/>
+        <div :style="style" class="cart-empty">
+          <h3 class="cart-empty-heading">{{ $t("cart.empty.header") }}</h3>
+          <p class="cart-empty-text">
+            <nuxt-link to="/" class="cart-empty-link">{{ $t("cart.empty.link") }}</nuxt-link>
+            <span>{{ $t("cart.empty.text") }}</span>
+          </p>
+        </div>
       </div>
       <div class="description">
         <div v-if="deliveryPageContent && deliveryPageContent.length" class="delivery" :style="style">
@@ -41,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("products", ["products"]),
+    ...mapState(["menu", "cartCount"]),
     ...mapState("company", ["deliveryPageContent", "paymentPageContent"]),
     style() {
       return {
@@ -103,4 +110,20 @@ export default {
 
     &-item-text
       font-size: 15px
+    
+  .cart-empty
+    text-align: center
+    margin-top: 20vh
+
+    &-heading
+      font-size: 20px
+      font-weight: bold
+      margin-bottom: 20px
+
+    &-text
+      font-size: 15px
+      font-weight: regular
+
+    &-link
+      text-decoration: underline !important
 </style>

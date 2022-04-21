@@ -2,12 +2,12 @@
   <div class="d-material">
     <h5 class="d-material-heaading">{{ $t(`components.material.fabric.${type}`) }}</h5>
     <div class="material-container" v-click-outside="hide">
-      <div class="selected-material" @click="open = !open" :style="styles">
+      <div class="selected-material" @click="open = !open" :style="style">
         <div class="material-color" :style="{background: value.color}"></div>
         <div class="material-text"> {{ value.name }} </div>
         <img class="d-icon-arrow" :src="arrow" alt="Arrow">
       </div>
-      <div class="material-list" v-if="open">
+      <div class="material-list" v-if="open" :style="style">
         <div
           class="material"
           v-for="(material, idx) in data"
@@ -47,15 +47,21 @@ export default {
       type: String,
       required: true
     },
-    style: {
+    product: {
       type: Object,
-      required: false,
-      default: null
+      required: true
     }
   },
   computed: {
     arrow() {
       return this.open && this.dark ? '/icons/arrow-up.svg' : this.open && !this.dark ? '/icons/arrow-up-black.svg' : !this.open && this.dark ? '/icons/arrow-down.svg' : '/icons/arrow-down-black.svg';
+    },
+    style() {
+      return {
+        background: this.dark ? '#0f0f0f' : '#fff',
+        'border-color': !this.dark ? '#0f0f0f' : '#fff',
+        color: !this.dark ? '#0f0f0f' : '#fff'
+      }
     }
   },
   data() {
@@ -67,7 +73,11 @@ export default {
   methods: {
     onMaterialSelect(material) {
       this.open = false;
-      this.$emit('input', material);
+      this.$emit('input', {
+        material: material,
+        product: this.product,
+        type: this.type
+      });
     },
     hide() {
       this.open = false;
@@ -101,16 +111,25 @@ export default {
       cursor: pointer
       user-select: none
       padding: 5px 10px
+
+    .selected-material
       border: 1px solid
+
+    .material
+      border: none
 
     .material-list
       width: 100%
       position: absolute
       z-index: 10
       background: none
-      padding: 5px 10px
+      padding: 5px 0
       overflow-y: scroll
-      height: 130px
+      border: 1px solid
+      border-top: 0 !important
+
+      &::-webkit-scrollbar
+        display: none
 
     .material-list .selected-material
       background: none

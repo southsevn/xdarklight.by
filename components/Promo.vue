@@ -11,7 +11,7 @@
         </div>
       </VueSlickCarousel>
     </client-only>
-    <FilterNavigation :styles="style"/>
+    <FilterNavigation/>
   </div>
 </template>
 

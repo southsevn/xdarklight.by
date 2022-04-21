@@ -22,7 +22,7 @@
         v-if="!product.isSoldOut"
         inverted
         :text="$t('catalog.product.actions.addToCart')"
-        @click="addToCart(product.id)"
+        @click="addToCart(product)"
       />
       <DButton
         @click="clickEffect"
@@ -35,12 +35,11 @@
 </template>
 
 <script>
-import { soundEffects, settings } from "@/mixins";
-import { CartService } from "@/services";
+import { soundEffects, settings, cart } from "@/mixins";
 
 export default {
   name: "CatalogProduct",
-  mixins: [soundEffects, settings],
+  mixins: [soundEffects, settings, cart],
   props: {
     product: {
       type: Object,
@@ -59,14 +58,6 @@ export default {
     productPrice() {
       // TODO: Parse price at backend
       return this.product.prices.find(price => price.name.toLowerCase() === this.cur.toLowerCase());
-    }
-  },
-  methods: {
-    addToCart(productId) {
-      this.clickEffect();
-      CartService.addToCart(productId);
-      const cartCount = CartService.getCartCount();
-      this.$store.commit("SET_CART_COUNT", cartCount);
     }
   }
 };

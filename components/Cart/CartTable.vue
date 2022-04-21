@@ -8,34 +8,34 @@
         :style="style"
       >{{ item.text }}</div>
     </div>
-    <div v-if="products && products.length" class="table-data">
+    <div class="table-data">
       <div
         class="table-data-row"
-        v-for="(item, idx) in cartProducts"
+        v-for="(item, idx) in cartItems"
         :key="idx"
         :style="style"
       >
         <div class="table-data-cell product">
-          <img v-if="item && item.product" :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.name">
+          <img :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.name">
           <div class="product-material">
             <DMaterial
-              v-if="item && item.product"
-              v-model="item.product.outsideMaterial"
+              :value="item.product.outsideMaterial"
+              :product="item.product"
               :data="item.product.availableOutsideMaterial"
-              :styles="style"
+              @input="onMaterialChange"
               type="outside"
             />
             <DMaterial
-              v-if="item && item.product"
-              v-model="item.product.insideMaterial"
+              :value="item.product.insideMaterial"
+              :product="item.product"
               :data="item.product.availableInsideMaterial"
-              :styles="style"
+              @input="onMaterialChange"
               type="inside"
             />
           </div>
         </div>
         <div class="table-data-cell price">
-          <DPrice v-if="item && item.product" :value="getProductPrice(item.product)"/>
+          <DPrice :value="getProductPrice(item.product)"/>
         </div>
         <div class="table-data-cell quantity">
           <div class="product-quantity">
@@ -45,7 +45,7 @@
           </div>
         </div>
         <div class="table-data-cell total">
-          <div v-if="item && item.product" class="price">
+          <div class="price">
             <span class="price-char">{{ getProductPrice(item.product).name }}</span>
             <div class="price-value">
               <span class="value">{{ getTotalPrice(getProductPrice(item.product).price, item.qnt) }}</span>
@@ -53,55 +53,21 @@
             </div>
           </div>
         </div>
-        <div class="table-data-cell remove">x</div>
+        <div class="table-data-cell remove">
+          <span @click="deleteCartItem(item.product)" class="remove-btn">x</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { CartService } from "@/services";
-import { mapState, mapActions } from "vuex";
-import { theme, settings } from "@/mixins";
+import { theme, settings, cart } from "@/mixins";
 
 export default {
   name: "CartTable",
-  mixins: [theme, settings],
+  mixins: [theme, settings, cart],
   computed: {
-    ...mapState("products", ["products"]),
-    cartProducts: {
-      set(value) {
-        const mappedCartProducts = value.map(cartProduct => {
-          const findedProduct = this.products?.find(product => product.id === cartProduct.id);
-          
-          return {
-            product: findedProduct,
-            qnt: cartProduct.qnt
-          }
-        });
-        this.cartItems = mappedCartProducts;
-      },
-      get() {
-        const cartProducts = CartService.getCart();
-
-        if (this.cartItems?.length) {
-          return this.cartItems;
-        }
-
-        if(!cartProducts.length) {
-          return [];
-        } else {
-          return cartProducts.map(cartProduct => {
-            const findedProduct = this.products?.find(product => product.id === cartProduct.id);
-            
-            return {
-              product: findedProduct,
-              qnt: cartProduct.qnt
-            }
-          });
-        }
-      }
-    },
     style() {
       return {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
@@ -111,7 +77,6 @@ export default {
   },
   data() {
     return {
-      cartItems: [],
       tableHeading: [
         {
           class: "product",
@@ -136,16 +101,23 @@ export default {
       ]
     }
   },
-  async created() {
-    await this.getProducts();
-  },
   methods: {
-    ...mapActions("products", ["getProducts"]),
     getProductPrice(product) {
       return product.prices.find(price => price.name.toLowerCase() === this.cur.toLowerCase());
     },
     getTotalPrice(price, qnt) {
       return price * qnt;
+    },
+    onMaterialChange({ material, product, type }) {
+      if(type === "inside") {
+        product.insideMaterial = material;
+      }
+
+      if(type === "outside") {
+        product.outsideMaterial = material;
+      }
+
+      this.updateCartItem(product);
     }
   }
 }
