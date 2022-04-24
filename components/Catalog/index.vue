@@ -45,7 +45,9 @@ export default {
     }
   },
   async created() {
-    await this.getProducts();
+    if(!this.products) {
+      await this.getProducts();
+    }
   },
   methods: {
     onPaginate(navQty) {

@@ -1,5 +1,5 @@
 <template>
-  <main class="cart-page">
+  <main class="page">
     <DPageTitle :title="$t('cart.title')"/>
     <div class="cart-container">
       <div class="filter-container">
@@ -7,7 +7,7 @@
       </div>
       <div class="cart-table-container">
         <CartTable v-if="cartCount"/>
-        <div :style="style" class="cart-empty">
+        <div v-else :style="style" class="cart-empty">
           <h3 class="cart-empty-heading">{{ $t("cart.empty.header") }}</h3>
           <p class="cart-empty-text">
             <nuxt-link to="/" class="cart-empty-link">{{ $t("cart.empty.link") }}</nuxt-link>
@@ -15,22 +15,22 @@
           </p>
         </div>
       </div>
-      <div class="description">
-        <div v-if="deliveryPageContent && deliveryPageContent.length" class="delivery" :style="style">
+      <aside class="description">
+        <article v-if="deliveryPageContent && deliveryPageContent.length" class="delivery" :style="style">
           <h3 class="description-heading">{{ $t('components.textPages.delivery') }}</h3>
           <div v-for="(item, i) in deliveryPageContent" class="description-item" :key="i">
             <h4 class="description-item-heading">{{ item.heading[lang] }}</h4>
             <p class="description-item-text">{{ item.description[lang] }}</p>
           </div>
-        </div>
-        <div v-if="paymentPageContent && paymentPageContent.length" class="payments" :style="style">
+        </article>
+        <article v-if="paymentPageContent && paymentPageContent.length" class="payments" :style="style">
           <h3 class="description-heading">{{ $t('components.textPages.payment') }}</h3>
           <div v-for="(item, i) in paymentPageContent" class="description-item" :key="i">
             <h4 class="description-item-heading">{{ item.heading[lang] }}</h4>
             <p class="description-item-text">{{ item.description[lang] }}</p>
           </div>
-        </div>
-      </div>  
+        </article>
+      </aside>
     </div>
   </main>
 </template>
@@ -61,17 +61,18 @@ export default {
     ...mapActions("company", ["getDeliveryPageContent", "getPaymentPageContent"])
   },
   async created() {
-    await this.getDeliveryPageContent();
-    await this.getPaymentPageContent();
+    if (!this.deliveryPageContent) {
+      await this.getDeliveryPageContent();
+    }
+
+    if (!this.paymentPageContent) {
+      await this.getPaymentPageContent();
+    }
   }
 }
 </script>
 
 <style lang="sass">
-  .cart-page
-    margin-top: 180px
-    padding: 0 60px
-
   .cart-container
     margin-top: 50px
     display: grid
@@ -86,7 +87,6 @@ export default {
     grid-area: 1
 
   .cart-table-container
-    grid-area: 1
     display: grid
     grid-template-columns: 1fr
     gap: 100px 60px

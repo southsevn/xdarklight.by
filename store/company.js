@@ -3,7 +3,8 @@ import { CompanyService } from "@/services";
 export const state = () => ({
   carePageContent: null,
   deliveryPageContent: null,
-  paymentPageContent: null
+  paymentPageContent: null,
+  deliveryPrices: null
 });
 
 export const mutations = {
@@ -15,10 +16,17 @@ export const mutations = {
   },
   SET_PAYMENT_CONTENT(state, content) {
     state.paymentPageContent = content;
+  },
+  SET_DELIVERY_PRICES(state, value) {
+    state.deliveryPrices = value;
   }
 };
 
 export const actions = {
+  async getDeliveryPrices({ commit }) {
+    const prices = await CompanyService.getDeliveryPrices();
+    commit("SET_DELIVERY_PRICES", prices);
+  },
   async getCarePageContent({ commit }) {
     const content = await CompanyService.getCareContent();
     commit("SET_CARE_CONTENT", content);

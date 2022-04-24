@@ -44,7 +44,8 @@ export default {
     { src: '~/plugins/vue-slick-carousel.js', mode: 'client' },
     { src: '~/plugins/vue-marquee.js', mode: 'client'},
     { src: '~/plugins/vue-storage.js', mode: 'client'},
-    { src: '~/plugins/staticPath.js', mode: 'client'}
+    { src: '~/plugins/static-path.js', mode: 'client'},
+    { src: '~/plugins/country-selector.js', mode: 'client' },
   ],
 
   loading: { color: "#008593" },
@@ -83,6 +84,7 @@ export default {
         ],
         defaultLocale: "ru",
         noPrefixDefaultLocale: true,
+        silentFallbackWarn: true,
         vueI18n: {
           fallbackLocale: "ru",
           messages: { en, ru }

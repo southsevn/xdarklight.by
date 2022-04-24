@@ -61,12 +61,41 @@
         "qnt": "Quantity",
         "total": "Total",
         "remove": "Remove"
-      }
+      },
+      "totalPrice": "Total Price:"
     },
     "empty": {
       "header": "Cart is empty",
       "link": "go to catalog",
       "text": "for getting products"
+    },
+    "actions": {
+      "continue": "Continue Shopping",
+      "checkout": "Checkout"
+    }
+  },
+  "checkout": {
+    "title": "Checkout",
+    "table": {
+      "heading": {
+        "product": "Product",
+        "price": "Price",
+        "qnt": "Quantity",
+        "total": "Total"
+      },
+      "totalPrice": "Total Price:"
+    },
+    "delivery": {
+      "heading": "Delivery",
+      "price": "Delivery Price:"
+    },
+    "form": {
+      "name": {
+        "label": "Full Name"
+      },
+      "phoneNumber": {
+        "label": "Phone Number"
+      }
     }
   },
   "components": {
@@ -132,6 +161,9 @@
       "workingHour": "Working Hour: {hour}",
       "phone": "Phone: {phone}",
       "email": "Email: {email}"
+    },
+    "countrySelector": {
+      "placeholder": "Select Country"
     }
   }
 }

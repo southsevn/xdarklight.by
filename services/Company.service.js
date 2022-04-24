@@ -11,6 +11,9 @@ export const CompanyService = {
   getDeliveryContent() {
     return apiClient.$get(`/companies/${companyId}/delivery`);
   },
+  getDeliveryPrices() {
+    return apiClient.$get(`/companies/${companyId}/delivery-prices`);
+  },
   getPaymentContent() {
     return apiClient.$get(`/companies/${companyId}/payments`);
   }

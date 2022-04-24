@@ -22,8 +22,8 @@ export default {
   computed: {
     style() {
       return {
-        color: this.dark ? '#0f0f0f' : '#fff',
-        'border-color': this.dark ? "#0f0f0f" : "#fff"
+        color: !this.dark ? '#0f0f0f' : '#fff',
+        'border-color': !this.dark ? "#0f0f0f" : "#fff"
       }
     }
   }

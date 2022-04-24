@@ -61,12 +61,33 @@
         "qnt": "Кол-во",
         "total": "Всего",
         "remove": "Удалить"
-      }
+      },
+      "totalPrice": "Итого:"
     },
     "empty": {
       "header": "У вас пока нет товаров в корзине",
       "link": "перейдите в каталог",
       "text": "для совершения покупок"
+    },
+    "actions": {
+      "continue": "Продолжить покупки",
+      "checkout": "Оформить заказ"
+    }
+  },
+  "checkout": {
+    "title": "Оплата",
+    "table": {
+      "heading": {
+        "product": "Товар",
+        "price": "Цена",
+        "qnt": "Кол-во",
+        "total": "Всего"
+      },
+      "totalPrice": "Итого:"
+    },
+    "delivery": {
+      "heading": "Доставка",
+      "price": "Цена доставки:"
     }
   },
   "components": {
@@ -126,6 +147,9 @@
       "workingHour": "Режим работы: {hour}",
       "phone": "Телефон: {phone}",
       "email": "Email: {email}"
+    },
+    "countrySelector": {
+      "placeholder": "Выберите страну"
     }
   }
 }

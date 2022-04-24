@@ -1,6 +1,6 @@
 <template>
   <component
-    :is="to ? 'nuxt-button' : 'button'"
+    :is="to ? 'nuxt-link' : 'button'"
     :to="to"
     class="d-button"
     :style="style"
