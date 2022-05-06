@@ -2,7 +2,7 @@
   <component
     :is="to ? 'nuxt-link' : 'button'"
     :to="to"
-    class="d-button"
+    :class="['d-button', {disabled: disabled}]"
     :style="style"
     @click="$emit('click')"
     @mouseover.stop="$emit('mouseover')"
@@ -74,6 +74,10 @@ export default {
     display: flex
     align-items: center
     justify-content: center
+    
+    &.disabled
+     opacity: 0.5
+     cursor: not-allowed
 
     img
       margin-right: 20px

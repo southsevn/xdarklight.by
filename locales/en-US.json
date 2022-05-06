@@ -90,12 +90,26 @@
       "price": "Delivery Price:"
     },
     "form": {
+      "label": "Customer",
       "name": {
-        "label": "Full Name"
+        "label": "Full Name *"
       },
       "phoneNumber": {
-        "label": "Phone Number"
-      }
+        "label": "Phone Number *"
+      },
+      "email": {
+        "label": "Email *"
+      },
+      "city": {
+        "label": "City *"
+      },
+      "address": {
+        "label": "Address *"
+      },
+      "comment": {
+        "label": "Order Commentx"
+      },
+      "submit": "Submit"
     }
   },
   "components": {

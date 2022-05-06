@@ -28,13 +28,44 @@
           </div>
         </div>
         <div v-if="country" class="checkout-form">
-          <!-- <DInput
-            v-model="phone"
-            :label="$t('checkout.customerInfo.phone.label')"
-            :defaultCountry="phoneMaskCountry"
-            autoDetectCountry
-            phone-mask
-          /> -->
+          <h3>{{ $t('checkout.form.label') }}</h3>
+          <div class="checkout-form-container">
+            <DInput
+              v-model="name"
+              @input="$v.name.$touch()"
+              :label="$t('checkout.form.name.label')"
+            />
+            <DInput
+              v-model="phone"
+              @input="$v.phone.$touch()"
+              :label="$t('checkout.form.phoneNumber.label')"
+              :countryCode="phoneMaskCountry"
+              phone
+            />
+            <DInput
+              v-model="email"
+              @input="$v.email.$touch()"
+              type="email"
+              :label="$t('checkout.form.email.label')"
+            />
+            <DInput
+              v-model="city"
+              @input="$v.city.$touch()"
+              :label="$t('checkout.form.city.label')"
+            />
+            <DInput
+              v-model="address"
+              @input="$v.address.$touch()"
+              :label="$t('checkout.form.address.label')"
+            />
+            <DInput
+              v-model="comment"
+              @input="$v.comment.$touch()"
+              :label="$t('checkout.form.comment.label')"
+              textarea
+            />
+          </div>
+          <DButton :text="$t('checkout.form.submit')" inverted :disabled="!formValid"/>
         </div>
       </div>
       <aside class="description">
@@ -60,6 +91,8 @@
 <script>
 import { settings, theme } from "@/mixins";
 import { mapState, mapActions } from "vuex";
+import { required, email, maxLength } from 'vuelidate/lib/validators';
+
 
 export default {
   name: "CheckoutPage",
@@ -81,20 +114,59 @@ export default {
     },
     deliveryPrice() {
       return this.deliveryPrices?.find(price => price.title.toLowerCase() === this.country.toLowerCase())?.values[this.cur] || this.deliveryPrices?.find(price => price.title.toLowerCase() === 'other')?.values[this.cur];
+    },
+    formValid() {
+      return (
+        this.name && !this.$v.name.$error &&
+        this.phone && !this.$v.phone.$error &&
+        this.email && !this.$v.email.$error &&
+        this.city && !this.$v.city.$error &&
+        this.address && !this.$v.address.$error &&
+        !this.$v.comment.$error
+      );
     }
   },
   data() {
     return {
       country: '',
-      phoneMaskCountry: 'by'
+      phoneMaskCountry: 'by',
+      name: '',
+      phone: '',
+      city: '',
+      address: '',
+      email: '',
+      comment: ''
     }
+  },
+  validations() {
+    return {
+      name: {
+        required
+      },
+      phone: {
+        required
+      },
+      city: {
+        required
+      },
+      address: {
+        required
+      },
+      email: {
+        required,
+        email
+      },
+      comment: {
+        maxLength: maxLength(540)
+      }
+    };
   },
   methods: {
     ...mapActions("company", ["getDeliveryPageContent", "getPaymentPageContent", "getDeliveryPrices"]),
     onCountrySelect(value) {
       this.phoneMaskCountry = value.toLowerCase();
       this.country = value;
-    },
+    }
   },
   async created() {
     if(!this.cartCount) {
@@ -180,4 +252,17 @@ export default {
     .delivery-price-value
       margin-left: 5px
       display: flex
+
+  .checkout-form
+    margin-top: 60px
+
+    h3
+      margin-bottom: 20px
+
+    &-container
+      display: grid
+      align-items: end
+      grid-template-columns: repeat(2, 1fr)
+      gap: 40px
+      margin-bottom: 60px
 </style>

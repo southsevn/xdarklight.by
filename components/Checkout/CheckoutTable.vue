@@ -1,14 +1,6 @@
 <template>
   <div class="checkout-table-wrapper">
     <div class="checkout-table">
-      <div class="table-heading" :style="style">
-        <div
-          :class="['table-heading-cell', item.class]"
-          v-for="(item, idx) in tableHeading"
-          :key="idx"
-          :style="style"
-        >{{ item.text }}</div>
-      </div>
       <div class="table-data">
         <div
           class="table-data-row"
@@ -135,6 +127,9 @@ export default {
     .table-data-row
       grid-template-columns: 60% 14% 14% 1fr 1fr
       align-items: center
+
+      &:first-child
+        margin-top: 0
 
     .table-total
       padding-left: 82%

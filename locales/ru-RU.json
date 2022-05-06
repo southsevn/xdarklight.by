@@ -88,6 +88,28 @@
     "delivery": {
       "heading": "Доставка",
       "price": "Цена доставки:"
+    },
+    "form": {
+      "label": "Данные покупателя",
+      "name": {
+        "label": "Ф.И.О *"
+      },
+      "phoneNumber": {
+        "label": "Номер телефона *"
+      },
+      "email": {
+        "label": "Email *"
+      },
+      "city": {
+        "label": "Город *"
+      },
+      "address": {
+        "label": "Адрес *"
+      },
+      "comment": {
+        "label": "Комментарий к заказу"
+      },
+      "submit": "Оплатить"
     }
   },
   "components": {

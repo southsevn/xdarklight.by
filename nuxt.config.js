@@ -46,6 +46,8 @@ export default {
     { src: '~/plugins/vue-storage.js', mode: 'client'},
     { src: '~/plugins/static-path.js', mode: 'client'},
     { src: '~/plugins/country-selector.js', mode: 'client' },
+    { src: '~/plugins/vue-phone-mask', mode: 'client' },
+    { src: '~/plugins/vuelidate', mode: 'client' }
   ],
 
   loading: { color: "#008593" },
