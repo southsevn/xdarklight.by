@@ -1,6 +1,6 @@
 <template>
   <div :class="['product', {'sale': product.isSale, 'sold-out': product.isSoldOut}]">
-    <nuxt-link :to="`/product/${product.id}`">
+    <nuxt-link :to="`/product/${product.slug}`">
       <div class="product-image">
         <span class="product-sale-percent" v-if="product.isSale && product.salePercent > 0">{{ $tc("catalog.product.salePercent", product.salePercent) }}</span>
         <p class="product-soldout" v-if="product.isSoldOut">{{ $t("catalog.product.soldOut") }}</p>

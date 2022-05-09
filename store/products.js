@@ -20,14 +20,19 @@ export const actions = {
     commit('SET_PRODUCTS', products.results.reverse());
   },
   async getProductBySlug({ commit }, slug) {
-    const product = ProductService.getProduct(slug);
+    const product = await ProductService.getProduct(slug);
     commit('SET_PRODUCT', product);
   }
 };
+
+export const getters = {
+  product: state => state.product
+}
 
 export default {
   namespaced: true,
   state,
   mutations,
+  getters,
   actions
 };
