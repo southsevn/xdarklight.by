@@ -47,7 +47,8 @@ export default {
     { src: '~/plugins/static-path.js', mode: 'client'},
     { src: '~/plugins/country-selector.js', mode: 'client' },
     { src: '~/plugins/vue-phone-mask', mode: 'client' },
-    { src: '~/plugins/vuelidate', mode: 'client' }
+    { src: '~/plugins/vuelidate', mode: 'client' },
+    { src: '~/plugins/vue-zoom-on-hover', mode: 'client' }
   ],
 
   loading: { color: "#008593" },
@@ -120,6 +121,9 @@ export default {
       trackLinks:true,
       accurateTrackBounce:true,
     }],
+    ['nuxt-lazy-load', {
+      directiveOnly: true
+    }]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
