@@ -112,6 +112,27 @@
       "submit": "Submit"
     }
   },
+  "payments": {
+    "title": "Payment"
+  },
+  "delivery": {
+    "title": "Delivery"
+  },
+  "care": {
+    "title": "Care"
+  },
+  "return": {
+    "title": "Return"
+  },
+  "terms": {
+    "title": "Terms"
+  },
+  "privacy": {
+    "title": "Privacy"
+  },
+  "publicOffer": {
+    "title": "Public Offer"
+  },
   "components": {
     "logo": {
       "alt": "Darklight"

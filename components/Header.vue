@@ -1,6 +1,6 @@
 <template>
   <transition name="fade">
-    <div v-if="loaded" class="header">
+    <header v-if="loaded" class="header">
       <div class="socials">
         <d-theme-switcher/>
         <div class="socials-list">
@@ -31,7 +31,7 @@
           <span class="line-3" :style="menuButtonStyle"></span>
         </div>
       </div>
-    </div>
+    </header>
   </transition>
 </template>
 

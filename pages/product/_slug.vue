@@ -3,7 +3,7 @@
     <div class="product-promo" v-if="product && product.promoImages && product.promoImages.length">
       <img
         class="product-promo-image"
-        v-for="(image, idx) in product.promoImages"
+        v-for="(image, idx) in product.images.reverse()"
         :key="idx"
         :src="`${STATIC_PATH}${image}`"
         :alt="product.name">
@@ -40,7 +40,7 @@ export default {
 
 <style scoped lang="sass">
   .product-promo-image
-    width: 100%
-    height: 100vh
+    width: 240px
+    height: 320px
     object-fit: cover
 </style>

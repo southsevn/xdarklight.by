@@ -7,7 +7,18 @@
     <transition name="show-menu">
       <Menu v-if="showMenu" />
     </transition>
-    <nuxt />
+    <main class="main">
+      <Promo v-if="isIndexPage"/>
+      <div class="page">
+        <DPageTitle v-if="!isProductPage" :title="pageTitle"/>
+        <div class="page-container">
+          <div class="categories-container">
+            <Categories v-if="!isTextPages"/>
+          </div>
+          <nuxt/>
+        </div>
+      </div>
+    </main>
     <TextPages/>
     <LegalInfo/>
   </div>
@@ -21,7 +32,22 @@ export default {
   mixins: [theme],
   computed: {
     ...mapGetters(["showMenu", "isPageOnTop"]),
-    ...mapState(["languages", "currencies", "language"])
+    ...mapState(["languages", "currencies", "language"]),
+    isIndexPage() {
+      return this.$route.path === '/';
+    },
+    isTextPages() {
+      return this.$route.path.includes('page');
+    },
+    isProductPage() {
+      return this.$route.path.includes('product');
+    },
+    pageTitle() {
+      let pageName = this.$route.path.replace('/page', '').replace('/', '');
+      pageName = pageName === "" ? "catalog" : pageName;
+
+      return this.$t(`${pageName}.title`)
+    }
   },
   data() {
     return {

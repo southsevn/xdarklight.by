@@ -112,6 +112,27 @@
       "submit": "Оплатить"
     }
   },
+  "payments": {
+    "title": "Оплата"
+  },
+  "delivery": {
+    "title": "Доставка"
+  },
+  "care": {
+    "title": "Уход"
+  },
+  "return": {
+    "title": "Возврат"
+  },
+  "terms": {
+    "title": "Пользовательское соглашение"
+  },
+  "privacy": {
+    "title": "Политика конфиденциальности"
+  },
+  "publicOffer": {
+    "title": "Публичная оферта"
+  },
   "components": {
     "logo": {
       "alt": "Darklight"

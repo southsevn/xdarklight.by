@@ -19,7 +19,6 @@ input, textarea, button
 
 main
   min-height: 100vh
-  color: $black
 
 a
   color: $black
@@ -82,6 +81,18 @@ a
 .page
   margin: 180px 0
   padding: 0 60px
+
+  &-container
+    margin-top: 50px
+    display: grid
+    grid-auto-columns: 1fr
+    grid-auto-rows: 1fr
+    grid-template-columns: 1.05fr 3fr
+    grid-template-rows: 1fr
+    gap: 0px 0px
+
+  .categories-container
+    grid-area: 1
 
 .table-heading
   padding-bottom: 10px
@@ -172,4 +183,27 @@ a
   display: flex
   justify-content: flex-end
 
-.country-select
+.order-description
+  .delivery
+    margin-bottom: 50px
+    transition: 1s all
+
+  .payments
+    transition: 1s all
+
+  .description-heading
+    font-size: 20px
+    font-weight: bold
+    margin-bottom: 20px
+
+  .description-item
+    margin-bottom: 40px
+
+  .description-item-heading
+    font-size: 15px
+    font-weight: 400
+    margin-bottom: 20px
+
+  .description-item-text
+    font-size: 15px
+    line-height: 1.2

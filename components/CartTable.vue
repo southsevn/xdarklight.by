@@ -1,6 +1,14 @@
 <template>
-  <div class="checkout-table-wrapper">
-    <div class="checkout-table">
+  <div class="cart-table-wrapper">
+    <div class="cart-table">
+      <div class="table-heading" :style="style">
+        <div
+          :class="['table-heading-cell', item.class]"
+          v-for="(item, idx) in tableHeading"
+          :key="idx"
+          :style="style"
+        >{{ item.text }}</div>
+      </div>
       <div class="table-data">
         <div
           class="table-data-row"
@@ -9,15 +17,32 @@
           :style="style"
         >
           <div class="table-data-cell product">
-            <p class="category">{{ item.product.parentProduct.category[`name_${lang}`] }}</p>
-            <p>{{ item.product.name }}</p>
+            <img :src="`${STATIC_PATH}${item.product.promoImages[0]}`" :alt="item.name">
+            <div class="product-material">
+              <DMaterial
+                :value="item.product.outsideMaterial"
+                :product="item.product"
+                :data="item.product.availableOutsideMaterial"
+                @input="onMaterialChange"
+                type="outside"
+              />
+              <DMaterial
+                :value="item.product.insideMaterial"
+                :product="item.product"
+                :data="item.product.availableInsideMaterial"
+                @input="onMaterialChange"
+                type="inside"
+              />
+            </div>
           </div>
           <div class="table-data-cell price">
             <DPrice :value="getProductPrice(item.product)"/>
           </div>
           <div class="table-data-cell quantity">
             <div class="product-quantity">
+              <span @click="changeCartItem(item, -1)" class="minus">-</span>
               <span class="quantity">{{ item.qnt }}</span>
+              <span @click="changeCartItem(item, 1)" class="plus">+</span>
             </div>
           </div>
           <div class="table-data-cell total">
@@ -29,10 +54,13 @@
               </div>
             </div>
           </div>
+          <div class="table-data-cell remove">
+            <span @click="deleteCartItem(item.product)" class="remove-btn">x</span>
+          </div>
         </div>
       </div>
       <div class="table-total" :style="style">
-        <p>{{ $t("checkout.table.totalPrice") }}</p>
+        <p>{{ $t("cart.table.totalPrice") }}</p>
         <div class="table-total-price">
           <span class="table-total-price-char">{{ cur }}</span>
           <div class="table-total-price-value">
@@ -42,6 +70,10 @@
         </div>
       </div>
     </div>
+    <div class="cart-table-actions">
+      <DButton to="/" :text="$t('cart.actions.continue')"/>
+      <DButton to="/checkout" inverted :text="$t('cart.actions.checkout')"/>
+    </div>
   </div>
 </template>
 
@@ -49,7 +81,7 @@
 import { theme, settings, cart } from "@/mixins";
 
 export default {
-  name: "Checkout",
+  name: "CartTable",
   mixins: [theme, settings, cart],
   computed: {
     style() {
@@ -67,19 +99,23 @@ export default {
       return [
         {
           class: "product",
-          text: this.$t("checkout.table.heading.product")
+          text: this.$t("cart.table.heading.product")
         },
         {
           class: "price",
-          text: this.$t("checkout.table.heading.price")
+          text: this.$t("cart.table.heading.price")
         },
         {
           class: "quantity",
-          text: this.$t("checkout.table.heading.qnt")
+          text: this.$t("cart.table.heading.qnt")
         },
         {
           class: "total",
-          text: this.$t("checkout.table.heading.total")
+          text: this.$t("cart.table.heading.total")
+        },
+        {
+          class: "remove",
+          text: this.$t("cart.table.heading.remove")
         }
       ]
     }
@@ -107,30 +143,19 @@ export default {
 </script>
 
 <style scoped lang="sass">
-  .checkout-table
-    .table-heading
-      grid-template-columns: 60% 14% 14% 1fr 1fr
-
-    .table-data-cell
+  .table-heading
+    &-cell
       &.product
-        display: flex
-        font-size: 20px
-        font-weight: bold
-        display: flex
-        flex-direction: column
+        width: 30%
 
-        .category
-          font-size: 15px
-          margin-bottom: 5px
-          font-weight: 300
+  .table-data-cell
+    &.product
+      display: flex
+      flex-direction: row
 
-    .table-data-row
-      grid-template-columns: 60% 14% 14% 1fr 1fr
-      align-items: center
+    &.price, &.total
+      padding-top: 60px
 
-      &:first-child
-        margin-top: 0
-
-    .table-total
-      padding-left: 82%
+    &.quantity
+      padding-top: 60px
 </style>

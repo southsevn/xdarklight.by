@@ -5,7 +5,7 @@
       v-for="(filter, idx) in filters"
       :key="idx"
     >
-      <h5 class="filter-group-parent" :style="styles">{{ $t(filter.parentCategory) }}</h5>
+      <h5 class="filter-group-parent" :style="style">{{ $t(filter.parentCategory) }}</h5>
       <div class="filter-group-items">
         <span
           @mouseover="hoverEffect"
@@ -22,19 +22,19 @@
 
 <script>
 import { mapState } from "vuex";
-import { soundEffects } from "@/mixins";
+import { theme, soundEffects } from "@/mixins";
 
 export default {
-  name: "CatalogFilter",
-  props: {
-    styles: {
-      type: Object,
-      required: false
-    }
-  },
-  mixins: [soundEffects],
+  name: "Categories",
+  mixins: [theme, soundEffects],
   computed: {
-    ...mapState(["filters"])
+    ...mapState(["filters"]),
+    style() {
+      return {
+        'border-color': !this.dark ? '#0f0f0f' : '#fff',
+        color: !this.dark ? '#0f0f0f' : '#fff'
+      }
+    }
   }
 }
 </script>

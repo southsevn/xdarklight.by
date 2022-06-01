@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <DPageTitle class="text-page-title" :title="title"/>
     <section class="section" v-for="(item, idx) in content" :key="idx">
       <DPageTitle simply :title="item.heading[lang]"/>
       <p class="section-description">{{ item.description[lang] }}</p>

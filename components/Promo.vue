@@ -2,6 +2,7 @@
   <div class="promo">
     <client-only>
       <VueSlickCarousel
+        v-if="products && products.length"
         class="promo-slider"
         ref="promo"
         v-bind="promoSlideOptions"
@@ -44,7 +45,9 @@ export default {
     }
   },
   async created() {
-    await this.getProducts();
+    if (!this.products && !this.products?.length) {
+      await this.getProducts();
+    }
   },
   methods: {
     ...mapState("products", ["getProducts"]),
@@ -59,7 +62,7 @@ export default {
     position: relative
 
     &-slider
-      width: 62%
+      width: 63.2%
       height: 100vh
 
     &-slide
