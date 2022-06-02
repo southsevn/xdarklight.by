@@ -49,6 +49,10 @@
       </div>
       <p class="product-text">{{ product[`description_${lang}`] }}</p>
       <div class="product-characteristics">
+        <DSize
+          v-if="product.size"
+          :size="product.size"
+        />
         <DMaterial
           :value="product.outsideMaterial"
           :product="product"
@@ -167,8 +171,7 @@ export default {
         font-weight: 300
 
     &-text
-      margin-top: 60px
-
+      margin: 60px 0
 
   .thumbs
     &-slider

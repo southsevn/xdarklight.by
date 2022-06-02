@@ -189,6 +189,12 @@
         "inside": "Outside Material"
       }
     },
+    "size": {
+      "header": "Size",
+      "width": "W: {width}",
+      "height": "H: {height}",
+      "deep": "D: {deep}"
+    },
     "legal": {
       "companyName": "Company Name: {name}",
       "inn": "INN: {inn}",

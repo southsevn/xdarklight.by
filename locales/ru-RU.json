@@ -183,6 +183,12 @@
         "inside": "Внутренний материал"
       }
     },
+    "size": {
+      "header": "Размер",
+      "width": "Д: {width}",
+      "height": "Ш: {height}",
+      "deep": "Г: {deep}"
+    },
     "legal": {
       "companyName": "Наименование: {name}",
       "inn": "УНП: {inn}",
