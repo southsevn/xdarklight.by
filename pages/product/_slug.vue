@@ -13,7 +13,7 @@
               <client-only>
                 <zoom-on-hover
                   :img-normal="`${STATIC_PATH}${image}`"
-                  :scale="2"
+                  :scale="1"
                   :alt="`${product.slug} image ${idx + 1}`"
                 />
               </client-only>
@@ -54,6 +54,7 @@
           :size="product.size"
         />
         <DMaterial
+          v-if="product.outsideMaterial"
           :value="product.outsideMaterial"
           :product="product"
           :data="product.availableOutsideMaterial"
@@ -61,6 +62,7 @@
           type="outside"
         />
         <DMaterial
+          v-if="product.insideMaterial"
           :value="product.insideMaterial"
           :product="product"
           :data="product.availableInsideMaterial"
@@ -68,6 +70,20 @@
           type="inside"
         />
       </div>
+    </div>
+    <div class="product-actions">
+      <DButton
+        v-if="!product.isSoldOut"
+        inverted
+        :text="$t('catalog.product.actions.addToCart')"
+        @click="addToCart(product)"
+      />
+      <DButton
+        @click="clickEffect"
+        v-if="product.isSoldOut"
+        :text="$t('catalog.product.actions.notify')"
+        :icon="dark ? '/icons/notify-icon.svg' : '/icons/notify-icon-black.svg'"
+      />
     </div>
   </div>
 </template>
@@ -172,6 +188,12 @@ export default {
 
     &-text
       margin: 60px 0
+
+    &-actions
+      margin-top: 40px
+
+      .d-button
+        width: 180px
 
   .thumbs
     &-slider

@@ -6,9 +6,9 @@
         {{ size.value }}
       </div>
       <div v-if="size && size.type === 'physical'" class="physical-size">
-        <div class="d-size-item width">{{ $t('components.size.width', { width: size.value.w }) }}</div>
-        <div class="d-size-item height">{{ $t('components.size.height', { height: size.value.h }) }}</div>
-        <div class="d-size-item deep">{{ $t('components.size.deep', { deep: size.value.d }) }}</div>
+        <div v-if="size.value.w" class="d-size-item width">{{ $t('components.size.width', { width: size.value.w }) }}</div>
+        <div v-if="size.value.h" class="d-size-item height">{{ $t('components.size.height', { height: size.value.h }) }}</div>
+        <div v-if="size.value.d" class="d-size-item deep">{{ $t('components.size.deep', { deep: size.value.d }) }}</div>
       </div>
     </div>
   </div>  

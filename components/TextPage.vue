@@ -28,12 +28,15 @@ export default {
 
 <style scoped lang="sass">
   .content
+    margin-top: -180px
+    margin-left: -60px
+
     .text-page-title
       margin-bottom: 50px
 
   .section
-    width: 45%
-    margin: 0 auto 20px
+    width: 68.2%
+    margin-bottom: 20px
 
     &-description
       line-height: 1.4

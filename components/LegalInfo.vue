@@ -66,8 +66,8 @@ export default {
         en: "09:00 - 18:00"
       },
       phone: {
-        ru: "+375(29)2777191",
-        en: "+375(29)2777191"
+        ru: "+375(29)5037771",
+        en: "+375(29)5037771"
       },
       email: {
         ru: "mail@darklight.by",
@@ -75,16 +75,16 @@ export default {
       },
       paymentImages: {
         visa: {
-          white: "/payments/visa_black.png",
-          black: "/payments/visa_white.png"
+          white: "/payments/visa_black.svg",
+          black: "/payments/visa_white.svg"
         },
         visaSecure: {
-          white: "/payments/visa-secure_black.png",
-          black: "/payments/visa-secure_black.png"
+          white: "/payments/visa-secure_white.svg",
+          black: "/payments/visa-secure_black.svg"
         },
         alfa: {
-          white: "/payments/alfa_white.png",
-          black: "/payments/alfa_black.png"
+          white: "/payments/alfa_white.svg",
+          black: "/payments/alfa_black.svg"
         },
         mcId: {
           white: "/payments/mc-id_black.png",
