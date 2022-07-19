@@ -187,7 +187,10 @@ export default {
         font-weight: 300
 
     &-text
-      margin: 60px 0
+      width: 80%
+      margin: 40px 0
+      font-size: 14px
+      line-height: 1.2      
 
     &-actions
       margin-top: 40px

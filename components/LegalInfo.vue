@@ -87,24 +87,24 @@ export default {
           black: "/payments/alfa_black.svg"
         },
         mcId: {
-          white: "/payments/mc-id_black.png",
-          black: "/payments/mc-id_white.png"
+          white: "/payments/mc-id_black.svg",
+          black: "/payments/mc-id_white.svg"
         },
         mc: {
-          white: "/payments/mc_black.png",
-          black: "/payments/mc_white.png"
+          white: "/payments/mc_black.svg",
+          black: "/payments/mc_white.svg"
         },
         belcart: {
-          white: "/payments/belcart.png",
-          black: "/payments/belcart.png"
+          white: "/payments/belcart_black.svg",
+          black: "/payments/belcart_white.svg"
         },
         belcartP: {
-          white: "/payments/belcart-p.png",
-          black: "/payments/belcart-p.png"
+          white: "/payments/belcart-p_black.svg",
+          black: "/payments/belcart-p_white.svg"
         },
         applePay: {
-          white: "/payments/apple.png",
-          black: "/payments/apple.png"
+          white: "/payments/apple_white.svg",
+          black: "/payments/apple_black.svg"
         },
         samsungPay: {
           white: "/payments/samsung_black.svg",
@@ -134,5 +134,5 @@ export default {
 
     img
       margin-right: 20px
-      width: 40px
+      height: 30px
 </style>
