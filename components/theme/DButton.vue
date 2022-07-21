@@ -7,7 +7,7 @@
     @click="$emit('click')"
     @mouseover.stop="$emit('mouseover')"
   >
-    <nuxt-img v-if="icon" :src="icon" />
+    <img v-if="icon" :src="icon" />
     {{ text }}
   </component>
 </template>

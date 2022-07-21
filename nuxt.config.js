@@ -63,7 +63,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    '@nuxt/image',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -72,7 +71,6 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/dotenv',
-    '@nuxt/image',
     [
       "@nuxtjs/i18n", {
         locales: [
@@ -150,10 +148,6 @@ export default {
     manifest: {
       lang: 'en'
     }
-  },
-
-  image: {
-    domains: [process.env.STATIC_URL]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

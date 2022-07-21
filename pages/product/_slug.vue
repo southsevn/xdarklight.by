@@ -32,7 +32,7 @@
             @beforeChange="syncSliders"
           >
             <div class="thumb-slide" v-for="(image, idx) in product.images" :key="idx">
-              <nuxt-img
+              <img
                 v-lazy-load
                 :data-src="`${STATIC_PATH}${image}`"
                 :alt="`${product.slug} image ${idx + 1}` "

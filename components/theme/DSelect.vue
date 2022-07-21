@@ -3,7 +3,7 @@
     <div class="d-selected">
       <span> {{ value[currency ? 'name': 'title'] }} </span>
       <div class="inner-item">
-        <nuxt-img class="d-icon-arrow" :src="arrow" alt="Arrow" />
+        <img class="d-icon-arrow" :src="arrow" alt="Arrow" />
       </div>
     </div>
     <ul :class="['d-select-list', {'top-open': topOpen}]" v-if="open">

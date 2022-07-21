@@ -1,7 +1,7 @@
 <template>
   <div @click="changeTheme" class="d-theme-switcher">
-    <nuxt-img v-if="!dark" src="/theme-switcher/dark.svg" />
-    <nuxt-img v-else src="/theme-switcher/light.svg" />
+    <img v-if="!dark" src="/theme-switcher/dark.svg" />
+    <img v-else src="/theme-switcher/light.svg" />
   </div>
 </template>
 <script>
