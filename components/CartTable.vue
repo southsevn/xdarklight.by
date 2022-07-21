@@ -17,7 +17,7 @@
           :style="style"
         >
           <div class="table-data-cell product">
-            <nuxt-img :src="`${STATIC_PATH}/${item.product.promoImages[0]}`" :alt="item.name" />
+            <nuxt-img :src="`/${STATIC_PATH}/${item.product.promoImages[0]}`" :alt="item.name" />
             <div class="product-material">
               <DMaterial
                 :value="item.product.outsideMaterial"
