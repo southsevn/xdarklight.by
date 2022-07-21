@@ -43,6 +43,7 @@ export default {
     { src: '~/plugins/axios', mode: "client" },
     { src: '~/plugins/vue-slick-carousel.js', mode: 'client' },
     { src: '~/plugins/vue-marquee.js', mode: 'client'},
+    { src: '~/plugins/static-path.js', mode: 'client'},
     { src: '~/plugins/vue-storage.js', mode: 'client'},
     { src: '~/plugins/country-selector.js', mode: 'client' },
     { src: '~/plugins/vue-phone-mask', mode: 'client' },
@@ -152,10 +153,7 @@ export default {
   },
 
   image: {
-    domains: [process.env.STATIC_URL],
-    alias: {
-      static: process.env.STATIC_URL
-    }
+    domains: [process.env.STATIC_URL]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
