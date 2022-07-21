@@ -4,7 +4,7 @@
       <div class="product-image">
         <span class="product-sale-percent" v-if="product.isSale && product.salePercent > 0">{{ $tc("catalog.product.salePercent", product.salePercent) }}</span>
         <p class="product-soldout" v-if="product.isSoldOut">{{ $t("catalog.product.soldOut") }}</p>
-        <nuxt-img :src="`/${STATIC_PATH}${product.promoImages[0]}`" :alt="product.name" preload placeholder/>
+        <nuxt-img :src="`${STATIC_PATH}${product.promoImages[0]}`" :alt="product.name" preload placeholder/>
       </div>
     </nuxt-link>
     <div class="product-info">

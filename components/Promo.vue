@@ -8,7 +8,7 @@
         v-bind="promoSlideOptions"
       >
         <div class="promo-slide" v-for="(image, idx) in mappedPromoImages" :key="idx">
-          <nuxt-img :src="`/${STATIC_PATH}${image}`" :alt="idx"/>
+          <nuxt-img :src="`${STATIC_PATH}${image}`" :alt="idx"/>
         </div>
       </VueSlickCarousel>
       <div v-else class="promo-placeholder"></div>
