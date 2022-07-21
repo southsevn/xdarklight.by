@@ -12,7 +12,7 @@
             <div class="product-slide" v-for="(image, idx) in product.images" :key="idx">
               <client-only>
                 <zoom-on-hover
-                  :img-normal="`/${STATIC_PATH}/${image}`"
+                  :img-normal="`/${STATIC_PATH}${image}`"
                   :scale="1"
                   :alt="`${product.slug} image ${idx + 1}`"
                 />
@@ -34,7 +34,7 @@
             <div class="thumb-slide" v-for="(image, idx) in product.images" :key="idx">
               <nuxt-img
                 v-lazy-load
-                :data-src="`/${STATIC_PATH}/${image}`"
+                :data-src="`/${STATIC_PATH}${image}`"
                 :alt="`${product.slug} image ${idx + 1}` "
               />
             </div>
