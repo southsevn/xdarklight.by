@@ -5,7 +5,7 @@
       <div class="selected-material" @click="open = !open" :style="style">
         <div class="material-color" :style="{background: value.color}"></div>
         <div class="material-text"> {{ value.name }} </div>
-        <img class="d-icon-arrow" :src="arrow" alt="Arrow">
+        <nuxt-img class="d-icon-arrow" :src="arrow" alt="Arrow" />
       </div>
       <div class="material-list" v-if="open" :style="style">
         <div

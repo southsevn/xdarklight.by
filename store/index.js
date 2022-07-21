@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
 export default () => new Vuex.Store({
   state: () => ({
+    loading: false,
     showMenu: false,
     isPageOnTop: true,
     dark: !!JSON.parse(window.localStorage.getItem("dl_theme"))?.value,
@@ -136,10 +137,14 @@ export default () => new Vuex.Store({
     ]
   }),
   getters: {
+    loading: state => state.loading,
     showMenu: state => state.showMenu,
     isPageOnTop: state => state.isPageOnTop
   },
   mutations: {
+    SET_LOADING(state, value) {
+      state.loading = value;
+    },
     SET_THEME(state, value) {
       state.dark = value;
     },
@@ -166,6 +171,9 @@ export default () => new Vuex.Store({
   actions: {
     changeTheme({ commit }, value) {
       commit("SET_THEME", value);
+    },
+    setLoading({ commit }, value) {
+      commit("SET_LOADING", value);
     },
     async getCurrencies({ commit }) {
       const currencies = await CompanyService.getCurrencies();

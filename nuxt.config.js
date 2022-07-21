@@ -44,14 +44,13 @@ export default {
     { src: '~/plugins/vue-slick-carousel.js', mode: 'client' },
     { src: '~/plugins/vue-marquee.js', mode: 'client'},
     { src: '~/plugins/vue-storage.js', mode: 'client'},
-    { src: '~/plugins/static-path.js', mode: 'client'},
     { src: '~/plugins/country-selector.js', mode: 'client' },
     { src: '~/plugins/vue-phone-mask', mode: 'client' },
     { src: '~/plugins/vuelidate', mode: 'client' },
     { src: '~/plugins/vue-zoom-on-hover', mode: 'client' }
   ],
 
-  loading: { color: "#008593" },
+  loading: false,
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
@@ -63,6 +62,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxt/image',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -71,6 +71,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
     '@nuxtjs/dotenv',
+    '@nuxt/image',
     [
       "@nuxtjs/i18n", {
         locales: [
@@ -147,6 +148,13 @@ export default {
   pwa: {
     manifest: {
       lang: 'en'
+    }
+  },
+
+  image: {
+    domains: [process.env.STATIC_URL],
+    alias: {
+      static: process.env.STATIC_URL
     }
   },
 

@@ -2,9 +2,9 @@
   <div class="cart-list">
     <div class="cart-product" v-for="(item, idx) in cartItems" :key="idx">
       <span @click="deleteCartItem(item.product)" class="close-icon">
-        <img src="/icons/close-icon.svg" alt="Close">
+        <nuxt-img src="/icons/close-icon.svg" alt="Close" />
       </span>
-      <img v-if="item && item.product" :src="`${STATIC_PATH}${item.product.images[0]}`" :alt="item.product.name">
+      <nuxt-img v-if="item && item.product" :src="`/static/${item.product.images[0]}`" :alt="item.product.name" />
       <div v-if="item && item.product" class="product-info">
         <span class="product-category">{{ item.product.category }}</span>
         <h4 class="product-name">{{ item.product.name }}</h4>

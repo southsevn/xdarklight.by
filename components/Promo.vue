@@ -8,9 +8,10 @@
         v-bind="promoSlideOptions"
       >
         <div class="promo-slide" v-for="(image, idx) in mappedPromoImages" :key="idx">
-          <img :src="`${STATIC_PATH}${image}`" :alt="idx"/>
+          <nuxt-img :src="`/static/${image}`" :alt="idx"/>
         </div>
       </VueSlickCarousel>
+      <div v-else class="promo-placeholder"></div>
     </client-only>
     <FilterNavigation/>
   </div>
@@ -61,9 +62,12 @@ export default {
     overflow: hidden
     position: relative
 
-    &-slider
+    &-slider, &-placeholder
       width: 63.2%
       height: 100vh
+
+    &-placeholder
+      background: url("/pl1.svg") no-repeat center center / cover
 
     &-slide
       img

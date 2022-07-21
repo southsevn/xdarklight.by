@@ -1,11 +1,11 @@
 <template>
   <div class="d-pagination">
     <div :class="['arrow', 'item', { dark: dark }]" @click="onArrowClick(-1)">
-      <img :src="dark ? '/icons/arrow-left.svg' : '/icons/arrow-left-black.svg'" alt="Prev">
+      <nuxt-img :src="dark ? '/icons/arrow-left.svg' : '/icons/arrow-left-black.svg'" alt="Prev" />
     </div>
     <div :class="['page-number', 'item', {'active': item === value}, { dark: dark }]" v-for="(item, idx) in length" :key="idx" @mouseover="hoverEffect">{{ item }}</div>
     <div class="arrow item" @click="onArrowClick(1)">
-      <img :src="dark ? '/icons/arrow-right.svg' : '/icons/arrow-right-black.svg'" alt="Next">
+      <nuxt-img :src="dark ? '/icons/arrow-right.svg' : '/icons/arrow-right-black.svg'" alt="Next" />
     </div>
   </div>
 </template>

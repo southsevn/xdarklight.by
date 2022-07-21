@@ -19,15 +19,15 @@
       </h5>
     </address>
     <div class="legal-payment">
-      <img :src="paymentImages.visa[dark ? 'black' : 'white']" alt="Visa">
-      <img :src="paymentImages.visaSecure[dark ? 'black' : 'white']" alt="Visa Secure">
-      <img :src="paymentImages.alfa[dark ? 'black' : 'white']" alt="Alfa">
-      <img :src="paymentImages.mcId[dark ? 'black' : 'white']" alt="MC ID">
-      <img :src="paymentImages.mc[dark ? 'black' : 'white']" alt="Master Card">
-      <img :src="paymentImages.belcart[dark ? 'black' : 'white']" alt="Belcart">
-      <img :src="paymentImages.belcartP[dark ? 'black' : 'white']" alt="Belcart P">
-      <img :src="paymentImages.applePay[dark ? 'black' : 'white']" alt="Apple Pay">
-      <img :src="paymentImages.samsungPay[dark ? 'black' : 'white']" alt="Samsung Pay">
+      <nuxt-img :src="paymentImages.visa[dark ? 'black' : 'white']" alt="Visa" />
+      <nuxt-img :src="paymentImages.visaSecure[dark ? 'black' : 'white']" alt="Visa Secure" />
+      <nuxt-img :src="paymentImages.alfa[dark ? 'black' : 'white']" alt="Alfa" />
+      <nuxt-img :src="paymentImages.mcId[dark ? 'black' : 'white']" alt="MC ID" />
+      <nuxt-img :src="paymentImages.mc[dark ? 'black' : 'white']" alt="Master Card" />
+      <nuxt-img :src="paymentImages.belcart[dark ? 'black' : 'white']" alt="Belcart" />
+      <nuxt-img :src="paymentImages.belcartP[dark ? 'black' : 'white']" alt="Belcart P" />
+      <nuxt-img :src="paymentImages.applePay[dark ? 'black' : 'white']" alt="Apple Pay" />
+      <nuxt-img :src="paymentImages.samsungPay[dark ? 'black' : 'white']" alt="Samsung Pay" />
     </div>
   </article>
 </template>
