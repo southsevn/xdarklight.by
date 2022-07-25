@@ -1,7 +1,7 @@
 <template>
   <div class="catalog">
     <div class="catalog-container">
-      <div class="products-container">
+      <div v-if="!loading" class="products-container">
         <CatalogProduct
           v-for="(product, idx) in products"
           :key="idx"
@@ -10,12 +10,13 @@
           :dark="dark"
         />
       </div>
+      <DLoader v-else/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 import { theme } from "@/mixins";
 
 export default {
@@ -33,6 +34,7 @@ export default {
   },
   computed: {
     ...mapState("products", ["products"]),
+    ...mapGetters(["loading"]),
     style() {
       return {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
@@ -41,7 +43,7 @@ export default {
     }
   },
   async created() {
-    if(!this.products) {
+    if(!this.products && !this.products?.length) {
       await this.getProducts();
     }
   },

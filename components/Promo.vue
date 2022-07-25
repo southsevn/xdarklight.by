@@ -7,23 +7,23 @@
         ref="promo"
         v-bind="promoSlideOptions"
       >
-        <div class="promo-slide" v-for="(image, idx) in mappedPromoImages" :key="idx">
+        <div v-show="!loading" class="promo-slide" v-for="(image, idx) in mappedPromoImages" :key="idx">
           <img :src="`${STATIC_PATH}${image}`" :alt="idx"/>
         </div>
       </VueSlickCarousel>
-      <div v-else class="promo-placeholder"></div>
     </client-only>
     <FilterNavigation/>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "Promo",
   computed: {
     ...mapState("products", ["products"]),
+    ...mapGetters(["loading"]),
     mappedPromoImages() {
       return this.products?.map(product => {
         return product.promoImages[0];

@@ -15,13 +15,17 @@ export const mutations = {
 };
 
 export const actions = {
-  async getProducts({ commit }) {
+  async getProducts({ commit, dispatch }) {
+    dispatch("setLoading", true, { root: true });
     const products = await ProductService.getProducts();
     commit('SET_PRODUCTS', products.results.reverse());
+    dispatch("setLoading", false, { root: true });
   },
-  async getProductBySlug({ commit }, slug) {
+  async getProductBySlug({ commit, dispatch }, slug) {
+    dispatch("setLoading", true, { root: true });
     const product = await ProductService.getProduct(slug);
     commit('SET_PRODUCT', product);
+    dispatch("setLoading", false, { root: true });
   }
 };
 

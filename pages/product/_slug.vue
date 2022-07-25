@@ -1,46 +1,49 @@
 <template>
   <div v-if="product" class="product-container">
-    <div class="product-slider" v-if="product.promoImages && product.promoImages.length">
-      <div class="main-slider">
-        <client-only>
-          <VueSlickCarousel
-            ref="main"
-            v-bind="mainSlideOptions"
-            :asNavFor="$refs.thumbs"
-            @beforeChange="syncSliders"
-          >
-            <div class="product-slide" v-for="(image, idx) in product.images" :key="idx">
-              <client-only>
-                <zoom-on-hover
-                  :img-normal="`${STATIC_PATH}${image}`"
-                  :scale="1"
-                  :alt="`${product.slug} image ${idx + 1}`"
+    <div class="product-slider">
+      <template v-if="!loading">
+        <div class="main-slider">
+          <client-only>
+            <VueSlickCarousel
+              ref="main"
+              v-bind="mainSlideOptions"
+              :asNavFor="$refs.thumbs"
+              @beforeChange="syncSliders"
+            >
+              <div class="product-slide" v-for="(image, idx) in product.images" :key="idx">
+                <client-only>
+                  <zoom-on-hover
+                    :img-normal="`${STATIC_PATH}${image}`"
+                    :scale="1"
+                    :alt="`${product.slug} image ${idx + 1}`"
+                  />
+                </client-only>
+              </div>
+            </VueSlickCarousel>
+          </client-only>
+        </div>
+        <div class="thumbs-slider">
+          <client-only>
+            <VueSlickCarousel
+              ref="thumbs"
+              v-bind="thumbsSlideOptions"
+              :asNavFor="$refs.main"
+              :slidesToShow="4"
+              :focusOnSelect="true"
+              @beforeChange="syncSliders"
+            >
+              <div class="thumb-slide" v-for="(image, idx) in product.images" :key="idx">
+                <img
+                  v-lazy-load
+                  :data-src="`${STATIC_PATH}${image}`"
+                  :alt="`${product.slug} image ${idx + 1}` "
                 />
-              </client-only>
-            </div>
-          </VueSlickCarousel>
-        </client-only>
-      </div>
-      <div class="thumbs-slider">
-        <client-only>
-          <VueSlickCarousel
-            ref="thumbs"
-            v-bind="thumbsSlideOptions"
-            :asNavFor="$refs.main"
-            :slidesToShow="4"
-            :focusOnSelect="true"
-            @beforeChange="syncSliders"
-          >
-            <div class="thumb-slide" v-for="(image, idx) in product.images" :key="idx">
-              <img
-                v-lazy-load
-                :data-src="`${STATIC_PATH}${image}`"
-                :alt="`${product.slug} image ${idx + 1}` "
-              />
-            </div>
-          </VueSlickCarousel>
-        </client-only>
-      </div>
+              </div>
+            </VueSlickCarousel>
+          </client-only>
+        </div>
+      </template>
+      <DLoader v-else/>
     </div>
     <div class="product-description">
       <div class="product-title">
@@ -55,18 +58,18 @@
         />
         <DMaterial
           v-if="product.outsideMaterial"
-          :value="product.outsideMaterial"
+          :value="outsideMaterial"
           :product="product"
           :data="product.availableOutsideMaterial"
-          @input="onMaterialChange"
+          @input="onOutsideMaterialChange"
           type="outside"
         />
         <DMaterial
           v-if="product.insideMaterial"
-          :value="product.insideMaterial"
+          :value="insideMaterial"
           :product="product"
           :data="product.availableInsideMaterial"
-          @input="onMaterialChange"
+          @input="onInsideMaterialChange"
           type="inside"
         />
       </div>
@@ -76,7 +79,7 @@
         v-if="!product.isSoldOut"
         inverted
         :text="$t('catalog.product.actions.addToCart')"
-        @click="addToCart(product)"
+        @click="addToCart(addedProduct)"
       />
       <DButton
         @click="clickEffect"
@@ -102,9 +105,23 @@ export default {
   },
   computed: {
     ...mapGetters("products", ["product"]),
+    ...mapGetters(["loading"]),
     title() {
       return this.product ? `${this.product.name} | Darklight` : 'Darklight';
     },
+    outsideMaterial() {
+      return this.selectedOutsideMaterial || this.product.outsideMaterial;
+    },
+    insideMaterial() {
+      return this.selectedInsideMaterial || this.product.insideMaterial;
+    },
+    addedProduct() {
+      return {
+        ...this.product,
+        outsideMaterial: this.outsideMaterial,
+        insideMaterial: this.insideMaterial
+      }
+    }
   },
   data() {
     return {
@@ -150,6 +167,12 @@ export default {
     syncSliders(currentPosition, nextPosition) {
       this.$refs['main'].goTo(nextPosition);
       this.$refs['thumbs'].goTo(nextPosition);
+    },
+    onOutsideMaterialChange(material) {
+      this.selectedOutsideMaterial = material;
+    },
+    onInsideMaterialChange(material) {
+      this.selectedInsideMaterial = material;
     }
   }
 }

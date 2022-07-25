@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="categories">
     <div
       class="filter-group"
       v-for="(filter, idx) in filters"
@@ -11,7 +11,7 @@
           @mouseover="hoverEffect"
           @click="clickEffect"
           class="hover-link"
-          :style="styles"
+          :style="style"
           v-for="(item, key) in filter.items"
           :key="key"
         >{{ $t(item.text) }}</span>
@@ -40,6 +40,10 @@ export default {
 </script>
 
 <style lang="sass">
+  .categories
+    position: sticky
+    top: 160px
+
   .filter-group
     margin-bottom: 30px
 

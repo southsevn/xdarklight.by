@@ -73,11 +73,7 @@ export default {
   methods: {
     onMaterialSelect(material) {
       this.open = false;
-      this.$emit('input', {
-        material: material,
-        product: this.product,
-        type: this.type
-      });
+      this.$emit('input', material);
     },
     hide() {
       this.open = false;
