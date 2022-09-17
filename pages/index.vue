@@ -3,7 +3,7 @@
     <div class="catalog-container">
       <div v-if="!loading" class="products-container">
         <CatalogProduct
-          v-for="(product, idx) in products"
+          v-for="(product, idx) in filteredProducts"
           :key="idx"
           :product="product"
           :styles="style"
@@ -33,6 +33,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(["selectedCategory"]),
     ...mapState("products", ["products"]),
     ...mapGetters(["loading"]),
     style() {
@@ -40,6 +41,13 @@ export default {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
         color: !this.dark ? '#0f0f0f' : '#fff'
       }
+    },
+    filteredProducts() {
+      console.log(this.selectedCategory);
+      if (this.selectedCategory) {
+        return this.products?.filter(product => product.parentProduct.category.id === this.selectedCategory);
+      }
+      return this.products;
     }
   },
   async created() {

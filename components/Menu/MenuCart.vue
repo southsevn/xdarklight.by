@@ -72,11 +72,7 @@ export default {
       position: absolute
       right: 0
       top: 0
-      cursor: pointer
       z-index: 2000
-
-      img
-        cursor: pointer
 
     .product-info
       text-align: left

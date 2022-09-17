@@ -103,6 +103,10 @@ export default {
         this.$store.commit("SET_CURRENCY", findedCur);
       }
     }
+
+    if (this.$route.query.category) {
+      this.$store.commit("SET_SELECTED_CATEGORY", this.$route.query.category);
+    }
   },
   beforeMount() {
     if (process.client) {
@@ -128,7 +132,10 @@ export default {
       }
     },
     "$route.query": {
-      handler() {
+      handler(value) {
+        if (value.category) {
+          this.$store.commit("SET_SELECTED_CATEGORY", value.category);
+        }
         this.$i18n.locale = this.language.value;
       },
     },

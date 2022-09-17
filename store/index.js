@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import company from "./company";
-import { CompanyService } from "@/services";
+import { CompanyService, CategoryService } from "@/services";
 import products from "./products";
 
 Vue.use(Vuex);
@@ -134,7 +134,9 @@ export default () => new Vuex.Store({
           }
         ]
       }
-    ]
+    ],
+    categories: null,
+    selectedCategory: null
   }),
   getters: {
     loading: state => state.loading,
@@ -166,6 +168,12 @@ export default () => new Vuex.Store({
     },
     SET_PAGE_ON_TOP(state, value) {
       state.isPageOnTop = value;
+    },
+    SET_CATEGORIES(state, value) {
+      state.categories = value;
+    },
+    SET_SELECTED_CATEGORY(state, value) {
+      state.selectedCategory = value;
     }
   },
   actions: {
@@ -179,6 +187,24 @@ export default () => new Vuex.Store({
       const currencies = await CompanyService.getCurrencies();
       commit('SET_CURRENCIES', currencies);
       commit('SET_CURRENCY', currencies[0]);
+    },
+    async getCategories({ commit }) {
+      const categories = await CategoryService.getCategories();
+      const mappedCategories = categories.reduce((a, item) => {
+        const groupIndex = a.findIndex(elem => elem?.id === item.parentCategory.id);
+
+        if (groupIndex === -1) {
+          a[a.length] = {
+            ...item.parentCategory,
+            children: [item]
+          };
+        } else {
+          a[groupIndex].children.push(item);
+        }
+
+        return a;
+      }, []);
+      commit('SET_CATEGORIES', mappedCategories);
     }
   },
   modules: {
