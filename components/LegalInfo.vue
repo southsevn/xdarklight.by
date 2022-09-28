@@ -50,16 +50,16 @@ export default {
         en: "193508444"
       },
       address: {
-        ru: "Республика Беларусь, г.Минск, ул. Пинская 28А, каб. 810",
-        en: "Belarus, Minsk, Pinskaya st. 28A, 810"
+        ru: "Республика Беларусь, г.Минск, переулок 4-й Кольцова, 51, помещение 87 (624)",
+        en: "Belarus, Minsk, lane 4th Koltsova, 51, room 87 (624)"
       },
       certificateInfo: {
         ru: "Свидетельство о государственной регистрации №193508444 от 12.02.2021 выдано Минским горисполкомом",
         en: "Certificate of state registration No. 193508444 dated February 12, 2021 issued by the Minsk City Executive Committee"
       },
       onlineRegistration: {
-        ru: "Интернет-магазин зарегистрирован в Торговом реестре РБ 12.02.2021",
-        en: "The online store is registered in the Trade Register of the Republic of Belarus dated February 12, 2021"
+        ru: "Интернет-магазин зарегистрирован в Торговом реестре РБ 09.08.2022",
+        en: "The online store is registered in the Trade Register of the Republic of Belarus dated August 09, 2022"
       },
       workingHour: {
         ru: "09:00 - 18:00",
