@@ -1,6 +1,6 @@
 export default ({ $axios, store, env }) => {
   $axios.onRequest(config => {
-    config.headers.common['x-api-key'] = env.WORKSHOP_API_KEY;
+    config.headers.common['x-api-key'] = env.APP_KEY;
   });
   $axios.onResponse(() => {
   });

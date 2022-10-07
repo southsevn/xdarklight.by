@@ -138,7 +138,7 @@ export default {
   publicRuntimeConfig: {
     axios: {
       baseURL: process.env.BASE_URL || "https://apiworkshop.darklight.by/v1/",
-      workshopApiKey: process.env.WORKSHOP_API_KEY,
+      appKey: process.env.APP_KEY,
       workshopCompanyId: process.env.COMPANY_ID
     }
   },
