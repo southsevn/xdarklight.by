@@ -137,7 +137,7 @@ export default {
   */
   publicRuntimeConfig: {
     axios: {
-      baseURL: process.env.BASE_URL || "https://apiworkshop.darklight.by/v1/",
+      baseURL: process.env.BASE_URL || "https://api.morningstar.by/v1/",
       appKey: process.env.APP_KEY,
       workshopCompanyId: process.env.COMPANY_ID
     }

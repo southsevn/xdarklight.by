@@ -3,7 +3,7 @@
     <div
       v-if="categories && categories.length"
       class="filter-group"
-      v-for="(category, idx) in categories"
+      v-for="(category, idx) in mappedCategories"
       :key="idx"
     >
       <h5 class="filter-group-parent" :style="style">{{ category[`name_${lang}`] }}</h5>
@@ -40,6 +40,22 @@ export default {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
         color: !this.dark ? '#0f0f0f' : '#fff'
       }
+    },
+    mappedCategories() {
+      return this.categories?.reduce((a, item) => {
+        const groupIndex = a.findIndex(elem => elem?.id === item.parentCategory.id);
+
+        if (groupIndex === -1) {
+          a[a.length] = {
+            ...item.parentCategory,
+            children: [item]
+          };
+        } else {
+          a[groupIndex].children.push(item);
+        }
+
+        return a;
+      }, []);
     }
   },
   methods: {

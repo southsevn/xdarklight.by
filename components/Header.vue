@@ -14,7 +14,7 @@
           />
         </div>
       </div>
-      <Logo class="logo" :animated="!isPageOnTop"/>
+      <Logo class="logo" :animated="!isPageOnTop && windowWidth > 1024"/>
       <div class="navigation">
         <d-link
           to="/login"
@@ -62,6 +62,13 @@ export default {
         color: this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#0f0f0f"
       }
     },
+    windowWidth() {
+      if (process.client) {
+        return window.innerWidth
+      } else {
+        return 0
+      }
+    }
   },
   data() {
     return {
@@ -101,21 +108,18 @@ export default {
   .fade-enter, .fade-leave-to .fade-leave-active
     opacity: 0
 
-  .logo
-    position: absolute
-    left: 50%
-    right: 50%
-    transform: translate(-50%, -50%)
-    top: 112px
-
   .header
-    display: flex
+    display: grid
     position: fixed
     z-index: 100
     width: 100%
     left: 0
     right: 0
     padding: 60px 0 0
+    grid-auto-rows: 1fr
+    grid-template-columns: 1fr 1fr 1fr
+    justify-content: center
+    align-content: center
 
     .socials, .navigation
       display: flex
@@ -131,10 +135,8 @@ export default {
         margin-right: 20px
 
     .navigation
-      position: absolute
-      right: 0
-      width: 301px
       margin-right: 60px
+      justify-items: flex-end
       justify-content: flex-end
 
       > *
@@ -175,4 +177,14 @@ export default {
 
     .cart-counter
       transition: all 1s
+
+    @include ml
+      grid-template-columns: 1fr 1fr
+
+      .logo
+        width: 60px
+        justify-self: flex-start
+
+      .socials
+        display: none
 </style>

@@ -90,51 +90,6 @@ export default () => new Vuex.Store({
         to: "/page/public-offer"
       }
     ],
-    filters: [
-      {
-        parentCategory: "components.filters.wear",
-        items: [
-          {
-            id: 1,
-            text: "components.filters.tshirts"
-          },
-          {
-            id: 2,
-            text: "components.filters.shorts"
-          },
-          {
-            id: 3,
-            text: "components.filters.longsleeves"
-          },
-          {
-            id: 4,
-            text: "components.filters.pants"
-          }
-        ]
-      },
-      {
-        parentCategory: "components.filters.bags",
-        items: [
-          {
-            id: 5,
-            text: "components.filters.bags"
-          },
-          {
-            id: 6,
-            text: "components.filters.bagpacks"
-          },
-          {
-            id: 7,
-            text: "components.filters.modules"
-          },
-          {
-            id: 8,
-            parentCategory: "components.filters.bags",
-            text: "components.filters.accessories"
-          }
-        ]
-      }
-    ],
     categories: null,
     selectedCategory: null
   }),
@@ -190,21 +145,7 @@ export default () => new Vuex.Store({
     },
     async getCategories({ commit }) {
       const categories = await CategoryService.getCategories();
-      const mappedCategories = categories.reduce((a, item) => {
-        const groupIndex = a.findIndex(elem => elem?.id === item.parentCategory.id);
-
-        if (groupIndex === -1) {
-          a[a.length] = {
-            ...item.parentCategory,
-            children: [item]
-          };
-        } else {
-          a[groupIndex].children.push(item);
-        }
-
-        return a;
-      }, []);
-      commit('SET_CATEGORIES', mappedCategories);
+      commit('SET_CATEGORIES', categories);
     }
   },
   modules: {

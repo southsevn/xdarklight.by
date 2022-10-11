@@ -1,46 +1,43 @@
 <template>
   <div class="filter-navigation">
+    <div
+      v-if="categories && categories.length"
+    >
       <div
         class="filter-row"
-        v-for="(row, idx) in filters"
+        v-for="(i, idx) in 2"
         :key="idx"
       >
-        <MarqueeText
-          :reverse="idx+1 %1 !== 0"
-          :duration="duration"
-          :paused="paused"
-        >
-          <div
-            class="filter-item"
-            v-for="(item, idx) in row.items"
-            :key="idx"
-          >  
+        <MarqueeText :reverse="idx+1 %1 !== 0" :duration="duration" :paused="paused">
+          <div class="filter-item" v-for="(item, key) in categories" :key="key">
             <div class="filter-item-content">
-              <span
-                @click="onFilterSelect(item.id)"
-                @mouseover="paused = true"
-                @mouseleave="paused = false"
-                class="filter-item-text"
-              >
-                {{ $t(item.text) }}
+              <span @click="onFilterSelect(item.id)" @mouseover="onMouseOver" @mouseleave="paused = false"
+                class="filter-item-text">
+                {{ item[`name_${lang}`] }}
               </span>
-              <span class="filter-item-category">{{ $t(row.parentCategory) }}</span>
+              <span class="filter-item-category">{{ item.parentCategory[`name_${lang}`] }}</span>
             </div>
-            <span class="filter-item-separator" v-if="idx !== filters.length - 1">/</span>
+            <span class="filter-item-separator" v-if="idx !== categories.length - 1">/</span>
           </div>
         </MarqueeText>
       </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex"; 
+import { mapState, mapActions } from "vuex";
+import { settings, soundEffects } from "@/mixins";
+
 export default {
   name: "FilterNavigation",
+  mixins: [settings, soundEffects],
   computed: {
-    ...mapState(["filters"]),
-    mappedFilters() {
-      return this.filters.map()
+    ...mapState(["categories"])
+  },
+  async created() {
+    if (!this.categories) {
+      await this.getCategories();
     }
   },
   data() {
@@ -50,8 +47,15 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["getCategories"]),
     onFilterSelect(id) {
+      this.clickEffect();
+      this.$router.push({ query: { category: id } });
       this.$emit("on-filter", id);
+    },
+    onMouseOver() {
+      this.paused = true;
+      this.hoverEffect();
     }
   }
 }
