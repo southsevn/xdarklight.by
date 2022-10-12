@@ -187,4 +187,5 @@ export default {
 
       .socials
         display: none
+
 </style>
