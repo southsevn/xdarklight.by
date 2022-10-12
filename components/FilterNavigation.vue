@@ -80,9 +80,15 @@ export default {
     font-weight: bold
     cursor: pointer
 
+    @include ml
+      font-size: 54px
+
   .filter-item-category
     font-size: 15px
     user-select: none
+
+    @include ml
+      font-size: 12px
   
   .marquee-text-text
     display: flex

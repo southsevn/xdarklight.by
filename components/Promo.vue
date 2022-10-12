@@ -81,4 +81,9 @@ export default {
       top: 50%
       transform: translateY(-50%)
       width: 70%
+  
+    @include ml
+      &-slider, &-placeholder
+        width: 70%
+        height: 100vh
 </style>

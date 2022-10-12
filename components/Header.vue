@@ -179,13 +179,31 @@ export default {
       transition: all 1s
 
     @include ml
-      grid-template-columns: 1fr 1fr
+      padding: 30px 0 0 0
+      grid-template-columns: 1fr 2fr
 
       .logo
-        width: 60px
+        margin-left: 30px
+        width: auto
         justify-self: flex-start
+
+        .image-logo
+          position: inherit
+
+          svg
+            width: 56px
 
       .socials
         display: none
 
+      .navigation
+        margin-right: 30px
+
+    @include md
+      .navigation
+        > *
+          margin-left: 20px
+
+        &:first-child
+          margin-left: 20px
 </style>

@@ -36,6 +36,8 @@ a
   display: flex
   flex-direction: column
   min-height: 100vh
+  width: 100%
+  overflow: hidden
 
   .text-pages
     margin-top: auto
@@ -85,11 +87,9 @@ a
   &-container
     margin-top: 50px
     display: grid
-    grid-auto-columns: 1fr
     grid-auto-rows: 1fr
-    grid-template-columns: 1.05fr 3fr
-    grid-template-rows: 1fr
-    gap: 0px 0px
+    grid-template-columns: auto 3fr
+    gap: 0px 100px
 
   .categories-container
     grid-area: 1
