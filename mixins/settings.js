@@ -8,6 +8,12 @@ export const settings = {
     },
     cur() {
       return this.currency?.value;
+    },
+    isClient() {
+      return process.client;
+    },
+    windowWidth() {
+      return this.isClient ? window.innerWidth : 0
     }
   }
 };

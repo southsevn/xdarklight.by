@@ -98,6 +98,9 @@ export default {
     &:not(:last-child)
       margin-bottom: 10px
 
+  @include ml
+    font-size: 12px
+
 .d-selected
   position: relative
   padding: 0px

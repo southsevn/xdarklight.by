@@ -1,5 +1,5 @@
 <template>
-  <div class="text-pages">
+  <div :class="['text-pages', { 'at-menu': menu }]">
     <div class="links">
       <nuxt-link
         v-for="(page, idx) in textPages"
@@ -80,10 +80,15 @@ export default {
     display: flex
     flex-direction: row
     justify-content: space-between
-    align-items: center
+    align-items: flex-start
+
+    .links
+      width: 70%
 
     &-item
       user-select: none
+      display: inline-block
+      margin-bottom: 5px
 
       &:not(:last-child)
         margin-right: 20px
@@ -93,4 +98,26 @@ export default {
 
     .d-select:not(:last-child)
       margin-right: 20px
+
+  @media (max-width: 1480px)
+    .text-pages-item:not(:last-child)
+      margin-right: 15px
+
+  @include ml
+    .text-pages
+      padding: 0 30px
+
+      .links
+        font-size: 12px
+
+  @include md
+    .text-pages
+      flex-direction: column-reverse
+
+      .links
+        width: 100%
+
+      .actions
+        width: 100%
+        margin-bottom: 30px
 </style>

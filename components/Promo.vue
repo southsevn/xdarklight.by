@@ -86,4 +86,12 @@ export default {
       &-slider, &-placeholder
         width: 70%
         height: 100vh
+
+    @include md
+      &-slider
+        width: 100%
+
+      .filter-navigation
+        width: 100%
+        transform: none
 </style>

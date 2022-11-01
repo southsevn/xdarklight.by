@@ -1,19 +1,19 @@
 <template>
   <div class="menu">
-    <div v-if="menu" class="menu-list">
-      <div :class="['menu-item', { submenu: item.childCategories }]" v-for="(item, idx) in menu" :key="idx">
+    <div v-if="categories && categories.length" class="menu-list">
+      <div :class="['menu-item', { submenu: item.childCategories }]" v-for="(item, idx) in mappedMenu" :key="idx">
         <div class="menu-item-container" v-if="item.childCategories">
           <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
           <div class="submenu-container" v-for="(category, idx) in item.childCategories" :key="idx">
-            <h4 class="submenu-category">{{ $t(category.categoryName) }}</h4>
+            <h4 class="submenu-category">{{ category[`name_${lang}`] }}</h4>
             <div class="submenu-list">
               <nuxt-link
-                v-for="(childItem, idx) in category.itemList"
+                v-for="(children, idx) in category.children"
                 class="hover-link submenu-link"
                 @mouseover.native="hoverEffect"
                 to="/"
                 :key="idx"
-              >{{ $t(childItem) }}</nuxt-link>
+              >{{ children[`name_${lang}`] }}</nuxt-link>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <div class="menu-cart">
+    <div v-if="isClient && windowWidth > 780" class="menu-cart">
       <MenuCart v-if="cartCount"/>
       <h3 v-else class="empty-cart">{{ $t('components.menu.cart.empty') }}</h3>
     </div>
@@ -31,21 +31,53 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { theme, soundEffects } from "@/mixins";
+import { mapState, mapActions } from "vuex";
+import { settings, theme, soundEffects } from "@/mixins";
 
 export default {
   name: "Menu",
-  mixins: [theme, soundEffects],
+  mixins: [settings, theme, soundEffects],
   computed: {
-    ...mapState(["menu", "cartCount"]),
+    ...mapState(["categories", "menu", "cartCount"]),
     ...mapState("products", ["products"]),
     style() {
       return {
         'border-color': !this.dark ? '#0f0f0f' : '#fff',
         color: !this.dark ? '#0f0f0f' : '#fff'
       }
+    },
+    mappedMenu() {
+      const mappedCategories = this.categories?.reduce((a, item) => {
+        const groupIndex = a.findIndex(elem => elem?.id === item.parentCategory.id);
+
+        if (groupIndex === -1) {
+          a[a.length] = {
+            ...item.parentCategory,
+            children: [item]
+          };
+        } else {
+          a[groupIndex].children.push(item);
+        }
+
+        return a;
+      }, []);
+
+      const mappedMenu = {
+        ...this.menu
+      }
+
+      mappedMenu[0].childCategories = [...mappedCategories];
+
+      return mappedMenu;
     }
+  },
+  async created() {
+    if (!this.categories) {
+      await this.getCategories();
+    }
+  },
+  methods: {
+    ...mapActions(["getCategories"]),
   }
 }
 </script>
@@ -129,4 +161,54 @@ export default {
 
       .actions
         margin-right: 361px
+
+  @include lg
+    .menu
+      &-list
+        margin-top: 180px
+        width: 45%
+
+      &-item
+        font-size: 24px
+
+  @include ml
+    .menu
+      &-cart
+        width: 296px
+
+      &-list
+        width: 60%
+
+      &-item
+        text-align: left
+
+        &.submenu
+          align-self: flex-start
+
+  @include md
+    .menu
+      &-list
+        margin-top: 25%
+        width: 100%
+        padding: 0 30px
+
+      &-item
+        width: 100%
+        font-size: 18px
+        margin-bottom: 15px
+
+      .submenu-category
+        margin: 25px 0
+        font-size: 16px
+
+      .submenu-category
+
+      .text-pages
+        .actions
+          margin-right: 0
+
+  @include sm
+    .menu
+      &-list
+        margin-top: 30%
 </style>

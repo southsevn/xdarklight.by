@@ -14,13 +14,8 @@
           />
         </div>
       </div>
-      <Logo class="logo" :animated="!isPageOnTop && windowWidth > 1024"/>
+      <Logo class="logo" :animated="!isPageOnTop && isClient && windowWidth > 1024"/>
       <div class="navigation">
-        <d-link
-          to="/login"
-          :text="$t('components.header.navigation.enter')"
-          :light="!dark && showMenu"
-        />
         <div class="cart" :style="navItemsStyle">
           <nuxt-link to="/cart" :style="navItemsStyle">{{ $t('components.header.navigation.cart') }}</nuxt-link>
           <span class="cart-counter" :style="navItemsStyle"> {{ `(${cartCount})` }} </span>
@@ -37,11 +32,11 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
-import { theme, soundEffects } from "@/mixins";
+import { theme, settings, soundEffects } from "@/mixins";
 
 export default {
   name: "Header",
-  mixins: [theme, soundEffects],
+  mixins: [settings, theme, soundEffects],
   props: {
     animateLogo: {
       type: Boolean,
@@ -60,13 +55,6 @@ export default {
     navItemsStyle() {
       return {
         color: this.dark && !this.showMenu ? "#ffffff" : this.dark && this.showMenu ? "#ffffff" : !this.dark && !this.showMenu ? "#0f0f0f" : !this.dark && this.showMenu ? "#fff" : "#0f0f0f"
-      }
-    },
-    windowWidth() {
-      if (process.client) {
-        return window.innerWidth
-      } else {
-        return 0
       }
     }
   },
@@ -175,6 +163,9 @@ export default {
         width: 100%
         margin-bottom: 0
 
+    .cart
+      white-space: nowrap
+  
     .cart-counter
       transition: all 1s
 
@@ -206,4 +197,13 @@ export default {
 
         &:first-child
           margin-left: 20px
+
+    @include sm
+      padding: 15px 0 0 0
+
+    @include md
+      .logo
+        .image-logo
+          svg
+            width: 42px
 </style>

@@ -28,10 +28,10 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from "vuex";
-import { theme } from "@/mixins";
+import { theme, settings } from "@/mixins";
 
 export default {
-  mixins: [theme],
+  mixins: [theme, settings],
   computed: {
     ...mapGetters(["showMenu", "isPageOnTop"]),
     ...mapState(["languages", "currencies", "language"]),
@@ -59,10 +59,12 @@ export default {
   methods: {
     ...mapActions(["getCurrencies"]),
     handleScroll() {
-      if (window.scrollY > 150) {
-        this.$store.commit("SET_PAGE_ON_TOP", false);
-      } else {
-        this.$store.commit("SET_PAGE_ON_TOP", true);
+      if (this.isClient) {
+        if (window.scrollY > 150) {
+          this.$store.commit("SET_PAGE_ON_TOP", false);
+        } else {
+          this.$store.commit("SET_PAGE_ON_TOP", true);
+        }
       }
     },
   },

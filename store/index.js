@@ -36,16 +36,7 @@ export default () => new Vuex.Store({
       {
         text: "components.menu.catalog",
         to: "/catalog",
-        childCategories: [
-          {
-            categoryName: "components.filters.wear",
-            itemList: ["components.filters.tshirts", "components.filters.shorts", "components.filters.longsleeves", "components.filters.pants"]
-          },
-          {
-            categoryName: "components.filters.bags",
-            itemList: ["components.filters.bags", "components.filters.bagpacks", "components.filters.modules", "components.filters.accessories"]
-          }
-        ]
+        childCategories: null
       },
       {
         text: "components.menu.mission",
