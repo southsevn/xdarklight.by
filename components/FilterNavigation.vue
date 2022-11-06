@@ -27,11 +27,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { settings, soundEffects } from "@/mixins";
+import { settings, theme } from "@/mixins";
 
 export default {
   name: "FilterNavigation",
-  mixins: [settings, soundEffects],
+  mixins: [settings, theme],
   computed: {
     ...mapState(["categories"])
   },

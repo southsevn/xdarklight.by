@@ -42,4 +42,24 @@ export default {
     &-value
       display: flex
       align-items: flex-end
+
+  @include xl
+    .price-char
+      font-size: 40px
+
+    .price-value
+      .value
+        font-size: 40px
+      .zeros
+        font-size: 30px
+
+  @include lg
+    .price-char
+      font-size: 30px
+
+    .price-value
+      .value
+        font-size: 30px
+      .zeros
+        font-size: 22px
 </style>

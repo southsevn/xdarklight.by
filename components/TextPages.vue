@@ -32,11 +32,11 @@
 
 <script>
 import { mapState } from "vuex";
-import { theme, soundEffects } from "@/mixins";
+import { theme } from "@/mixins";
 
 export default {
   name: "TextPages",
-  mixins: [theme, soundEffects],
+  mixins: [theme],
   props: {
     menu: {
       type: Boolean,

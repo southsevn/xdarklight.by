@@ -12,11 +12,11 @@
   </component>
 </template>
 <script>
-import { theme, soundEffects } from "@/mixins";
+import { theme } from "@/mixins";
 
 export default {
   name: "DButton",
-  mixins: [theme, soundEffects],
+  mixins: [theme],
   props: {
     text: {
       type: String,

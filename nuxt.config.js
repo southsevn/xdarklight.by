@@ -123,7 +123,8 @@ export default {
     }],
     ['nuxt-lazy-load', {
       directiveOnly: true
-    }]
+    }],
+    'vue-scrollto/nuxt'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

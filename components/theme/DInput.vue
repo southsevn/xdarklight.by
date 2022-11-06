@@ -116,7 +116,6 @@ export default {
       this.$emit('input', this.newValue);
     },
     onPhoneInput(value) {
-      console.log(value);
       this.newValue = value;
       this.$emit('input', this.newValue);
     }

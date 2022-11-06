@@ -26,6 +26,7 @@
       <img :src="paymentImages.mc[dark ? 'black' : 'white']" alt="Master Card" />
       <img :src="paymentImages.belcart[dark ? 'black' : 'white']" alt="Belcart" />
       <img :src="paymentImages.belcartP[dark ? 'black' : 'white']" alt="Belcart P" />
+      <img :src="paymentImages.mir[dark ? 'black' : 'white']" alt="Mir" />
       <img :src="paymentImages.applePay[dark ? 'black' : 'white']" alt="Apple Pay" />
       <img :src="paymentImages.samsungPay[dark ? 'black' : 'white']" alt="Samsung Pay" />
     </div>
@@ -102,6 +103,10 @@ export default {
           white: "/payments/belcart-p_black.svg",
           black: "/payments/belcart-p_white.svg"
         },
+        mir: {
+          white: "/payments/mir-black.svg",
+          black: "/payments/mir-white.svg"
+        },
         applePay: {
           white: "/payments/apple_white.svg",
           black: "/payments/apple_black.svg"
@@ -135,4 +140,27 @@ export default {
     img
       margin-right: 20px
       height: 30px
+
+      @include xl
+        height: 25px
+
+  @include ml
+    .legal-container
+      flex-direction: column-reverse
+      padding: 0 30px
+      margin-top: 60px
+      margin-bottom: 20px
+
+    .legal-payment
+      margin-bottom: 30px
+      display: flex
+      flex-wrap: wrap
+
+      img
+        margin-bottom: 10px
+
+  @include md
+    .legal-container
+      h5
+        margin-bottom: 10px
 </style>

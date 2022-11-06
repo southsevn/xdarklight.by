@@ -35,7 +35,7 @@ export default () => new Vuex.Store({
     menu: [
       {
         text: "components.menu.catalog",
-        to: "/catalog",
+        to: "/",
         childCategories: null
       },
       {

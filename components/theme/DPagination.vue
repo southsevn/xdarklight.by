@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import { theme, soundEffects } from "@/mixins";
+import { theme } from "@/mixins";
  
 export default {
-  mixins: [theme, soundEffects],
+  mixins: [theme],
   props: {
     value: {
       type: String | Number,

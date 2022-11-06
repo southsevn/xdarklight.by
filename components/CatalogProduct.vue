@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import { soundEffects, settings, cart } from "@/mixins";
+import { theme, settings, cart } from "@/mixins";
 
 export default {
   name: "CatalogProduct",
-  mixins: [soundEffects, settings, cart],
+  mixins: [theme, settings, cart],
   props: {
     product: {
       type: Object,
@@ -48,10 +48,6 @@ export default {
     styles: {
       type: Object,
       required: false
-    },
-    dark: {
-      type: Boolean,
-      required: true
     }
   },
   computed: {
@@ -136,4 +132,34 @@ export default {
 
       .d-button
         width: 100%
+        min-width: auto
+
+  @include xl
+    .product-image
+      height: 326px
+
+    .product-name
+      font-size: 30px
+
+    .product-actions
+      .d-button
+        padding-right: 0
+        padding-left: 0
+        font-size: 18px
+
+  @include lg
+    .product-actions
+      flex-direction: column
+
+  @include ml
+    .product-actions
+      flex-direction: row
+
+  @include md
+   .product-actions
+      flex-direction: column
+
+  @media (max-width: 560px)
+    .product-actions
+      flex-direction: row
 </style>

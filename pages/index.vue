@@ -43,7 +43,6 @@ export default {
       }
     },
     filteredProducts() {
-      console.log(this.selectedCategory);
       if (this.selectedCategory) {
         return this.products?.filter(product => product.parentProduct.category.id === this.selectedCategory);
       }
@@ -68,9 +67,25 @@ export default {
   .products-container
     grid-area: 1
     display: grid
-    grid-template-columns: auto auto auto
+    grid-template-columns: 1fr 1fr 1fr
     gap: 100px 60px
-    
+
   .d-pagination
     margin: 92px auto 0
+
+  @include xl
+    .products-container
+      gap: 60px 40px
+
+  @include ml
+    .products-container
+      grid-template-columns: 1fr 1fr
+  
+  @include md
+    .products-container
+      grid-template-columns: 1fr
+
+  @media (max-width: 560px)
+    .product-container 
+      grid-template-columns: 1fr
 </style>

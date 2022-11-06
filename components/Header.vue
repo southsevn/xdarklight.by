@@ -17,7 +17,7 @@
       <Logo class="logo" :animated="!isPageOnTop && isClient && windowWidth > 1024"/>
       <div class="navigation">
         <div class="cart" :style="navItemsStyle">
-          <nuxt-link to="/cart" :style="navItemsStyle">{{ $t('components.header.navigation.cart') }}</nuxt-link>
+          <nuxt-link @click.native="onCartClick" to="/cart" :style="navItemsStyle">{{ $t('components.header.navigation.cart') }}</nuxt-link>
           <span class="cart-counter" :style="navItemsStyle"> {{ `(${cartCount})` }} </span>
         </div>
         <div @click="onMenuButtonClick" class="menu-button">
@@ -32,11 +32,11 @@
 
 <script>
 import { mapGetters, mapState } from "vuex";
-import { theme, settings, soundEffects } from "@/mixins";
+import { theme, settings } from "@/mixins";
 
 export default {
   name: "Header",
-  mixins: [settings, theme, soundEffects],
+  mixins: [settings, theme],
   props: {
     animateLogo: {
       type: Boolean,
@@ -83,6 +83,9 @@ export default {
   methods: {
     onMenuButtonClick() {
       this.clickEffect();
+      this.$store.commit("SET_MENU", !this.showMenu);
+    },
+    onCartClick() {
       this.$store.commit("SET_MENU", !this.showMenu);
     }
   }

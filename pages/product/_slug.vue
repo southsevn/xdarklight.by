@@ -93,11 +93,11 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { soundEffects, settings, cart, theme } from "@/mixins";
+import { settings, cart, theme } from "@/mixins";
 
 export default {  
   name: "Product",
-  mixins: [soundEffects, settings, cart, theme],
+  mixins: [settings, cart, theme],
   head() {
     return {
       title: this.title

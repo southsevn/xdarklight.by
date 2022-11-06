@@ -3,22 +3,27 @@
     <div v-if="categories && categories.length" class="menu-list">
       <div :class="['menu-item', { submenu: item.childCategories }]" v-for="(item, idx) in mappedMenu" :key="idx">
         <div class="menu-item-container" v-if="item.childCategories">
-          <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
+          <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" @click.native="click" :to="item.to">{{ $t(item.text) }}</nuxt-link>
           <div class="submenu-container" v-for="(category, idx) in item.childCategories" :key="idx">
             <h4 class="submenu-category">{{ category[`name_${lang}`] }}</h4>
             <div class="submenu-list">
-              <nuxt-link
+              <div
+                class="submenu-link"
                 v-for="(children, idx) in category.children"
-                class="hover-link submenu-link"
-                @mouseover.native="hoverEffect"
-                to="/"
                 :key="idx"
-              >{{ children[`name_${lang}`] }}</nuxt-link>
+              >
+              <span class="hover-link" @mouseover.native="hoverEffect" @click="sort(children.id)">
+                {{ children[`name_${lang}`] }}
+              </span>
+              <span v-if="selectedCategory === children.id" @click="clearSelectedCategory()" class="close-icon button">
+                <img src="/icons/close-icon.svg" alt="Close" />
+              </span>
+            </div>
             </div>
           </div>
         </div>
         <div class="menu-item-container" v-else>
-          <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" :to="item.to">{{ $t(item.text) }}</nuxt-link>
+          <nuxt-link class="hover-link page-link" @mouseover.native="hoverEffect" @click.native="click" :to="item.to">{{ $t(item.text) }}</nuxt-link>
         </div>
       </div>
     </div>
@@ -32,13 +37,13 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { settings, theme, soundEffects } from "@/mixins";
+import { settings, theme } from "@/mixins";
 
 export default {
   name: "Menu",
-  mixins: [settings, theme, soundEffects],
+  mixins: [settings, theme],
   computed: {
-    ...mapState(["categories", "menu", "cartCount"]),
+    ...mapState(["categories", "selectedCategory", "menu", "cartCount", "showMenu"]),
     ...mapState("products", ["products"]),
     style() {
       return {
@@ -78,6 +83,22 @@ export default {
   },
   methods: {
     ...mapActions(["getCategories"]),
+    click() {
+      this.$store.commit("SET_MENU", !this.showMenu);
+    },
+
+    sort(id) {
+      this.clickEffect();
+      this.$router.push({ query: { category: id } });
+      this.$store.commit("SET_SELECTED_CATEGORY", id);
+      this.$store.commit("SET_MENU", !this.showMenu);
+    },
+
+    clearSelectedCategory() {
+      this.$store.commit("SET_SELECTED_CATEGORY", null);
+      this.$router.replace({ 'query': null });
+      this.$store.commit("SET_MENU", !this.showMenu);
+    }
   }
 }
 </script>
@@ -200,8 +221,6 @@ export default {
       .submenu-category
         margin: 25px 0
         font-size: 16px
-
-      .submenu-category
 
       .text-pages
         .actions

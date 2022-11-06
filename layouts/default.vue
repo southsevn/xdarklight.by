@@ -4,19 +4,19 @@
     :style="{background: `${dark ? '#0F0F0F' : '#fff'}`}"
   >
     <template>
-      <Header :animateLogo="animateLogo" />
+      <Header :animateLogo="animateLogo" ref="header"/>
       <transition name="show-menu">
         <Menu v-if="showMenu" />
       </transition>
       <main class="main">
         <Promo v-if="isIndexPage"/>
         <div class="page">
-          <DPageTitle v-if="!isProductPage" :title="pageTitle"/>
+          <DPageTitle id="title" v-if="!isProductPage" :title="pageTitle"/>
           <div class="page-container">
             <div class="categories-container">
-              <Categories v-if="!isTextPages"/>
+              <Categories v-if="!isTextPages" @sort="scrollToCatalog"/>
             </div>
-            <nuxt/>
+            <nuxt />
           </div>
         </div>
       </main>
@@ -34,7 +34,7 @@ export default {
   mixins: [theme, settings],
   computed: {
     ...mapGetters(["showMenu", "isPageOnTop"]),
-    ...mapState(["languages", "currencies", "language"]),
+    ...mapState(["languages", "currencies", "language", "selectedCategory"]),
     isIndexPage() {
       return this.$route.path === '/';
     },
@@ -67,6 +67,9 @@ export default {
         }
       }
     },
+    scrollToCatalog() {
+      this.$scrollTo("#title", 400, { offset: -30 })
+    }
   },
   async created() {
     await this.getCurrencies();
@@ -132,6 +135,9 @@ export default {
           this.$store.commit("SET_CURRENCY", findedCur);
         }
       }
+    },
+    selectedCategory() {
+      this.$scrollTo("#title", 1400, { offset: -30 })
     },
     "$route.query": {
       handler(value) {

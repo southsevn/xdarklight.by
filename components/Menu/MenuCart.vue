@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import { settings, soundEffects, cart } from "@/mixins";
+import { settings, theme, cart } from "@/mixins";
 
 export default {
   name: "MenuCart",
-  mixins: [settings, soundEffects, cart],
+  mixins: [settings, theme, cart],
   methods: {
     getProductPrice(product) {
       return product.prices.find(price => price.name.toLowerCase() === this.cur.toLowerCase());

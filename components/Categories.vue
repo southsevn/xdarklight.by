@@ -1,38 +1,29 @@
 <template>
   <div class="categories">
-    <div
-      v-if="categories && categories.length"
-      class="filter-group"
-      v-for="(category, idx) in mappedCategories"
-      :key="idx"
-    >
-      <h5 class="filter-group-parent" :style="style">{{ category[`name_${lang}`] }}</h5>
-      <div class="filter-group-items">
-        <span
-          :key="key"
-          v-for="(item, key) in category.children"
-        >
-          <span class="hover-link" @click="sort(item.id)" @mouseover="hoverEffect" :style="style">{{ item[`name_${lang}`] }}</span>
-          <span
-            v-if="selectedCategory === item.id"
-            @click="clearSelectedCategory()"
-            class="close-icon button"
-          >
-            <img src="/icons/close-icon.svg" alt="Close" />
+    <template v-if="categories && categories.length">
+      <div class="filter-group" v-for="(category, idx) in mappedCategories" :key="idx">
+        <h5 class="filter-group-parent" :style="style">{{ category[`name_${lang}`] }}</h5>
+        <div class="filter-group-items">
+          <span :key="key" v-for="(item, key) in category.children">
+            <span class="hover-link" @click="sort(item.id)" @mouseover="hoverEffect" :style="style">{{ item[`name_${lang}`]
+            }}</span>
+            <span v-if="selectedCategory === item.id" @click="clearSelectedCategory()" class="close-icon button">
+              <img src="/icons/close-icon.svg" alt="Close" />
+            </span>
           </span>
-        </span>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { settings, theme, soundEffects } from "@/mixins";
+import { settings, theme } from "@/mixins";
 
 export default {
   name: "Categories",
-  mixins: [settings, theme, soundEffects],
+  mixins: [settings, theme],
   computed: {
     ...mapState(["selectedCategory", "categories"]),
     style() {
@@ -64,10 +55,12 @@ export default {
       this.clickEffect();
       this.$router.push({ query: { category: id } });
       this.$store.commit("SET_SELECTED_CATEGORY", id);
+      this.$emit("sort");
     },
     clearSelectedCategory() {
       this.$store.commit("SET_SELECTED_CATEGORY", null);
       this.$router.replace({'query': null})
+      this.$emit("sort");
     }
   },
   async created() {
@@ -81,7 +74,7 @@ export default {
 <style lang="sass">
   .categories
     position: sticky
-    top: 160px
+    top: 180px
 
   .filter-group
     margin-bottom: 30px
@@ -104,4 +97,8 @@ export default {
 
   .close-icon.button
     margin-left: 10px
+
+  @include ml
+    .categories
+      top: 140px
 </style>
