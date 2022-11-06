@@ -80,6 +80,7 @@ export default {
     if (!this.categories) {
       await this.getCategories();
     }
+    this.clickEffect();
   },
   methods: {
     ...mapActions(["getCategories"]),
@@ -95,6 +96,7 @@ export default {
     },
 
     clearSelectedCategory() {
+      this.clickEffect();
       this.$store.commit("SET_SELECTED_CATEGORY", null);
       this.$router.replace({ 'query': null });
       this.$store.commit("SET_MENU", !this.showMenu);

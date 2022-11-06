@@ -55,12 +55,10 @@ export default {
       this.clickEffect();
       this.$router.push({ query: { category: id } });
       this.$store.commit("SET_SELECTED_CATEGORY", id);
-      this.$emit("sort");
     },
     clearSelectedCategory() {
       this.$store.commit("SET_SELECTED_CATEGORY", null);
       this.$router.replace({'query': null})
-      this.$emit("sort");
     }
   },
   async created() {

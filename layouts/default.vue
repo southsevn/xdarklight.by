@@ -14,7 +14,7 @@
           <DPageTitle id="title" v-if="!isProductPage" :title="pageTitle"/>
           <div class="page-container">
             <div class="categories-container">
-              <Categories v-if="!isTextPages" @sort="scrollToCatalog"/>
+              <Categories v-if="!isTextPages" />
             </div>
             <nuxt />
           </div>
@@ -66,9 +66,6 @@ export default {
           this.$store.commit("SET_PAGE_ON_TOP", true);
         }
       }
-    },
-    scrollToCatalog() {
-      this.$scrollTo("#title", 400, { offset: -30 })
     }
   },
   async created() {
