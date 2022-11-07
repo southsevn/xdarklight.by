@@ -145,7 +145,6 @@ export default {
       .d-button
         padding-right: 0
         padding-left: 0
-        font-size: 18px
 
   @include lg
     .product-actions

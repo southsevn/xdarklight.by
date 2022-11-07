@@ -48,7 +48,8 @@ export default {
     { src: '~/plugins/country-selector.js', mode: 'client' },
     { src: '~/plugins/vue-phone-mask', mode: 'client' },
     { src: '~/plugins/vuelidate', mode: 'client' },
-    { src: '~/plugins/vue-zoom-on-hover', mode: 'client' }
+    { src: '~/plugins/vue-zoom-on-hover', mode: 'client' },
+    { src: '~/plugins/vue-show-more', mode: 'client' }
   ],
 
   loading: false,

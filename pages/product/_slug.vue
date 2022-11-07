@@ -50,7 +50,19 @@
         <nuxt-link class="name" :to="`/product/${product.slug}`">{{` ${product.name}`}}</nuxt-link>
         <nuxt-link class="category" :to="`/?category=${product.parentProduct.category.id}`">{{ product.parentProduct.category[`name_${lang}`] }}</nuxt-link>
       </div>
-      <p class="product-text">{{ product[`description_${lang}`] }}</p>
+      <p class="product-text">
+        <client-only>
+          <vue-show-more-text
+            @click="clickEffect()"
+            :text="product[`description_${lang}`]"
+            :more-text="$t('components.showMore')"
+            :less-text="$t('components.showLess')"
+            :additional-container-css="'padding: 0'"
+            :additional-anchor-css="'text-align: left; font-size: 10px; padding-left: 0; margin-top: 10px'"
+            :lines="lines"
+          />
+        </client-only>
+      </p>
       <div class="product-characteristics">
         <DSize
           v-if="product.size"
@@ -125,6 +137,7 @@ export default {
   },
   data() {
     return {
+      lines: 10,
       selectedInsideMaterial: null,
       selectedOutsideMaterial: null,
       mainSlideOptions: {
@@ -139,17 +152,33 @@ export default {
         centerPadding: '40',
         responsive: [
           {
-            'breakpoint': 780,
+            'breakpoint': 1280,
             'settings': {
-              'slidesToShow': 6,
+              'slidesToShow': 4,
               'slidesToScroll': 3,
               'infinite': true
             }
           },
           {
-            'breakpoint': 565,
+            'breakpoint': 960,
             'settings': {
-              'slidesToShow': 5,
+              'slidesToShow': 3,
+              'slidesToScroll': 3,
+              'infinite': true
+            }
+          },
+          {
+            'breakpoint': 780,
+            'settings': {
+              'slidesToShow': 3,
+              'slidesToScroll': 3,
+              'infinite': true
+            }
+          },
+          {
+            'breakpoint': 560,
+            'settings': {
+              'slidesToShow': 3,
               'slidesToScroll': 1,
               'infinite': true
             }
@@ -179,6 +208,9 @@ export default {
 </script>
 
 <style scoped lang="sass">
+  .anchor
+    text-align: left
+
   .product
     &-container
       display: grid
@@ -242,4 +274,35 @@ export default {
         @include md
           width: 60px
           height: 60px
+
+  @include lg
+    .product-container
+      grid-template-columns: 4fr 2.5fr
+
+    .product-text
+      width: 100%
+      margin: 20px 0
+
+  @include ml
+    .product-container
+      grid-template-columns: 4fr 2.5fr
+      gap: 0px 40px
+
+    .product-text
+      margin-top: 20px
+      font-size: 12px
+
+    .product-title
+      .name
+        font-size: 36px
+      .category
+        margin: 0
+        font-size: 12px
+      
+  @media (max-width: 560px)
+    .product-container 
+      grid-template-columns: 1fr
+
+    .product-description
+      margin-top: 40px
 </style>

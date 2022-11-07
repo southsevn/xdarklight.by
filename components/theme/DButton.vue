@@ -82,4 +82,9 @@ export default {
     img
       margin-right: 20px
       width: 20px
+
+  @include xl
+    .d-button
+      padding: 10px
+      font-size: 18px
 </style>
