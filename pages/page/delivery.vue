@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="text-page">
     <TextPage v-if="content" :content="content" :title="$t('components.textPages.delivery')"/>
   </div>
 </template>

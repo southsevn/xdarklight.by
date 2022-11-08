@@ -81,7 +81,7 @@ export default {
       top: 50%
       transform: translateY(-50%)
       width: 70%
-  
+
     @include ml
       &-slider, &-placeholder
         width: 70%
@@ -94,4 +94,8 @@ export default {
       .filter-navigation
         width: 100%
         transform: none
+
+  @include lg
+    .promo
+      margin-bottom: -60px
 </style>
