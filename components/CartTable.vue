@@ -174,4 +174,15 @@ export default {
     .table-data-cell.product
       display: grid
       padding: 0
+
+      .product-material
+        margin-top: 0
+
+    .table-data-cell.price, .table-data-cell.total, .table-data-cell.quantity
+      padding-top: 20px
+  
+  @include sm
+    .table-data-cell.product
+      display: flex
+      flex-direction: column
 </style>
