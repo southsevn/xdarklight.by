@@ -107,7 +107,7 @@ export default {
     }
 
     if (this.$route.query.category) {
-      this.$store.commit("SET_SELECTED_CATEGORY", this.$route.query.category);
+      this.$store.commit("SET_S ELECTED_CATEGORY", this.$route.query.category);
     }
   },
   beforeMount() {

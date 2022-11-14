@@ -63,8 +63,11 @@ export default {
 <style lang="sass">
   .cart-content
     display: grid
-    grid-template-columns: 2fr 1fr
+    grid-template-columns: auto 0.6fr
     gap: 0 60px
+
+  .cart-table
+    width: 100%
 
   .cart-table-container
     display: grid
@@ -87,4 +90,25 @@ export default {
 
     &-link
       text-decoration: underline!important
+
+  .delivery-description
+    article
+      margin-bottom: 50px
+
+  .description-heading
+    font-size: 30px
+    margin-bottom: 20px
+
+  .description-item-heading
+    margin-bottom: 10px
+
+  .description-item-text
+    margin-bottom: 20px
+    font-weight: 300
+    line-height: 18px
+
+  @include lg
+    .cart-content
+      grid-template-columns: 1fr
+      gap: 50px 0
 </style>

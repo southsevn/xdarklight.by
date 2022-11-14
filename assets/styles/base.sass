@@ -107,6 +107,14 @@ a
     font-size: 20px
     font-size: bold
 
+@include lg
+  .table-heading
+    grid-template-columns: 35% 20% 18% 1fr 1fr
+
+@include md
+  .table-heading
+    display: none
+
 .table-data
   &-row
     display: grid
@@ -115,6 +123,15 @@ a
     grid-template-columns: 50% 14% 14% 1fr 1fr
     grid-template-rows: 1fr
     margin-top: 50px
+
+@include lg
+  .table-data-row
+    grid-template-columns: 35% 20% 18% 1fr 1fr
+
+@include md
+  .table-data-row
+    grid-template-columns: none
+    grid-template-areas: "product product product product" "setting setting setting setting"
 
 .table-data-cell
   img
@@ -158,6 +175,21 @@ a
     cursor: pointer
     text-align: center
 
+@include lg
+  .table-data-cell
+    img
+      margin-right: 0
+
+@include md
+  .table-data-cell.product
+    grid-area: product
+    display: grid
+    grid-template-columns: 1fr 1fr
+    padding-right: 0
+
+  .table-data-cell.price, .table-data-cell.quantity, .table-data-cell.total, .table-data-cell.remove
+    grid-area: setting
+
 .table-total
   margin-top: 50px
   border-top: 1px solid
@@ -178,6 +210,10 @@ a
 
     &-value
       display: flex
+
+@include ml
+  .table-total
+    padding-left: 0
 
 .cart-table-actions
   display: flex

@@ -152,10 +152,26 @@ export default {
     &.product
       display: flex
       flex-direction: row
+      padding-right: 10px
 
     &.price, &.total
       padding-top: 60px
 
     &.quantity
       padding-top: 60px
+
+  @include lg
+    .table-data-cell.product
+      flex-direction: column
+
+      .product-material
+        margin-top: 20px
+
+    .table-data-heading.remove
+      display: none
+
+  @include md
+    .table-data-cell.product
+      display: grid
+      padding: 0
 </style>
