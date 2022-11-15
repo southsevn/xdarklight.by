@@ -10,7 +10,7 @@
         >
           <div class="table-data-cell product">
             <p class="category">{{ item.product.parentProduct.category[`name_${lang}`] }}</p>
-            <p>{{ item.product.name }}</p>
+            <p class="product-name">{{ item.product.name }}</p>
           </div>
           <div class="table-data-cell price">
             <DPrice :value="getProductPrice(item.product)"/>
@@ -131,4 +131,57 @@ export default {
     .table-total
       justify-content: end
       padding-right: 40px
+
+.category
+  font-weight: 300
+  font-size: 14px
+
+.product-name
+  font-weight: bold
+  font-size: 18px
+
+@include md
+  .table-data-row
+    display: grid
+    grid-template-columns: auto 25% 15% 25%
+
+  .table-data-cell.quantity
+    text-align: center
+
+@include sm
+  .table-data-row
+    margin-top: 20px
+    display: grid
+    grid-template-columns: auto auto auto
+    grid-auto-rows: minmax(100px, auto)
+
+  .table-data-cell.product
+    display: flex
+    flex-direction: column
+
+  .table-total
+    margin-top: 40px
+
+  .table-data-cell.total
+    display: none
+
+@include xs
+  .table-data-row
+    grid-template-areas: "product product qnt" "price price qnt"
+    align-items: flex-start
+
+  .table-data-cell.product
+    grid-area: product
+
+  .table-data-cell.price
+    height: auto
+    margin: 20px 0 0 0
+    align-self: flex-start
+    grid-area: price
+
+  .table-data-cell.quantity
+    grid-area: qnt
+    height: auto
+    margin: 20px 0 0 0
+    align-self: flex-start
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-content">
+  <div class="cart-container">
     <div class="cart-table-container">
       <CartTable v-if="cartCount"/>
       <div v-else :style="style" class="cart-empty">
@@ -11,14 +11,22 @@
       </div>
     </div>
     <aside class="delivery-description">
-      <article v-if="deliveryPageContent && deliveryPageContent.length" class="delivery" :style="style">
+      <article
+        v-if="deliveryPageContent && deliveryPageContent.length"
+        class="delivery"
+        :style="style"
+      >
         <h3 class="description-heading">{{ $t('components.textPages.delivery') }}</h3>
         <div v-for="(item, i) in deliveryPageContent" class="description-item" :key="i">
           <h4 class="description-item-heading">{{ item.heading[lang] }}</h4>
           <p class="description-item-text">{{ item.description[lang] }}</p>
         </div>
       </article>
-      <article v-if="paymentPageContent && paymentPageContent.length" class="payments" :style="style">
+      <article
+        v-if="paymentPageContent && paymentPageContent.length"
+        class="payments"
+        :style="style"
+      >
         <h3 class="description-heading">{{ $t('components.textPages.payment') }}</h3>
         <div v-for="(item, i) in paymentPageContent" class="description-item" :key="i">
           <h4 class="description-item-heading">{{ item.heading[lang] }}</h4>
@@ -61,7 +69,7 @@ export default {
 </script>
 
 <style lang="sass">
-  .cart-content
+  .cart-container
     display: grid
     grid-template-columns: auto 0.6fr
     gap: 0 60px
@@ -108,7 +116,7 @@ export default {
     line-height: 18px
 
   @include lg
-    .cart-content
+    .cart-container
       grid-template-columns: 1fr
       gap: 50px 0
 </style>

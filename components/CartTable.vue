@@ -141,7 +141,7 @@ export default {
   }
 }
 </script>
-
+  
 <style scoped lang="sass">
   .table-heading
     &-cell
@@ -171,18 +171,76 @@ export default {
       display: none
 
   @include md
+    .table-data-row
+      grid-template-columns: none
+      grid-template-areas: "product product product product" "price qnt qnt total"
+      position: relative
+      margin-top: 0
+      padding-top: 20px
+
     .table-data-cell.product
+      grid-area: product
+      display: grid
+      grid-template-columns: 1fr 1fr
+      padding-right: 0
       display: grid
       padding: 0
 
       .product-material
         margin-top: 0
 
+      img:not(.d-icon-arrow)
+        padding-right: 10px
+
+    .table-data-cell.price
+      grid-area: price
+      align-self: flex-start
+
+    .table-data-cell.quantity
+      text-align: center
+      grid-area: qnt
+      align-self: flex-start
+
+    .table-data-cell.total
+      grid-area: total
+      align-self: flex-start
+
+    .table-data-cell.remove
+      padding: 0
+      position: absolute
+      right: 10px
+      top: 0
+      font-size: 18px
+
     .table-data-cell.price, .table-data-cell.total, .table-data-cell.quantity
       padding-top: 20px
   
-  @include sm
-    .table-data-cell.product
-      display: flex
-      flex-direction: column
+    @include sm
+      .table-data-row
+        grid-template-areas: "product product" "price qnt"
+        grid-auto-rows: minmax(100px, auto)
+
+      .table-data-cell.product
+        display: flex
+        flex-direction: column
+
+        img:not(.d-icon-arrow)
+          padding-right: 0
+          width: 100%
+          margin: 0 auto
+          max-width: 100%
+          height: 360px
+          margin-bottom: 20px
+
+        .d-material
+          width: 100%
+
+      .cart-table-actions
+        flex-direction: column
+
+      .table-total
+        margin-top: 0
+
+      .table-data-cell.total
+        display: none
 </style>

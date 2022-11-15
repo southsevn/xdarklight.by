@@ -134,7 +134,10 @@ export default {
       }
     },
     selectedCategory() {
-      this.$scrollTo("#title", 1400, { offset: -30 })
+      this.$router.push("/");
+      setTimeout(() => {
+        this.$scrollTo("#title", 1400, { offset: -30 })
+      }, 300)
     },
     "$route.query": {
       handler(value) {
